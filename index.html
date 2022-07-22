@@ -1,0 +1,97 @@
+<!DOCTYPE html>
+<html>
+	<head>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+		<link rel="stylesheet" href="style.css"/>
+		<title>Simple Task Manager</title>
+	</head>
+	
+	<body>
+      <div class="container">
+    	 <div class="topbar">Task Manager</div>
+    	 
+    	 <div class="navbar">
+    	 	<button onclick="section(0)"><img class="home-btn" src="Img/category-glyph.png"/></button>
+    	 	<button onclick="opentaskPopup()"><img src="Img/add.png"/></button>
+    	 	<button onclick="section(1)"><img class="stats-btn" src="Img/chart-glyph.png"/></button>
+    	 </div>
+    		
+      	 <div class="page-wrapper">
+        	 <div id="schedule" class="schedule-section">
+        	 	<div class="category">
+        	 		<button>work</button>
+        	 		<button>education</button>
+        	 		<button>sport</button>
+        	 		<button>social</button>
+        	 		<button>entertainment</button>
+        	 	</div>
+        	 	
+          		<div class="date-holder">
+          			<div class="topdate-holder">
+          			   <h2>July</h2>
+          			   <span>
+          			   	 <button onclick="changeMonth(1)"><img src="Img/arrow-left.png"/></button>
+          			     <button onclick="changeMonth(0)"><img src="Img/arrow-right.png"/></button>
+          			   </span>
+          			</div>
+          			
+          			<div class="date"></div>
+          			
+          		</div>
+          		
+          		<div class="task-container-parent">
+          			<div class="task-container"><span class="empty-task">There is no task 😉</span></div>
+          			<div class="task-container-completed"><span class="completed-tag">Completed Tasks</span></div>
+          		</div>
+
+        	 </div>
+        
+          	 <div id="stats" class="stats-section">Stats</div>
+         	 
+        	 <div class="add-task">
+        	 	<h2>Create New Task</h2>
+        	 	<button id="close" onclick="closetaskPopup()">&times;</button>
+        	 	<button id="add" onclick="addtaskBtn()">Create New Task</button>
+        	 	
+        	 	<div class="task-form">
+        	 		<h3 id="taskHeader">Task Name</h3>
+        	 		<input type="text" id="taskname" value="" required/>
+        	 		<h3 id="taskHeader">Task Description</h3>
+        	 		<input type="text" id="taskdesc" value=""/>
+        	 		
+        	 		<div class="lower-input">
+        	 			<div class="loweri-holder">
+        	 				<button><span>Date</span><input type="date" id="datetime"/></button>
+        	 				<button onclick="openCategory();"><span>Category</span></button>
+        	 			 	<button><span>Start</span><input type="time" id="timestart" value="12:00"/></button>
+        	 			 	<button><span>End</span><input type="time" id="timeend" value="13:00"/></button>
+        	 			</div>
+  						<span class="remainme-span">Remind Me</span>
+        	 		</div>
+        	 	</div>
+        	 </div>
+        	 
+        	 <div class="task-view">
+            	<button id="close" onclick="closetaskView()">X</button>
+        	 	<div class="task-form">
+        	 		<h1>Task Name</h1>
+        	 		<p>Task Description</p>
+        	 		<button id="taskDelete">Delete</button>
+        	 		<button id="taskComplete">Complete</button>
+        	 		
+        	 		<div class="lower-input-view">
+        	 			 <button><span>Date</span></button>
+        	 			 <button><span>Category</span></button>
+        	 			 <button><span>Start</span></button>
+        	 			 <button><span>End</span></button>
+        	  		</div>
+        	 	</div
+      		</div>
+      	
+      	</div>
+   	  </div>
+	</body>
+	
+	<script src="script.js" type="text/javascript" charset="utf-8"></script>
+	
+</html>
