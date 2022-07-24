@@ -8,8 +8,6 @@
 	
 	<body>
       <div class="container">
-    	 <div class="topbar">Task Manager</div>
-    	 
     	 <div class="navbar">
     	 	<button onclick="section(0)"><img class="home-btn" src="Img/category-glyph.png"/></button>
     	 	<button onclick="opentaskPopup()"><img src="Img/add.png"/></button>
@@ -28,7 +26,7 @@
         	 	
           		<div class="date-holder">
           			<div class="topdate-holder">
-          			   <h2>July</h2>
+          			   <h4>2022<h2>July</h2></h4>
           			   <span>
           			   	 <button onclick="changeMonth(1)"><img src="Img/arrow-left.png"/></button>
           			     <button onclick="changeMonth(0)"><img src="Img/arrow-right.png"/></button>
@@ -46,10 +44,34 @@
 
         	 </div>
         
-          	 <div id="stats" class="stats-section">Stats</div>
+          	 <div id="stats" class="stats-section">
+          	 	<h4 class="headertop">All</h4>
+          	 	<h2 class="headerbottom">Statistic</h2>
+          	 	
+          	 	<div class="stats-holder">
+          	 		<div class="box-holder">
+          	 			<span><h1>35</h1><h4>Active Task</h4></span>
+          	 			<span><h1>15</h1><h4>Completed Task</h4></span>
+          	 			<span><h1>55</h1><h4>Total Task</h4></span>
+          	 			<span><h1>5</h1><h4>Deleted Task</h4></span>
+          	 		</div>
+          	 		
+          	 		<div class="lower-box">
+          	 			<h2 class="lb-head">Category</h2>
+          	 			
+          	 			<div class="catbox-holder">
+          	 				<span>5</span>
+          	 				<span>10</span>
+          	 				<span>15</span>
+          	 				<span>5</span>
+          	 				<span>2</span>
+          	 				<span>18</span>
+          	 			</div>
+          	 		</div>
+          	 	</div>
+          	 </div>
          	 
         	 <div class="add-task">
-        	 	<h2>Create New Task</h2>
         	 	<button id="close" onclick="closetaskPopup()">&times;</button>
         	 	<button id="add" onclick="addtaskBtn()">Create New Task</button>
         	 	
@@ -61,30 +83,31 @@
         	 		
         	 		<div class="lower-input">
         	 			<div class="loweri-holder">
-        	 				<button><span>Date</span><input type="date" id="datetime"/></button>
-        	 				<button onclick="openCategory();"><span>Category</span></button>
-        	 			 	<button><span>Start</span><input type="time" id="timestart" value="12:00"/></button>
-        	 			 	<button><span>End</span><input type="time" id="timeend" value="13:00"/></button>
+        	 				<button onclick="openCategory();"><b>Category :</b> <span></span></button>
+        	 			 	<button><b>Start</b><br/><span></span><input type="time" id="timestart" value="12:00"/></button>
+        	 			 	<button><b>End</b><br/><span></span><input type="time" id="timeend" value="13:00"/></button>
         	 			</div>
-  						<span class="remainme-span">Remind Me</span>
         	 		</div>
         	 	</div>
         	 </div>
         	 
         	 <div class="task-view">
-            	<button id="close" onclick="closetaskView()">X</button>
-        	 	<div class="task-form">
+            	<button id="close" onclick="closetaskView()">&times;</button>
+	
+        	 	<div class="task-form-view">
+        	 		<img src="Img/unset.png"/>
         	 		<h1>Task Name</h1>
         	 		<p>Task Description</p>
-        	 		<button id="taskDelete">Delete</button>
-        	 		<button id="taskComplete">Complete</button>
         	 		
         	 		<div class="lower-input-view">
-        	 			 <button><span>Date</span></button>
-        	 			 <button><span>Category</span></button>
-        	 			 <button><span>Start</span></button>
-        	 			 <button><span>End</span></button>
-        	  		</div>
+        	 			<div class="loweri-holder-view">
+        	 				<button><b>Category : </b><span></span></button>
+        	 			 	<button><b>Start</b><br/><span></span></button>
+        	 			 	<button><b>End</b><br/><span></span></button>
+        	 				<button id="taskComplete">Complete</button>
+        	 			 	<button id="taskDelete">Delete</button>
+        	 			</div>
+        	 		</div>
         	 	</div
       		</div>
       	

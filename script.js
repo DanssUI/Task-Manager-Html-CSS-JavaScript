@@ -15,7 +15,7 @@ const nowid = now.getFullYear() + "" + (now.getMonth() + 1) + "" + now.getDate()
 let currid = nowid;
 var taskArray = [{
 	"date": nowid,
-	"content": [{"uid": "0", "isCompleted": "false", "title": "Kulo Anime 😅", "desc": "anjay 😜😳😎😅", "dateChild": "2022-7-12", "timestart": "12:00", "timeend": "13:00", "time": "1PM - 3PM", "category": "Nyatir"}]
+	"content": [{"uid": "0", "isCompleted": "false", "title": "Kulo Anime 😅", "desc": "anjay 😜😳😎😅", "timestart": "12:00", "timeend": "13:00", "time": "1PM - 3PM", "category": "entertainment"}]
 }];
 
 loadData();
@@ -60,11 +60,11 @@ initTime();
 					opentaskView(
 					currcontent.title, 
 					currcontent.desc,
-					currcontent.dateChild,
 					currcontent.timestart,
 					currcontent.timeend,
 					currcontent.category,
-					currcontent.uid
+					currcontent.uid,
+					currcontent.isCompleted
 					)};
 					
 				const tabContent = document.createElement("span");
@@ -162,8 +162,9 @@ initTime();
 			}
 		}
 		
-		document.querySelector(".topdate-holder h2").innerHTML = month + ", " + cyear;
-  
+		document.querySelector(".topdate-holder h2").innerHTML = month;
+		document.querySelector(".topdate-holder h4").innerHTML = cyear;
+
 	}
 	
 	function deactiveBtn(val){
@@ -174,15 +175,13 @@ initTime();
 	
 	let title = document.getElementById('taskname');
 	let desc = document.getElementById('taskdesc');
-	let date = document.getElementById('datetime');
 	let category = "unset";
 	let timeStart = document.getElementById('timestart');
 	let timeEnd = document.getElementById('timeend');
 
-	const dateDisplayer = document.querySelector(".lower-input button:nth-child(1) span");
-	const cateDisplayer = document.querySelector(".lower-input button:nth-child(2) span");
-	const tsDisplayer = document.querySelector(".lower-input button:nth-child(3) span");
-	const teDisplayer = document.querySelector(".lower-input button:nth-child(4) span");
+	const cateDisplayer = document.querySelector(".lower-input button:nth-child(1) span");
+	const tsDisplayer = document.querySelector(".lower-input button:nth-child(2) span");
+	const teDisplayer = document.querySelector(".lower-input button:nth-child(3) span");
 
 	function opentaskPopup(){
 		addTaskPopup.style.display = "flex";
@@ -191,31 +190,38 @@ initTime();
 	function closetaskPopup(){
 		addTaskPopup.style.display = "none";
 		
-		[title.value, desc.value, date.value, category, timeStart.value, timeEnd.value] = ["", "", "2022-07-10", "unset", "12:00", "13:00"];
-		[dateDisplayer.innerHTML, cateDisplayer.innerHTML, tsDisplayer.innerHTML, teDisplayer.innerHTML] = [date.value, category, timeStart.value, timeEnd.value];
+		[title.value, desc.value, category, timeStart.value, timeEnd.value] = ["", "", "unset", "12:00", "13:00"];
+		[cateDisplayer.innerHTML, tsDisplayer.innerHTML, teDisplayer.innerHTML] = [category, timeStart.value, timeEnd.value];
 	}
 	
-	function opentaskView(t, d, dt, ts, te, c, u){
+	function opentaskView(t, d, ts, te, c, u, ic){
 		taskView.style.display = "flex";
 		
-		let title = taskView.querySelector(".task-form h1");
-		let desc = taskView.querySelector(".task-form p");
-		let del = taskView.querySelector(".task-form #taskDelete");
-		let cmplt = taskView.querySelector(".task-form #taskComplete");
+		let title = taskView.querySelector(".task-form-view h1");
+		let desc = taskView.querySelector(".task-form-view p");
+		let del = taskView.querySelector(".task-view #taskDelete");
+		let cmplt = taskView.querySelector(".task-view #taskComplete");
 
-		let dateDisplay = document.querySelector(".lower-input-view button:nth-child(1) span");
-		let cateDisplay = document.querySelector(".lower-input-view button:nth-child(2) span");
-		let tsDisplay = document.querySelector(".lower-input-view button:nth-child(3) span");
-		let teDisplay = document.querySelector(".lower-input-view button:nth-child(4) span");
+		let cateDisplay = document.querySelector(".lower-input-view button:nth-child(1) span");
+		let tsDisplay = document.querySelector(".lower-input-view button:nth-child(2) span");
+		let teDisplay = document.querySelector(".lower-input-view button:nth-child(3) span");
+		let imgDisplay = document.querySelector(".task-form-view img");
+
+		imgDisplay.src = "Img/" + c + ".png";
 
 		title.innerHTML = t;
 		desc.innerHTML = d;
-		dateDisplay.innerHTML = dt;
 		tsDisplay.innerHTML = ts;
 		teDisplay.innerHTML = te;
 		cateDisplay.innerHTML = c;
 		del.onclick = function() {deleteTask(u)};
-		cmplt.onclick = function(){completeTask(u)};
+		
+		if (ic == "false") {
+			cmplt.style.display = "block";
+			cmplt.onclick = function(){completeTask(u)};
+		}else{
+			cmplt.style.display = "none";
+		}
 
 	}
 	
@@ -237,21 +243,20 @@ initTime();
 	function addtaskBtn(){
 		let timeStartEnd = timeStart.value + " - " + timeEnd.value;
 	
-		addtask(title.value, desc.value, date.value, timeStart.value, timeEnd.value, category, timeStartEnd);
+		addtask(title.value, desc.value, timeStart.value, timeEnd.value, category, timeStartEnd);
 	}
 	
-	date.oninput = function(){dateDisplayer.innerHTML = date.value; console.log(date.value.split("-"));};
 	timeStart.oninput = function(){tsDisplayer.innerHTML = timeStart.value};
 	timeEnd.oninput = function(){teDisplayer.innerHTML = timeEnd.value};
 
 	
-	function addtask(t, d, dt, ts, te, c, tse){
+	function addtask(t, d, ts, te, c, tse){
 		let uniqueid = Math.random() * 100;
 
 		if (taskArray.find(tanggal => tanggal.date === currid)){
 			let existTask = taskArray.find(tanggal => tanggal.date === currid);
 			let content = existTask.content;
-			content.push({"uid": uniqueid, "isCompleted": "false", "title": t, "desc": d, "dateChild": dt, "timestart": ts, "timeend": te, "time": tse, "category": c});
+			content.push({"uid": uniqueid, "isCompleted": "false", "title": t, "desc": d, "timestart": ts, "timeend": te, "time": tse, "category": c});
 			
 			loadTask();
 			closetaskPopup();
@@ -259,7 +264,7 @@ initTime();
 		}else{
 			taskArray.push({
 				"date": currid,
-				"content": [{"uid": uniqueid, "isCompleted": "false", "title": t, "desc": d, "dateChild": dt, "timestart": ts, "timeend": te, "time": tse, "category": c}]
+				"content": [{"uid": uniqueid, "isCompleted": "false", "title": t, "desc": d, "timestart": ts, "timeend": te, "time": tse, "category": c}]
 			});
 			
 			loadTask();
