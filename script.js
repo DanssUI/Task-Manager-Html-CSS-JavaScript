@@ -1,4 +1,7 @@
 
+//Bad Code Writing
+//Created by DanssUi
+
 const taskContainer = document.querySelector(".task-container");
 const addTaskPopup = document.querySelector(".add-task");
 const taskCard = document.querySelectorAll(".task-card");
@@ -15,8 +18,10 @@ const nowid = now.getFullYear() + "" + (now.getMonth() + 1) + "" + now.getDate()
 let currid = nowid;
 var taskArray = [{
 	"date": nowid,
-	"content": [{"uid": "0", "isCompleted": "false", "title": "Kulo Anime 😅", "desc": "anjay 😜😳😎😅", "timestart": "12:00", "timeend": "13:00", "time": "1PM - 3PM", "category": "entertainment"}]
+	"content": [{"uid": 0, "isCompleted": "false", "title": "Give me a star ✨", "desc": "This is an example", "timestart": "12:00", "timeend": "13:00", "time": "Infinity", "category": "entertainment"}]
 }];
+
+var statsData = {"aktif": 1, "komplit": 0, "hapus": 0, "total": 1, "unset": 0, "work": 0, "education": 0, "sport": 0, "social": 0, "entertainment": 1};
 
 loadData();
 loadTask();
@@ -24,6 +29,7 @@ initTime();
 
 //reset Database
 //loadDatarage.setItem("tasks", JSON.stringify(taskArray));
+//localStorage.setItem("stats", JSON.stringify(statsData));
 
 	function loadData(){
 		//Task Data
@@ -34,14 +40,22 @@ initTime();
 			taskArray = JSON.parse(localStorage.getItem("tasks"));
 		}
 		
+		//Stats Data
+		if (JSON.parse(localStorage.getItem("stats")) == null){
+    		localStorage.setItem("stats", JSON.stringify(statsData));
+			statsData = JSON.parse(localStorage.getItem("stats"));
+		}else{
+			statsData = JSON.parse(localStorage.getItem("stats"));
+		}
 	}
 	
 	function saveData(){
     	localStorage.setItem("tasks", JSON.stringify(taskArray));
+    	localStorage.setItem("stats", JSON.stringify(statsData));
+    	loadStats();
 	}
-
+	
 	function loadTask(){
-		console.table(taskArray);
 		const updatedtaskCard = document.querySelectorAll(".task-card");
 		updatedtaskCard.forEach(updatedtaskCard => {updatedtaskCard.remove();});
 		document.querySelector(".task-container-completed").style.display = "none";
@@ -66,6 +80,8 @@ initTime();
 					currcontent.uid,
 					currcontent.isCompleted
 					)};
+					
+				
 					
 				const tabContent = document.createElement("span");
 				tabContent.classList = "task-content";
@@ -230,7 +246,7 @@ initTime();
 	}
 	
 	function openCategory() {
-		catePopup.style.display = "block"
+		catePopup.style.display = "flex"
 		document.querySelectorAll(".category button").forEach(button => {
 			button.addEventListener("click", function(){category = button.innerHTML; cateDisplayer.innerHTML = button.innerHTML; closeCategory();});
 		});
@@ -252,6 +268,11 @@ initTime();
 	
 	function addtask(t, d, ts, te, c, tse){
 		let uniqueid = Math.random() * 100;
+		
+		statsData.aktif ++;
+		statsData.total ++;
+		statsData[c] ++;
+		saveData();
 
 		if (taskArray.find(tanggal => tanggal.date === currid)){
 			let existTask = taskArray.find(tanggal => tanggal.date === currid);
@@ -279,6 +300,21 @@ initTime();
 			let taskContent = getTask.content;
 			let getUidTask = getTask.content.find(id => id.uid === val);
 			
+			//Stats Update
+			if (taskContent.isCompleted == "false") {
+				if (statsData.aktif > 0) {
+					statsData.hapus ++;
+					statsData.aktif --;
+					saveData();
+				}
+			}else{
+				if (statsData.komplit > 0) {
+					statsData.hapus ++;
+					statsData.komplit --;
+					saveData();
+				}
+			}
+			
 			let indPos = taskContent.indexOf(getUidTask);
 			
 			if (taskContent.length > 1) {
@@ -294,6 +330,12 @@ initTime();
 	}
 	
 	function completeTask(val){
+		if (statsData.aktif > 0) {
+			statsData.komplit ++;
+			statsData.aktif --;
+			saveData();
+		}
+		
 		if (taskArray.find(tanggal => tanggal.date === currid)){
 			let getTask = taskArray.find(tanggal => tanggal.date === currid);
 			let getUidTask = getTask.content.find(id => id.uid === val);
@@ -319,4 +361,32 @@ initTime();
 			document.querySelector(".navbar button:last-child img").src = "Img/chart.png";
 			document.querySelector(".navbar button:first-child img").src = "Img/category-glyph.png";
 		}
+	}
+	
+	//Stats getter
+	const aktifD = document.querySelector(".box-holder span:nth-child(1) h1");
+	const komplitD = document.querySelector(".box-holder span:nth-child(2) h1");
+	const hapusD = document.querySelector(".box-holder span:nth-child(4) h1");
+	const totalD = document.querySelector(".box-holder span:nth-child(3) h1");
+
+	const unsetD = document.querySelector(".catbox-holder span:nth-child(1)");
+	const workD = document.querySelector(".catbox-holder span:nth-child(2)");
+	const eduD = document.querySelector(".catbox-holder span:nth-child(3)");
+	const sportD = document.querySelector(".catbox-holder span:nth-child(4)");
+	const socialD = document.querySelector(".catbox-holder span:nth-child(5)");
+	const entD = document.querySelector(".catbox-holder span:nth-child(6)");
+	
+	loadStats();
+	function loadStats(){
+		aktifD.innerHTML = statsData.aktif;
+		komplitD.innerHTML = statsData.komplit;
+		hapusD.innerHTML = statsData.hapus;
+		totalD.innerHTML = statsData.total;
+		
+		unsetD.innerHTML = statsData.unset;
+		workD.innerHTML = statsData.work;
+		eduD.innerHTML = statsData.education;
+		sportD.innerHTML = statsData.sport;
+		socialD.innerHTML = statsData.social;
+		entD.innerHTML = statsData.entertainment;
 	}
