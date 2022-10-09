@@ -5,7 +5,11 @@ This is a fully functional web based task manager app.
 >Not recommended using other browser. Use chrome instead.
 </br>The code might not responsive for bigger screen size
 
-#Changelogs---<br>
+<br>
+<br>
+<br>
+
+<h2>Changelogs---</h2><br>
 HTML<br>
 Remove the images from next/prev month button.<br>
 <br>
