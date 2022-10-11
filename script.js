@@ -208,7 +208,7 @@ function createMonthDays() {
 
     datesBtn.classList = "dateBtn";
     dateContainer.appendChild(datesBtn);
-    
+
     if (i == numday) {
       dateContainer.scrollLeft = datesBtn.offsetLeft - dateContainer.offsetLeft;
       currid = datesBtn.id;
@@ -235,11 +235,11 @@ const tsDisplayer = document.querySelector(".lower-input button:nth-child(2) spa
 const teDisplayer = document.querySelector(".lower-input button:nth-child(3) span");
 
 function opentaskPopup() {
-  addTaskPopup.style.display = "flex";
+ addTaskPopup.classList.add('active');
 }
 
 function closetaskPopup() {
-  addTaskPopup.style.display = "none";
+  addTaskPopup.classList.remove('active');
 
 		[title.value, desc.value, category, timeStart.value, timeEnd.value] = ["", "", "unset", "12:00", "13:00"];
 		[cateDisplayer.innerHTML, tsDisplayer.innerHTML, teDisplayer.innerHTML] = [category, timeStart.value, timeEnd.value];
@@ -295,7 +295,7 @@ function closeCategory() {
   catePopup.style.display = "none"
 }
 
-function addtaskBtn() {
+function addTaskBtn() {
   let timeStartEnd = timeStart.value + " - " + timeEnd.value;
 
   addtask(title.value, desc.value, timeStart.value, timeEnd.value, category, timeStartEnd);
@@ -303,7 +303,6 @@ function addtaskBtn() {
 
 timeStart.oninput = function() { tsDisplayer.innerHTML = timeStart.value };
 timeEnd.oninput = function() { teDisplayer.innerHTML = timeEnd.value };
-
 
 function addtask(t, d, ts, te, c, tse) {
   let uniqueid = Math.random() * 100;
