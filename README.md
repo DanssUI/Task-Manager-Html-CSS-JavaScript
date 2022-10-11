@@ -22,6 +22,7 @@ CSS<br>
 replaced width/height and some other properties unit from px to rem.<br>
 removed width on nav bar and added left,right properties.<br>
 replace dateBtnActive class with dateBtn.active and remove repeating code.<br>
+replaced hex code with hsla to get lighter shadow on date buttons
 <br>
 <br>
 

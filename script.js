@@ -222,7 +222,6 @@ function currDayActive(elem) {
 
   allBtn.forEach(fbtn => fbtn.classList = "dateBtn");
   elem.classList.add("active");
-  //  console.log(elem);
 }
 
 let title = document.getElementById('taskname');
