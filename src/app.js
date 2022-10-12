@@ -1,31 +1,19 @@
 //Created by DanssUiDanssUi
-const taskContainer = document.querySelector(".task-container");
-const addTaskPopup = document.querySelector(".add-task");
+import * as homepage from './homepage.js'
+homepage.generateHomepageHTML();
+homepage.generateAddTaskHTML();
+homepage.generateTaskView();
+
+
 const taskView = document.querySelector(".task-view");
 const catePopup = document.querySelector(".category");
-const changeMonthCont = document.querySelector('.btns-container');
-const dateContainer = document.querySelector(".date");
 
 
+//const nowid = `${homepage.now.getFullYear()} ${(homepage.now.getMonth() + 1)} ${homepage.now.getDate()}`;
 
-const monthsArr = ["January", "February", "March", "April", "May", "June", "July", "August", "September", "October", "November", "December"];
-const weekDaysArr = ["Sunday", "Monday", "Tuesday", "Wednesday", "Thursday", "Friday", "Saturday"];
-
-changeMonthCont.addEventListener('click', changeMonth);
-
-const now = new Date();
-
-let currMonth = now.getMonth();
-let currYear = now.getFullYear();
-
-const nowid = `${now.getFullYear()} ${(now.getMonth() + 1)} ${now.getDate()}`;
-
-let getMonthTotalDays;
-let currDay;
-
-let currid = nowid;
 var taskArray = [{
-  "date": nowid,
+  //i have change nowid to currid since original dev was reassigned the nowid with currid
+  "date": homepage.currid,
   "content": [
     {
       "uid": 0,
@@ -44,8 +32,8 @@ var statsData = { "aktif": 1, "komplit": 0, "hapus": 0, "total": 1, "unset": 0, 
 
 loadData();
 loadTask();
-initTime();
-createMonthDays();
+homepage.initTime();
+homepage.createMonthDays();
 
 //reset Database
 //loadDatarage.setItem("tasks", JSON.stringify(taskArray));
@@ -75,17 +63,16 @@ function saveData() {
   loadStats();
 }
 
-function loadTask() {
+export function loadTask() {
   const updatedtaskCard = document.querySelectorAll(".task-card");
-  console.log(updatedtaskCard.innerHTML);
   updatedtaskCard.forEach(updatedtaskCard => updatedtaskCard.remove());
 
   document.querySelector(".task-container-completed").style.display = "none";
 
   document.querySelector(".empty-task").style.display = "block";
 
-  if (taskArray.find(tanggal => tanggal.date === currid)) {
-    let existTask = taskArray.find(tanggal => tanggal.date === currid);
+  if (taskArray.find(tanggal => tanggal.date === homepage.currid)) {
+    let existTask = taskArray.find(tanggal => tanggal.date === homepage.currid);
 
     let contentArray = existTask.content;
 
@@ -105,8 +92,6 @@ function loadTask() {
           currcontent.isCompleted
         )
       };
-
-
 
       const tabContent = document.createElement("span");
       tabContent.classList = "task-content";
@@ -143,94 +128,6 @@ function loadTask() {
   }
 }
 
-function changeMonth(e) {
-  const btn = e.target.closest('button');
-  const btnDataset = btn.dataset.btn
-
-  if (btnDataset === 'next') {
-    if (currMonth < 11) currMonth++;
-    else {
-      currMonth = 0;
-      currYear++;
-    }
-  }
-
-  if (btnDataset === 'prev') {
-    if (currMonth > 0) currMonth--;
-    else {
-      currMonth = 11;
-      currYear -= 1;
-    }
-  }
-
-  initTime();
-  createMonthDays();
-  document.querySelector(".date button").click();
-  dateContainer.scrollLeft = 0;
-}
-
-function initTime() {
-  const dashboardMonth = document.querySelector(".topdate-holder h2");
-  const dashboardYear = document.querySelector(".topdate-holder h4");
-
-  let month = monthsArr[currMonth];
-  let day = weekDaysArr[now.getDay()];
-
-  currDay = now.getDate();
-
-  getMonthTotalDays = new Date(now.getFullYear(), currMonth + 1, 0).getDate();
-
-  dashboardMonth.innerHTML = month;
-  dashboardYear.innerHTML = currYear;
-
-}
-
-function createMonthDays() {
-  const allBtn = document.querySelectorAll(".date button");
-  allBtn.forEach(btn => { btn.remove() });
-
-  for (var i = 1; i < getMonthTotalDays + 1; i++) {
-
-    //get current month days
-    const currMonthFullDate = new Date(now.getFullYear(), currMonth, i);
-
-    //get current month week days
-    const weekDays = weekDaysArr[currMonthFullDate.getDay()].slice(0, 3);
-
-    //create dates button
-    const datesBtn = document.createElement("button");
-    datesBtn.innerHTML = i;
-
-    //create week days 
-    const weekDaysElem = document.createElement("span");
-
-    weekDaysElem.innerHTML = weekDays;
-    datesBtn.insertAdjacentElement('beforeend', weekDaysElem);
-
-    datesBtn.id = `${now.getFullYear()}${(currMonth + 1)}${i}`;
-
-    datesBtn.addEventListener('click', () => {
-      currid = datesBtn.id;
-      currDayActive(datesBtn);
-      loadTask();
-    });
-
-    datesBtn.classList = "dateBtn";
-    dateContainer.appendChild(datesBtn);
-
-    if (i === currDay) {
-      dateContainer.scrollLeft = datesBtn.offsetLeft - dateContainer.offsetLeft;
-      currDayActive(datesBtn);
-    }
-  }
-}
-
-function currDayActive(elem) {
-  const allBtn = document.querySelectorAll(".date button");
-
-  allBtn.forEach(fbtn => fbtn.classList = "dateBtn");
-  elem.classList.add("active");
-}
 
 let title = document.getElementById('taskname');
 let desc = document.getElementById('taskdesc');
@@ -242,16 +139,6 @@ const cateDisplayer = document.querySelector(".lower-input button:nth-child(1) s
 const tsDisplayer = document.querySelector(".lower-input button:nth-child(2) span");
 const teDisplayer = document.querySelector(".lower-input button:nth-child(3) span");
 
-function opentaskPopup() {
-  addTaskPopup.classList.add('active');
-}
-
-function closetaskPopup() {
-  addTaskPopup.classList.remove('active');
-
-		[title.value, desc.value, category, timeStart.value, timeEnd.value] = ["", "", "unset", "12:00", "13:00"];
-		[cateDisplayer.innerHTML, tsDisplayer.innerHTML, teDisplayer.innerHTML] = [category, timeStart.value, timeEnd.value];
-}
 
 function opentaskView(t, d, ts, te, c, u, ic) {
   taskView.classList.add('active');
@@ -320,8 +207,8 @@ function addtask(t, d, ts, te, c, tse) {
   statsData[c]++;
   saveData();
 
-  if (taskArray.find(tanggal => tanggal.date === currid)) {
-    let existTask = taskArray.find(tanggal => tanggal.date === currid);
+  if (taskArray.find(tanggal => tanggal.date === homepage.currid)) {
+    let existTask = taskArray.find(tanggal => tanggal.date === homepage.currid);
     let content = existTask.content;
     content.push({ "uid": uniqueid, "isCompleted": "false", "title": t, "desc": d, "timestart": ts, "timeend": te, "time": tse, "category": c });
 
@@ -330,7 +217,7 @@ function addtask(t, d, ts, te, c, tse) {
     saveData();
   } else {
     taskArray.push({
-      "date": currid,
+      "date": homepage.currid,
       "content": [{ "uid": uniqueid, "isCompleted": "false", "title": t, "desc": d, "timestart": ts, "timeend": te, "time": tse, "category": c }]
     });
 
@@ -341,8 +228,8 @@ function addtask(t, d, ts, te, c, tse) {
 }
 
 function deleteTask(val) {
-  if (taskArray.find(tanggal => tanggal.date === currid)) {
-    let getTask = taskArray.find(tanggal => tanggal.date === currid);
+  if (taskArray.find(tanggal => tanggal.date === homepage.currid)) {
+    let getTask = taskArray.find(tanggal => tanggal.date === homepage.currid);
     let taskContent = getTask.content;
     let getUidTask = getTask.content.find(id => id.uid === val);
 
@@ -382,8 +269,8 @@ function completeTask(val) {
     saveData();
   }
 
-  if (taskArray.find(tanggal => tanggal.date === currid)) {
-    let getTask = taskArray.find(tanggal => tanggal.date === currid);
+  if (taskArray.find(tanggal => tanggal.date === homepage.currid)) {
+    let getTask = taskArray.find(tanggal => tanggal.date === homepage.currid);
     let getUidTask = getTask.content.find(id => id.uid === val);
     getUidTask.isCompleted = "true";
   }
@@ -397,8 +284,8 @@ function completeTask(val) {
 section(0);
 
 
-function section(val) {
-  if (val == 0) {
+export function section(val) {
+ /* if (val == 0) {
     //window.location.href = "#schedule";
     document.getElementById('schedule').scrollIntoView({ behavior: "smooth" });
     document.querySelector(".navbar button:first-child img").src = "Img/category.png";
@@ -408,7 +295,7 @@ function section(val) {
     document.getElementById('stats').scrollIntoView({ behavior: "smooth" });
     document.querySelector(".navbar button:last-child img").src = "Img/chart.png";
     document.querySelector(".navbar button:first-child img").src = "Img/category-glyph.png";
-  }
+  }*/
 }
 
 //Stats getter

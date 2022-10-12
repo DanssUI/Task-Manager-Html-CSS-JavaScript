@@ -106,7 +106,7 @@ body {
 
 .date {
   width: 100vw;
-  height: 120px;
+  height:7.5rem;
   padding-top: 10px;
   display: flex;
   justify-content: start;
@@ -116,7 +116,6 @@ body {
   padding-left: 20px;
   padding-right: 10px;
   scroll-snap-type: x mandatory;
-
   scroll-behavior: smooth;
   -webkit-overflow-scrolling: touch;
   border-radius: 30px 30px 0px 0px;
@@ -124,7 +123,6 @@ body {
   box-shadow: 0 0px 1px 0 rgba(31, 38, 135, 0.37);
   backdrop-filter: blur(10px);
   -webkit-backdrop-filter: blur(20px);
-  border: 2px solid rgba(255, 255, 255, 0.2);
 }
 
 .dateBtn {
@@ -228,8 +226,9 @@ body {
   justify-content: space-evenly;
   align-items: center;
   z-index: 10;
-  background: white;
-  border-radius: 20px 20px 0px 0px;
+  background: #fff;
+  border-radius: 2.5rem 2.5rem 0px 0px;
+  box-shadow:0 1px 5px 0 rgba(0, 0, 0, 0.3);
 }
 
 .navbar button {
