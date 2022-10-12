@@ -3,15 +3,18 @@
 
 <head>
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <link rel="stylesheet" href="style.css" />
+  <link rel="stylesheet" href="src/styles/style.css" />
+
+  <!------Font awesome------>
   <script src="https://kit.fontawesome.com/912f1a9d04.js" crossorigin="anonymous"></script>
   <title>Simple Task Manager</title>
 </head>
 
 <body>
   <div class="container">
-    
+
     <div class="page-wrapper">
+      
       <!---Home Page---->
       <div id="schedule" class="schedule-section">
         <div class="date-holder">
@@ -47,10 +50,9 @@
         </div>
       </div>
 
+      <!----Stats Section---->
       <div id="stats" class="stats-section">
-        <h4 class="headertop">All</h4>
-        <h2 class="headerbottom">Statistic</h2>
-
+        <h4 class="headertop">All <span class="headerbottom">Statistics</span></h4>
         <div class="stats-holder">
           <div class="box-holder">
             <span>
@@ -86,9 +88,10 @@
         </div>
       </div>
 
+
+      <!------ ADD A TASK SECTION----->
       <div class="add-task">
         <button id="close" onclick="closetaskPopup()">&times</button>
-        <button onclick="addTaskBtn()" id="add"> Create New Task </button>
         <div class="task-form">
           <h3 id="taskHeader">Task Name</h3>
           <input type="text" id="taskname" value="" required />
@@ -97,7 +100,7 @@
 
           <div class="lower-input">
             <div class="loweri-holder">
-              <button onclick="openCategory();">
+              <button onclick="openCategory()">
                 <b>Category :</b> <span></span>
               </button>
               <button>
@@ -108,8 +111,11 @@
             </div>
           </div>
         </div>
+        <button onclick="addTaskBtn()" id="add"> Create New Task </button>
       </div>
 
+
+      <!------VIEW A TASK----->
       <div class="task-view">
         <button id="close" onclick="closetaskView()">&times;</button>
 
@@ -127,13 +133,11 @@
               <button id="taskDelete">Delete</button>
             </div>
           </div>
-        </div </div>
-
+        </div>
       </div>
-
     </div>
-</body>
 
-<script src="script.js" type="text/javascript" charset="utf-8"></script>
+    <script src="src/app.js" type="text/javascript" charset="utf-8"></script>
+</body>
 
 </html>

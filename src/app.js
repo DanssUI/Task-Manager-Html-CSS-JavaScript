@@ -1,11 +1,12 @@
 //Created by DanssUiDanssUi
 const taskContainer = document.querySelector(".task-container");
 const addTaskPopup = document.querySelector(".add-task");
-const taskCard = document.querySelectorAll(".task-card");
 const taskView = document.querySelector(".task-view");
 const catePopup = document.querySelector(".category");
 const changeMonthCont = document.querySelector('.btns-container');
 const dateContainer = document.querySelector(".date");
+
+
 
 const monthsArr = ["January", "February", "March", "April", "May", "June", "July", "August", "September", "October", "November", "December"];
 const weekDaysArr = ["Sunday", "Monday", "Tuesday", "Wednesday", "Thursday", "Friday", "Saturday"];
@@ -20,7 +21,7 @@ let currYear = now.getFullYear();
 const nowid = `${now.getFullYear()} ${(now.getMonth() + 1)} ${now.getDate()}`;
 
 let getMonthTotalDays;
-let numday;
+let currDay;
 
 let currid = nowid;
 var taskArray = [{
@@ -76,7 +77,7 @@ function saveData() {
 
 function loadTask() {
   const updatedtaskCard = document.querySelectorAll(".task-card");
-
+  console.log(updatedtaskCard.innerHTML);
   updatedtaskCard.forEach(updatedtaskCard => updatedtaskCard.remove());
 
   document.querySelector(".task-container-completed").style.display = "none";
@@ -164,6 +165,7 @@ function changeMonth(e) {
 
   initTime();
   createMonthDays();
+  document.querySelector(".date button").click();
   dateContainer.scrollLeft = 0;
 }
 
@@ -174,11 +176,13 @@ function initTime() {
   let month = monthsArr[currMonth];
   let day = weekDaysArr[now.getDay()];
 
-  numday = now.getDate();
+  currDay = now.getDate();
+
   getMonthTotalDays = new Date(now.getFullYear(), currMonth + 1, 0).getDate();
 
   dashboardMonth.innerHTML = month;
   dashboardYear.innerHTML = currYear;
+
 }
 
 function createMonthDays() {
@@ -186,7 +190,7 @@ function createMonthDays() {
   allBtn.forEach(btn => { btn.remove() });
 
   for (var i = 1; i < getMonthTotalDays + 1; i++) {
-    
+
     //get current month days
     const currMonthFullDate = new Date(now.getFullYear(), currMonth, i);
 
@@ -203,19 +207,19 @@ function createMonthDays() {
     weekDaysElem.innerHTML = weekDays;
     datesBtn.insertAdjacentElement('beforeend', weekDaysElem);
 
-    datesBtn.id = now.getFullYear() + "" + (currMonth + 1) + "" + i;
+    datesBtn.id = `${now.getFullYear()}${(currMonth + 1)}${i}`;
+
     datesBtn.addEventListener('click', () => {
       currid = datesBtn.id;
       currDayActive(datesBtn);
       loadTask();
-    })
+    });
 
     datesBtn.classList = "dateBtn";
     dateContainer.appendChild(datesBtn);
 
-    if (i == numday) {
+    if (i === currDay) {
       dateContainer.scrollLeft = datesBtn.offsetLeft - dateContainer.offsetLeft;
-      currid = datesBtn.id;
       currDayActive(datesBtn);
     }
   }
@@ -250,7 +254,7 @@ function closetaskPopup() {
 }
 
 function opentaskView(t, d, ts, te, c, u, ic) {
-  taskView.style.display = "flex";
+  taskView.classList.add('active');
 
   let title = taskView.querySelector(".task-form-view h1");
   let desc = taskView.querySelector(".task-form-view p");
@@ -281,7 +285,7 @@ function opentaskView(t, d, ts, te, c, u, ic) {
 }
 
 function closetaskView() {
-  taskView.style.display = "none";
+  taskView.classList.remove('active')
 }
 
 function openCategory() {
@@ -391,6 +395,7 @@ function completeTask(val) {
 }
 
 section(0);
+
 
 function section(val) {
   if (val == 0) {
