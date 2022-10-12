@@ -182,7 +182,11 @@ function initTime() {
 }
 
 function createMonthDays() {
+  const allBtn = document.querySelectorAll(".date button");
+  allBtn.forEach(btn => { btn.remove() });
+
   for (var i = 1; i < getMonthTotalDays + 1; i++) {
+    
     //get current month days
     const currMonthFullDate = new Date(now.getFullYear(), currMonth, i);
 
@@ -218,7 +222,7 @@ function createMonthDays() {
 }
 
 function currDayActive(elem) {
-  let allBtn = document.querySelectorAll(".date button");
+  const allBtn = document.querySelectorAll(".date button");
 
   allBtn.forEach(fbtn => fbtn.classList = "dateBtn");
   elem.classList.add("active");
@@ -235,7 +239,7 @@ const tsDisplayer = document.querySelector(".lower-input button:nth-child(2) spa
 const teDisplayer = document.querySelector(".lower-input button:nth-child(3) span");
 
 function opentaskPopup() {
- addTaskPopup.classList.add('active');
+  addTaskPopup.classList.add('active');
 }
 
 function closetaskPopup() {
