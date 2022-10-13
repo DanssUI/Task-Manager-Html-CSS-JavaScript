@@ -1,19 +1,21 @@
 //Created by DanssUiDanssUi
 import * as homepage from './homepage.js'
+import * as model from './model.js'
+import * as stats from './stats.js'
+
 homepage.generateHomepageHTML();
 homepage.generateAddTaskHTML();
 homepage.generateTaskView();
-
-
+stats.generateStatsHTML();
+homepage.init();
 const taskView = document.querySelector(".task-view");
-const catePopup = document.querySelector(".category");
+
 
 
 //const nowid = `${homepage.now.getFullYear()} ${(homepage.now.getMonth() + 1)} ${homepage.now.getDate()}`;
-
-var taskArray = [{
+let taskArray = [{
   //i have change nowid to currid since original dev was reassigned the nowid with currid
-  "date": homepage.currid,
+  "date": model.currid,
   "content": [
     {
       "uid": 0,
@@ -28,12 +30,15 @@ var taskArray = [{
   ]
 }];
 
-var statsData = { "aktif": 1, "komplit": 0, "hapus": 0, "total": 1, "unset": 0, "work": 0, "education": 0, "sport": 0, "social": 0, "entertainment": 1 };
+let statsData = { "aktif": 1, "komplit": 0, "hapus": 0, "total": 1, "unset": 0, "work": 0, "education": 0, "sport": 0, "social": 0, "entertainment": 1 };
+
+
+
 
 loadData();
 loadTask();
-homepage.initTime();
-homepage.createMonthDays();
+model.initTime();
+model.createMonthDays();
 
 //reset Database
 //loadDatarage.setItem("tasks", JSON.stringify(taskArray));
@@ -135,7 +140,7 @@ let category = "unset";
 let timeStart = document.getElementById('timestart');
 let timeEnd = document.getElementById('timeend');
 
-const cateDisplayer = document.querySelector(".lower-input button:nth-child(1) span");
+
 const tsDisplayer = document.querySelector(".lower-input button:nth-child(2) span");
 const teDisplayer = document.querySelector(".lower-input button:nth-child(3) span");
 
@@ -175,21 +180,6 @@ function closetaskView() {
   taskView.classList.remove('active')
 }
 
-function openCategory() {
-  catePopup.style.display = "flex"
-  document.querySelectorAll(".category button").forEach(button => {
-    button.addEventListener("click", function() {
-      category = button.innerHTML;
-      cateDisplayer.innerHTML = button.innerHTML;
-      closeCategory();
-    });
-  });
-}
-
-function closeCategory() {
-  catePopup.style.display = "none"
-}
-
 function addTaskBtn() {
   let timeStartEnd = timeStart.value + " - " + timeEnd.value;
 
@@ -199,7 +189,7 @@ function addTaskBtn() {
 timeStart.oninput = function() { tsDisplayer.innerHTML = timeStart.value };
 timeEnd.oninput = function() { teDisplayer.innerHTML = timeEnd.value };
 
-function addtask(t, d, ts, te, c, tse) {
+/*function addtask(t, d, ts, te, c, tse) {
   let uniqueid = Math.random() * 100;
 
   statsData.aktif++;
@@ -225,7 +215,7 @@ function addtask(t, d, ts, te, c, tse) {
     closetaskPopup();
     saveData();
   }
-}
+}*/
 
 function deleteTask(val) {
   if (taskArray.find(tanggal => tanggal.date === homepage.currid)) {
@@ -281,22 +271,9 @@ function completeTask(val) {
 
 }
 
-section(0);
 
 
-export function section(val) {
- /* if (val == 0) {
-    //window.location.href = "#schedule";
-    document.getElementById('schedule').scrollIntoView({ behavior: "smooth" });
-    document.querySelector(".navbar button:first-child img").src = "Img/category.png";
-    document.querySelector(".navbar button:last-child img").src = "Img/chart-glyph.png";
-  } else {
-    //window.location.href = "#stats";
-    document.getElementById('stats').scrollIntoView({ behavior: "smooth" });
-    document.querySelector(".navbar button:last-child img").src = "Img/chart.png";
-    document.querySelector(".navbar button:first-child img").src = "Img/category-glyph.png";
-  }*/
-}
+ 
 
 //Stats getter
 const aktifD = document.querySelector(".box-holder span:nth-child(1) h1");
