@@ -30,6 +30,8 @@ replace dateBtnActive class with dateBtn.active and remove repeating code.<br>
 replaced hex code with hsla to get lighter shadow on date buttons<br>
 add transition on add-task container<br>
 fixed the create task button slightly overlapping the timers.<br>
+Change the architecture similiar to MVC <br>
+
 <br>
 removed position absolute from lower-box .lb-head.<br>
 remove flex with grid and also height auto from some properties<br>
