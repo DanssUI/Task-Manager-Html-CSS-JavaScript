@@ -13,29 +13,12 @@ const taskView = document.querySelector(".task-view");
 
 
 //const nowid = `${homepage.now.getFullYear()} ${(homepage.now.getMonth() + 1)} ${homepage.now.getDate()}`;
-let taskArray = [{
-  //i have change nowid to currid since original dev was reassigned the nowid with currid
-  "date": model.currid,
-  "content": [
-    {
-      "uid": 0,
-      "isCompleted": "false",
-      "title": "Give me a star ✨",
-      "desc": "This is an example",
-      "timestart": "12:00",
-      "timeend": "13:00",
-      "time": "Infinity",
-      "category": "entertainment"
-    }
-  ]
-}];
-
-let statsData = { "aktif": 1, "komplit": 0, "hapus": 0, "total": 1, "unset": 0, "work": 0, "education": 0, "sport": 0, "social": 0, "entertainment": 1 };
 
 
+let taskArray = [];
+let statsData = [];
 
-
-loadData();
+//loadData();
 loadTask();
 model.initTime();
 model.createMonthDays();
@@ -189,7 +172,7 @@ function addTaskBtn() {
 timeStart.oninput = function() { tsDisplayer.innerHTML = timeStart.value };
 timeEnd.oninput = function() { teDisplayer.innerHTML = timeEnd.value };
 
-/*function addtask(t, d, ts, te, c, tse) {
+function addtask(t, d, ts, te, c, tse) {
   let uniqueid = Math.random() * 100;
 
   statsData.aktif++;
@@ -215,7 +198,7 @@ timeEnd.oninput = function() { teDisplayer.innerHTML = timeEnd.value };
     closetaskPopup();
     saveData();
   }
-}*/
+}
 
 function deleteTask(val) {
   if (taskArray.find(tanggal => tanggal.date === homepage.currid)) {
@@ -273,7 +256,7 @@ function completeTask(val) {
 
 
 
- 
+
 
 //Stats getter
 const aktifD = document.querySelector(".box-holder span:nth-child(1) h1");

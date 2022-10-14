@@ -238,8 +238,13 @@ body {
   border: none;
 }
 
-.navbar button img {
+.navbar button svg {
   width: 3rem;
+  height: 3rem;
+}
+
+.navbar button.active svg .activeBtn {
+  fill: url(#Gradient1);
 }
 
 /*STATS PAGE*/
@@ -486,7 +491,7 @@ body {
   z-index: 10;
 }
 
-#add {
+#createTask {
   position: fixed;
   bottom: 1rem;
   width: 90%;
