@@ -122,46 +122,13 @@ const tsDisplayer = document.querySelector(".lower-input button:nth-child(2) spa
 const teDisplayer = document.querySelector(".lower-input button:nth-child(3) span");
 
 
-function opentaskView(t, d, ts, te, c, u, ic) {
-  taskView.classList.add('active');
 
-  let title = taskView.querySelector(".task-form-view h1");
-  let desc = taskView.querySelector(".task-form-view p");
-  let del = taskView.querySelector(".task-view #taskDelete");
-  let cmplt = taskView.querySelector(".task-view #taskComplete");
 
-  let cateDisplay = document.querySelector(".lower-input-view button:nth-child(1) span");
-  let tsDisplay = document.querySelector(".lower-input-view button:nth-child(2) span");
-  let teDisplay = document.querySelector(".lower-input-view button:nth-child(3) span");
-  let imgDisplay = document.querySelector(".task-form-view img");
-
-  imgDisplay.src = "Img/" + c + ".png";
-
-  title.innerHTML = t;
-  desc.innerHTML = d;
-  tsDisplay.innerHTML = ts;
-  teDisplay.innerHTML = te;
-  cateDisplay.innerHTML = c;
-  del.onclick = function() { deleteTask(u) };
-
-  if (ic == "false") {
-    cmplt.style.display = "block";
-    cmplt.onclick = function() { completeTask(u) };
-  } else {
-    cmplt.style.display = "none";
-  }
-
-}
-
-function closetaskView() {
-  taskView.classList.remove('active')
-}
-
-function addTaskBtn() {
+/*function addTaskBtn() {
   let timeStartEnd = timeStart.value + " - " + timeEnd.value;
 
   addtask(title.value, desc.value, timeStart.value, timeEnd.value, category, timeStartEnd);
-}
+}*/
 
 timeStart.oninput = function() { tsDisplayer.innerHTML = timeStart.value };
 timeEnd.oninput = function() { teDisplayer.innerHTML = timeEnd.value };

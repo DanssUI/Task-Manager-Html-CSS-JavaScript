@@ -209,10 +209,10 @@ export function loadTask() {
 
   document.querySelector(".empty-task").style.display = "block";
 
-  const existTask = taskArray.find(tanggal => tanggal.date === homepage.currid);
-
+  const existTask = taskArray.find(task => task.date === currid);
+  
   if (existTask) {
-
+    
     let contentArray = existTask.content;
 
     for (var i = 0; i < contentArray.length; i++) {
@@ -255,9 +255,10 @@ export function loadTask() {
 
       document.querySelector(".empty-task").style.display = "none";
 
-      if (currcontent.isCompleted == "false") {
+      if (currcontent.isCompleted === false) {
         document.querySelector(".task-container").appendChild(tab);
-      } else if (currcontent.isCompleted == "true") {
+        console.log(document.querySelector(".task-container"));
+      } else if (currcontent.isCompleted === true) {
         tab.style = "background: linear-gradient(120deg, #D6FFA3, #97FF00)";
         document.querySelector(".task-container-completed").style.display = "flex";
         document.querySelector(".task-container-completed").appendChild(tab);
@@ -265,4 +266,39 @@ export function loadTask() {
 
     }
   }
+}
+
+function opentaskView(t, d, ts, te, c, u, ic) {
+  taskView.classList.add('active');
+
+  let title = taskView.querySelector(".task-form-view h1");
+  let desc = taskView.querySelector(".task-form-view p");
+  let del = taskView.querySelector(".task-view #taskDelete");
+  let cmplt = taskView.querySelector(".task-view #taskComplete");
+
+  let cateDisplay = document.querySelector(".lower-input-view button:nth-child(1) span");
+  let tsDisplay = document.querySelector(".lower-input-view button:nth-child(2) span");
+  let teDisplay = document.querySelector(".lower-input-view button:nth-child(3) span");
+  let imgDisplay = document.querySelector(".task-form-view img");
+
+  imgDisplay.src = "Img/" + c + ".png";
+
+  title.innerHTML = t;
+  desc.innerHTML = d;
+  tsDisplay.innerHTML = ts;
+  teDisplay.innerHTML = te;
+  cateDisplay.innerHTML = c;
+  del.onclick = function() { deleteTask(u) };
+
+  if (ic == "false") {
+    cmplt.style.display = "block";
+    cmplt.onclick = function() { completeTask(u) };
+  } else {
+    cmplt.style.display = "none";
+  }
+
+}
+
+function closetaskView() {
+  taskView.classList.remove('active')
 }
