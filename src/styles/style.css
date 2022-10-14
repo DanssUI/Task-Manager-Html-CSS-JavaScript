@@ -609,6 +609,10 @@ body {
   background-color: white;
 }
 
+.lower-input button span {
+  text-transform: capitalize;
+}
+
 .lower-input button input,
 .lower-input-view button input {
   position: absolute;

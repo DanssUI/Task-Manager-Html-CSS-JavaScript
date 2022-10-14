@@ -1,4 +1,4 @@
-import { loadTask } from './app.js'
+
 import * as model from './model.js'
 import { icons } from './helper.js'
 
@@ -12,6 +12,7 @@ let addTaskPopup;
 let nav;
 let categoryMenu;
 let categoryBtn;
+let category;
 
 export function generateHomepageHTML() {
   let html = `
@@ -41,7 +42,7 @@ export function generateHomepageHTML() {
     </div>
 
     <div class="task-container-parent">
-      <div class="task-container">
+      <div  class="task-container">
         <span class="empty-task">There is no task.!</span>
       </div>
       <div class="task-container-completed">
@@ -93,11 +94,13 @@ export function generateAddTaskHTML() {
       </div>
     </div>
    <button id="createTask"> Create New Task </button>`
-    
+
 
 
   addTaskParentElem.insertAdjacentHTML('beforeend', html);
   categoryBtn = document.querySelector('[data-category-btn]');
+  category = categoryBtn.querySelector('span');
+  
 }
 
 export function generateTaskView() {
@@ -176,25 +179,30 @@ function addNewTaskPopUp() {
 }
 
 function createTask() {
-  model.createNewTask();
+  const title = document.getElementById('taskname');
+  const desc = document.getElementById('taskdesc');
+ // const category = "unset";
+  const timeStart = document.getElementById('timestart');
+  const timeEnd = document.getElementById('timeend');
+  
+  let timeStartEnd = `${timeStart.value} - ${timeEnd.value}`;
+
+  model.createNewTask(title.value, desc.value, timestart.value, timeend.value, category.innerText, timeStartEnd);
   closeNewtaskPopup();
 }
 
 function closeNewtaskPopup() {
   addTaskParentElem.classList.remove('active');
-  /*	[title.value, desc.value, category, timeStart.value, timeEnd.value] = ["", "", "unset", "12:00", "13:00"];
+ /*[title.value, desc.value, category, timeStart.value, timeEnd.value] = ["", "", "unset", "12:00", "13:00"];
   	[cateDisplayer.innerHTML, tsDisplayer.innerHTML, teDisplayer.innerHTML] = [category, timeStart.value, timeEnd.value];*/
 }
 
 function openCategoryMenu() {
-  const cateDisplayer = document.querySelector(".lower-input button:nth-child(1) span");
-
   categoryMenu.classList.add('active');
 
   categoryMenu.querySelectorAll("button").forEach(button => {
     button.addEventListener("click", function() {
-      // category = button.innerHTML
-      cateDisplayer.innerHTML = button.innerHTML;
+      category.innerHTML = button.innerHTML;
       closeCategory();
     });
   });

@@ -1,3 +1,4 @@
+import {statsData} from './model.js'
 const parentElement = document.querySelector('#stats')
 
 export function generateStatsHTML() {
@@ -40,4 +41,30 @@ export function generateStatsHTML() {
     </div>`
     
     parentElement.insertAdjacentHTML('beforeend', html);
+}
+
+export function loadStats() {
+  const activeTask = document.querySelector(".box-holder span:nth-child(1) h1");
+  const completedTask = document.querySelector(".box-holder span:nth-child(2) h1");
+  const deletedTask = document.querySelector(".box-holder span:nth-child(4) h1");
+  const total = document.querySelector(".box-holder span:nth-child(3) h1");
+
+  const unset = document.querySelector(".catbox-holder span:nth-child(1)");
+  const work = document.querySelector(".catbox-holder span:nth-child(2)");
+  const edu = document.querySelector(".catbox-holder span:nth-child(3)");
+  const sport = document.querySelector(".catbox-holder span:nth-child(4)");
+  const social = document.querySelector(".catbox-holder span:nth-child(5)");
+  const entertainment = document.querySelector(".catbox-holder span:nth-child(6)");
+
+  activeTask.innerHTML = statsData.activeTask;
+  //completeTask.innerHTML = statsData.completeTask;
+  deletedTask.innerHTML = statsData.deletedTask;
+  total.innerHTML = statsData.total;
+
+  unset.innerHTML = statsData.unset;
+  work.innerHTML = statsData.work;
+  edu.innerHTML = statsData.education;
+  sport.innerHTML = statsData.sport;
+  social.innerHTML = statsData.social;
+  entertainment.innerHTML = statsData.entertainment;
 }

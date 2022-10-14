@@ -8,18 +8,12 @@ homepage.generateAddTaskHTML();
 homepage.generateTaskView();
 stats.generateStatsHTML();
 homepage.init();
+
 const taskView = document.querySelector(".task-view");
 
 
-
-//const nowid = `${homepage.now.getFullYear()} ${(homepage.now.getMonth() + 1)} ${homepage.now.getDate()}`;
-
-
-let taskArray = [];
-let statsData = [];
-
 //loadData();
-loadTask();
+model.loadTask();
 model.initTime();
 model.createMonthDays();
 
@@ -45,13 +39,13 @@ function loadData() {
   }
 }
 
-function saveData() {
+/*function saveData() {
   localStorage.setItem("tasks", JSON.stringify(taskArray));
   localStorage.setItem("stats", JSON.stringify(statsData));
   loadStats();
-}
+}*/
 
-export function loadTask() {
+/*export function loadTask() {
   const updatedtaskCard = document.querySelectorAll(".task-card");
   updatedtaskCard.forEach(updatedtaskCard => updatedtaskCard.remove());
 
@@ -114,7 +108,7 @@ export function loadTask() {
 
     }
   }
-}
+}*/
 
 
 let title = document.getElementById('taskname');
@@ -252,37 +246,4 @@ function completeTask(val) {
   loadTask();
   closetaskView();
 
-}
-
-
-
-
-
-//Stats getter
-const aktifD = document.querySelector(".box-holder span:nth-child(1) h1");
-const komplitD = document.querySelector(".box-holder span:nth-child(2) h1");
-const hapusD = document.querySelector(".box-holder span:nth-child(4) h1");
-const totalD = document.querySelector(".box-holder span:nth-child(3) h1");
-
-const unsetD = document.querySelector(".catbox-holder span:nth-child(1)");
-const workD = document.querySelector(".catbox-holder span:nth-child(2)");
-const eduD = document.querySelector(".catbox-holder span:nth-child(3)");
-const sportD = document.querySelector(".catbox-holder span:nth-child(4)");
-const socialD = document.querySelector(".catbox-holder span:nth-child(5)");
-const entD = document.querySelector(".catbox-holder span:nth-child(6)");
-
-loadStats();
-
-function loadStats() {
-  aktifD.innerHTML = statsData.aktif;
-  komplitD.innerHTML = statsData.komplit;
-  hapusD.innerHTML = statsData.hapus;
-  totalD.innerHTML = statsData.total;
-
-  unsetD.innerHTML = statsData.unset;
-  workD.innerHTML = statsData.work;
-  eduD.innerHTML = statsData.education;
-  sportD.innerHTML = statsData.sport;
-  socialD.innerHTML = statsData.social;
-  entD.innerHTML = statsData.entertainment;
 }

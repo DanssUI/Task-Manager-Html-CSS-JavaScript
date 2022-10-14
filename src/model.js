@@ -1,4 +1,5 @@
 import * as homepage from './homepage.js';
+import { loadStats } from './stats.js'
 import { monthsArr, weekDaysArr } from './helper.js';
 
 export const now = new Date();
@@ -7,30 +8,40 @@ let currMonth = now.getMonth();
 let currYear = now.getFullYear();
 let getMonthTotalDays;
 let currDay;
+
 export const nowid = `${currYear} ${(now.getMonth() + 1)} ${now.getDate()}`;
 
 export let currid = nowid;
 
 let taskArray = [{
   //i have change nowid to currid since original dev was reassigned the nowid with currid
-  "date": currid,
-  "content": [
+  date: currid,
+  content: [
     {
-      "uid": 0,
-      "isCompleted": "false",
-      "title": "Give me a star ✨",
-      "desc": "This is an example",
-      "timestart": "12:00",
-      "timeend": "13:00",
-      "time": "Infinity",
-      "category": "entertainment"
+      uid: 0,
+      isCompleted: false,
+      title: "Give me a star ✨",
+      desc: "This is an example",
+      timestart: "12:00",
+      timeend: "13:00",
+      time: "Infinity",
+      category: "entertainment"
     }
   ]
 }];
 
-let statsData = { "aktif": 1, "komplit": 0, "hapus": 0, "total": 1, "unset": 0, "work": 0, "education": 0, "sport": 0, "social": 0, "entertainment": 1 };
-
-
+export let statsData = {
+  active: 1,
+  complete: 0,
+  deletedTask: 0,
+  total: 1,
+  unset: 0,
+  work: 0,
+  education: 0,
+  sport: 0,
+  social: 0,
+  entertainment: 1
+};
 
 export function changeMonth(e) {
   const btn = e.target.closest('button');
@@ -101,7 +112,7 @@ export function createMonthDays() {
     datesBtn.addEventListener('click', () => {
       currid = datesBtn.id;
       currDayActive(datesBtn);
-      //     loadTask();
+      loadTask();
     });
 
     datesBtn.classList = "dateBtn";
@@ -129,30 +140,129 @@ export function scrollToSection(val) {
   //window.location.href = "#stats";
 }
 
+/*timeStart.oninput = function(){tsDisplayer.innerHTML = timeStart.value};
+	timeEnd.oninput = function(){teDisplayer.innerHTML = timeEnd.value};*/
+
 export function createNewTask(title, desc, timestart, timeend, category, timeStartEnd) {
+  console.log(title);
   let uniqueid = Math.random() * 100;
 
-  /* statsData.active++;
-   statsData.total++;
-   statsData[c]++;
-   saveData();
+  statsData.active++;
+  statsData.total++;
+  statsData[category]++;
+  saveData()
 
-   if (taskArray.find(tanggal => tanggal.date === homepage.currid)) {
-     let existTask = taskArray.find(tanggal => tanggal.date === homepage.currid);
-     let content = existTask.content;
-     content.push({ "uid": uniqueid, "isCompleted": "false", "title": t, "desc": d, "timestart": ts, "timeend": te, "time": tse, "category": c });
+  let existTask = taskArray.find(task => task.date === currid);
 
-     loadTask();
-     closetaskPopup();
-     saveData();
-   } else {
-     taskArray.push({
-       "date": homepage.currid,
-       "content": [{ "uid": uniqueid, "isCompleted": "false", "title": t, "desc": d, "timestart": ts, "timeend": te, "time": tse, "category": c }]
-     });
+  /* if (taskArray.find(task => task.date === homepage.currid)) {*/
+  if (existTask) {
+    // let existTask = taskArray.find(task => task.date === currid);
+    let content = existTask.content;
 
-     loadTask();
-     closetaskPopup();
-     saveData();
-   }*/
+    content.push(
+    {
+      uid: uniqueid,
+      isCompleted: false,
+      title: title,
+      desc,
+      timestart,
+      timeend,
+      time: timeStartEnd,
+      category
+    });
+
+    loadTask();
+    saveData();
+  } else {
+    taskArray.push({
+      date: currid,
+      content: [
+        {
+          uid: uniqueid,
+          isCompleted: false,
+          title,
+          desc,
+          timestart,
+          timeend,
+          time: 'timeStartEnd',
+          category
+        }
+      ]
+    });
+    loadTask();
+    saveData();
+  }
+}
+
+function saveData() {
+  localStorage.setItem("tasks", JSON.stringify(taskArray));
+  localStorage.setItem("stats", JSON.stringify(statsData));
+  loadStats();
+}
+
+export function loadTask() {
+  const updatedtaskCard = document.querySelectorAll(".task-card");
+
+  updatedtaskCard.forEach(updatedtaskCard => updatedtaskCard.remove());
+
+  document.querySelector(".task-container-completed").style.display = "none";
+
+  document.querySelector(".empty-task").style.display = "block";
+
+  const existTask = taskArray.find(tanggal => tanggal.date === homepage.currid);
+
+  if (existTask) {
+
+    let contentArray = existTask.content;
+
+    for (var i = 0; i < contentArray.length; i++) {
+      let currcontent = contentArray[i];
+
+      const tab = document.createElement("div");
+      tab.classList = "task-card";
+      tab.onclick = function() {
+        opentaskView(
+          currcontent.title,
+          currcontent.desc,
+          currcontent.timestart,
+          currcontent.timeend,
+          currcontent.category,
+          currcontent.uid,
+          currcontent.isCompleted
+        )
+      };
+
+      const tabContent = document.createElement("span");
+      tabContent.classList = "task-content";
+
+      const image = document.createElement("img");
+      image.src = "Img/" + currcontent.category + ".png";
+
+      const title = document.createElement("h2");
+      title.innerHTML = currcontent.title;
+
+      const des = document.createElement("p");
+      des.innerHTML = currcontent.desc;
+
+      const time = document.createElement("h3");
+      time.innerHTML = currcontent.time;
+
+      tab.appendChild(image);
+      tabContent.appendChild(title);
+      tabContent.appendChild(des);
+      tabContent.appendChild(time);
+      tab.appendChild(tabContent);
+
+      document.querySelector(".empty-task").style.display = "none";
+
+      if (currcontent.isCompleted == "false") {
+        document.querySelector(".task-container").appendChild(tab);
+      } else if (currcontent.isCompleted == "true") {
+        tab.style = "background: linear-gradient(120deg, #D6FFA3, #97FF00)";
+        document.querySelector(".task-container-completed").style.display = "flex";
+        document.querySelector(".task-container-completed").appendChild(tab);
+      }
+
+    }
+  }
 }
