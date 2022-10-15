@@ -9,8 +9,6 @@ homepage.generateTaskView();
 stats.generateStatsHTML();
 homepage.init();
 
-const taskView = document.querySelector(".task-view");
-
 
 //loadData();
 model.loadTask();

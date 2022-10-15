@@ -1,5 +1,5 @@
 import * as homepage from './homepage.js';
-import { loadStats } from './stats.js'
+import { generateStats } from './stats.js'
 import { monthsArr, weekDaysArr } from './helper.js';
 
 export const now = new Date();
@@ -33,7 +33,7 @@ let taskArray = [{
 export let statsData = {
   active: 1,
   complete: 0,
-  deletedTask: 0,
+  deleted : 0,
   total: 1,
   unset: 0,
   work: 0,
@@ -197,7 +197,7 @@ export function createNewTask(title, desc, timestart, timeend, category, timeSta
 function saveData() {
   localStorage.setItem("tasks", JSON.stringify(taskArray));
   localStorage.setItem("stats", JSON.stringify(statsData));
-  loadStats();
+  generateStats();
 }
 
 export function loadTask() {
@@ -257,7 +257,7 @@ export function loadTask() {
 
       if (currcontent.isCompleted === false) {
         document.querySelector(".task-container").appendChild(tab);
-        console.log(document.querySelector(".task-container"));
+        
       } else if (currcontent.isCompleted === true) {
         tab.style = "background: linear-gradient(120deg, #D6FFA3, #97FF00)";
         document.querySelector(".task-container-completed").style.display = "flex";
@@ -269,8 +269,9 @@ export function loadTask() {
 }
 
 function opentaskView(t, d, ts, te, c, u, ic) {
+ const taskView = document.querySelector(".task-view");
+ 
   taskView.classList.add('active');
-
   let title = taskView.querySelector(".task-form-view h1");
   let desc = taskView.querySelector(".task-form-view p");
   let del = taskView.querySelector(".task-view #taskDelete");

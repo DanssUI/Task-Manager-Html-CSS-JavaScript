@@ -70,7 +70,7 @@ export function generateHomepageHTML() {
   nav = document.querySelector('.navbar');
 }
 
-export function generateAddTaskHTML() {
+/*export function generateAddTaskHTML() {
   let html = `
     <button id="close">&times</button>
     <div class="task-form">
@@ -101,7 +101,7 @@ export function generateAddTaskHTML() {
   categoryBtn = document.querySelector('[data-category-btn]');
   category = categoryBtn.querySelector('span');
   
-}
+}*/
 
 export function generateTaskView() {
   const parentElement = document.querySelector('.task-view')
