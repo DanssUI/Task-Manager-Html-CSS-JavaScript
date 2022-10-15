@@ -2,40 +2,34 @@
 import * as homepage from './homepage.js'
 import * as model from './model.js'
 import * as stats from './stats.js'
+import * as viewTask from './viewTask.js'
+import { generateAddTaskHTML } from './createTask.js'
 
-homepage.generateHomepageHTML();
-homepage.generateAddTaskHTML();
-homepage.generateTaskView();
-stats.generateStatsHTML();
-homepage.init();
+function generateMarkup() {
+  homepage.generateHomepageHTML();
+  generateAddTaskHTML();
+  viewTask.generateTaskView();
+  stats.generateStatsHTML();
+  homepage.init();
+}
 
+function init() {
+  generateMarkup();
+}
 
-//loadData();
+init();
+
 model.loadTask();
 model.initTime();
 model.createMonthDays();
+stats.generateStats();
+model.loadData();
 
 //reset Database
-//loadDatarage.setItem("tasks", JSON.stringify(taskArray));
+//loadStorage.setItem("tasks", JSON.stringify(taskArray));
 //localStorage.setItem("stats", JSON.stringify(statsData));
 
-function loadData() {
-  //Task Data
-  if (JSON.parse(localStorage.getItem("tasks")) == null) {
-    localStorage.setItem("tasks", JSON.stringify(taskArray));
-    taskArray = JSON.parse(localStorage.getItem("tasks"));
-  } else {
-    taskArray = JSON.parse(localStorage.getItem("tasks"));
-  }
 
-  //Stats Data
-  if (JSON.parse(localStorage.getItem("stats")) == null) {
-    localStorage.setItem("stats", JSON.stringify(statsData));
-    statsData = JSON.parse(localStorage.getItem("stats"));
-  } else {
-    statsData = JSON.parse(localStorage.getItem("stats"));
-  }
-}
 
 /*function saveData() {
   localStorage.setItem("tasks", JSON.stringify(taskArray));
@@ -109,18 +103,6 @@ function loadData() {
 }*/
 
 
-let title = document.getElementById('taskname');
-let desc = document.getElementById('taskdesc');
-let category = "unset";
-let timeStart = document.getElementById('timestart');
-let timeEnd = document.getElementById('timeend');
-
-
-const tsDisplayer = document.querySelector(".lower-input button:nth-child(2) span");
-const teDisplayer = document.querySelector(".lower-input button:nth-child(3) span");
-
-
-
 
 /*function addTaskBtn() {
   let timeStartEnd = timeStart.value + " - " + timeEnd.value;
@@ -128,10 +110,10 @@ const teDisplayer = document.querySelector(".lower-input button:nth-child(3) spa
   addtask(title.value, desc.value, timeStart.value, timeEnd.value, category, timeStartEnd);
 }*/
 
-timeStart.oninput = function() { tsDisplayer.innerHTML = timeStart.value };
-timeEnd.oninput = function() { teDisplayer.innerHTML = timeEnd.value };
+//timeStart.oninput = function() { tsDisplayer.innerHTML = timeStart.value }
+//timeEnd.oninput = function() { teDisplayer.innerHTML = timeEnd.value };
 
-function addtask(t, d, ts, te, c, tse) {
+/*function addtask(t, d, ts, te, c, tse) {
   let uniqueid = Math.random() * 100;
 
   statsData.aktif++;
@@ -157,58 +139,4 @@ function addtask(t, d, ts, te, c, tse) {
     closetaskPopup();
     saveData();
   }
-}
-
-function deleteTask(val) {
-  if (taskArray.find(tanggal => tanggal.date === homepage.currid)) {
-    let getTask = taskArray.find(tanggal => tanggal.date === homepage.currid);
-    let taskContent = getTask.content;
-    let getUidTask = getTask.content.find(id => id.uid === val);
-
-    //Stats Update
-    if (taskContent.isCompleted == "false") {
-      if (statsData.aktif > 0) {
-        statsData.hapus++;
-        statsData.aktif--;
-        saveData();
-      }
-    } else {
-      if (statsData.komplit > 0) {
-        statsData.hapus++;
-        statsData.komplit--;
-        saveData();
-      }
-    }
-
-    let indPos = taskContent.indexOf(getUidTask);
-
-    if (taskContent.length > 1) {
-      taskContent.splice(indPos, 1);
-    } else {
-      taskArray.pop();
-    }
-
-    saveData();
-    loadTask();
-    closetaskView();
-  }
-}
-
-function completeTask(val) {
-  if (statsData.aktif > 0) {
-    statsData.komplit++;
-    statsData.aktif--;
-    saveData();
-  }
-
-  if (taskArray.find(tanggal => tanggal.date === homepage.currid)) {
-    let getTask = taskArray.find(tanggal => tanggal.date === homepage.currid);
-    let getUidTask = getTask.content.find(id => id.uid === val);
-    getUidTask.isCompleted = "true";
-  }
-
-  saveData();
-  loadTask();
-  closetaskView();
-
-}
+}*/

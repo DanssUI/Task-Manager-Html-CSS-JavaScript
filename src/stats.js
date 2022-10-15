@@ -1,4 +1,4 @@
-import {statsData} from './model.js'
+import { statsData } from './model.js'
 const parentElement = document.querySelector('#stats');
 let statsHolder;
 
@@ -8,13 +8,11 @@ export function generateStatsHTML() {
       <span class="headerbottom">Statistics</span>
     </h4>
     <div class="stats-holder">
- 
-
     </div>`
-    
-    parentElement.insertAdjacentHTML('beforeend', html);
-    statsHolder = document.querySelector('.stats-holder');
-    generateStats();
+
+  parentElement.insertAdjacentHTML('beforeend', html);
+  statsHolder = document.querySelector('.stats-holder');
+  generateStats();
 }
 
 export function generateStats() {
@@ -49,7 +47,7 @@ export function generateStats() {
       <span>${statsData.entertainment}</span>
     </div>
   </div>`
-  
+
   statsHolder.innerHTML = '';
   statsHolder.insertAdjacentHTML('beforeend', html)
 }

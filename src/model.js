@@ -2,6 +2,7 @@ import * as homepage from './homepage.js';
 import { generateStats } from './stats.js'
 import { monthsArr, weekDaysArr } from './helper.js';
 
+
 export const now = new Date();
 
 let currMonth = now.getMonth();
@@ -14,7 +15,6 @@ export const nowid = `${currYear} ${(now.getMonth() + 1)} ${now.getDate()}`;
 export let currid = nowid;
 
 let taskArray = [{
-  //i have change nowid to currid since original dev was reassigned the nowid with currid
   date: currid,
   content: [
     {
@@ -33,7 +33,7 @@ let taskArray = [{
 export let statsData = {
   active: 1,
   complete: 0,
-  deleted : 0,
+  deleted: 0,
   total: 1,
   unset: 0,
   work: 0,
@@ -140,11 +140,8 @@ export function scrollToSection(val) {
   //window.location.href = "#stats";
 }
 
-/*timeStart.oninput = function(){tsDisplayer.innerHTML = timeStart.value};
-	timeEnd.oninput = function(){teDisplayer.innerHTML = timeEnd.value};*/
-
 export function createNewTask(title, desc, timestart, timeend, category, timeStartEnd) {
-  console.log(title);
+  
   let uniqueid = Math.random() * 100;
 
   statsData.active++;
@@ -154,9 +151,7 @@ export function createNewTask(title, desc, timestart, timeend, category, timeSta
 
   let existTask = taskArray.find(task => task.date === currid);
 
-  /* if (taskArray.find(task => task.date === homepage.currid)) {*/
   if (existTask) {
-    // let existTask = taskArray.find(task => task.date === currid);
     let content = existTask.content;
 
     content.push(
@@ -210,9 +205,8 @@ export function loadTask() {
   document.querySelector(".empty-task").style.display = "block";
 
   const existTask = taskArray.find(task => task.date === currid);
-  
+ 
   if (existTask) {
-    
     let contentArray = existTask.content;
 
     for (var i = 0; i < contentArray.length; i++) {
@@ -257,7 +251,7 @@ export function loadTask() {
 
       if (currcontent.isCompleted === false) {
         document.querySelector(".task-container").appendChild(tab);
-        
+
       } else if (currcontent.isCompleted === true) {
         tab.style = "background: linear-gradient(120deg, #D6FFA3, #97FF00)";
         document.querySelector(".task-container-completed").style.display = "flex";
@@ -268,9 +262,10 @@ export function loadTask() {
   }
 }
 
+
 function opentaskView(t, d, ts, te, c, u, ic) {
- const taskView = document.querySelector(".task-view");
- 
+  const taskView = document.querySelector(".task-view");
+
   taskView.classList.add('active');
   let title = taskView.querySelector(".task-form-view h1");
   let desc = taskView.querySelector(".task-form-view p");
@@ -302,4 +297,22 @@ function opentaskView(t, d, ts, te, c, u, ic) {
 
 function closetaskView() {
   taskView.classList.remove('active')
+}
+
+export function loadData() {
+  //Task Data
+  if (JSON.parse(localStorage.getItem("tasks")) == null) {
+    localStorage.setItem("tasks", JSON.stringify(taskArray));
+    taskArray = JSON.parse(localStorage.getItem("tasks"));
+  } else {
+    taskArray = JSON.parse(localStorage.getItem("tasks"));
+  }
+
+  //Stats Data
+  if (JSON.parse(localStorage.getItem("stats")) == null) {
+    localStorage.setItem("stats", JSON.stringify(statsData));
+    statsData = JSON.parse(localStorage.getItem("stats"));
+  } else {
+    statsData = JSON.parse(localStorage.getItem("stats"));
+  }
 }

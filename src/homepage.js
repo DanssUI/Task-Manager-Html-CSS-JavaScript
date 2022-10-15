@@ -1,18 +1,16 @@
-
-import * as model from './model.js'
-import { icons } from './helper.js'
+import * as model from './model.js';
+import { icons } from './helper.js';
+import { toggleTaskForm, category } from './createTask.js';
 
 const parentContainer = document.querySelector('.schedule-section');
-const addTaskParentElem = document.querySelector('.add-task');
 
 let taskContainer;
 let changeMonthCont;
 export let dateContainer;
 let addTaskPopup;
 let nav;
-let categoryMenu;
-let categoryBtn;
-let category;
+export let categoryMenu;
+
 
 export function generateHomepageHTML() {
   let html = `
@@ -30,15 +28,6 @@ export function generateHomepageHTML() {
       </div>
         
       <div class="date"></div>
-        
-      <div class="category_Menu">
-        <button>unset</button>
-        <button>work</button>
-        <button>education</button>
-        <button>sport</button>
-        <button>social</button>
-        <button>entertainment</button>
-      </div>
     </div>
 
     <div class="task-container-parent">
@@ -66,84 +55,12 @@ export function generateHomepageHTML() {
   dateContainer = document.querySelector(".date");
   taskContainer = document.querySelector(".task-container");
   changeMonthCont = document.querySelector('.btns-container');
-  categoryMenu = document.querySelector(".category_Menu");
   nav = document.querySelector('.navbar');
 }
 
-/*export function generateAddTaskHTML() {
-  let html = `
-    <button id="close">&times</button>
-    <div class="task-form">
-      <h3 id="taskHeader">Task Name</h3>
-      <input type="text" id="taskname" value="" required />
-      <h3 id="taskHeader">Task Description</h3>
-      <input type="text" id="taskdesc" value="" />
-
-      <div class="lower-input">
-        <button data-category-btn>
-          <b>Category : </b> <span></span>
-        </button>
-        
-        <button><b>Start</b><br />
-          <span></span><input type="time" id="timestart" value="12:00" />
-        </button>
-        
-        <button><b>End</b><br />
-          <span></span><input type="time" id="timeend" value="13:00" />
-        </button>
-      </div>
-    </div>
-   <button id="createTask"> Create New Task </button>`
-
-
-
-  addTaskParentElem.insertAdjacentHTML('beforeend', html);
-  categoryBtn = document.querySelector('[data-category-btn]');
-  category = categoryBtn.querySelector('span');
-  
-}*/
-
-export function generateTaskView() {
-  const parentElement = document.querySelector('.task-view')
-  let html = `
-    <button id="close" onclick="closetaskView()">&times;</button>
-
-    <div class="task-form-view">
-      <img src="Img/unset.png" />
-      <h1>Task Name</h1
-      <p>Task Description</p>
-
-      <div class="lower-input-view">
-        <div class="lower-holder-view">
-          <button>
-            <b>Category : </b>
-            <span></span>
-          </button>
-          <button>
-            <b>Start</b> <br>
-            <span></span>
-          </button>
-          <button>
-            <b>End</b><br>
-            <span></span>
-          </button>
-          <button id="taskComplete">Complete</button>
-          <button id="taskDelete">Delete</button>
-        </div>
-      </div>
-    </div>`
-
-  parentElement.insertAdjacentHTML('beforeend', html);
-}
-
 export function init() {
-  const createTaskBtn = document.querySelector('#createTask');
   changeMonthCont.addEventListener('click', model.changeMonth);
   nav.addEventListener('click', navSectionToggle);
-
-  categoryBtn.addEventListener('click', openCategoryMenu);
-
-  createTaskBtn.addEventListener('click', createTask);
 }
 
 function navSectionToggle(e) {
@@ -173,41 +90,36 @@ function navSectionToggle(e) {
 }
 
 function addNewTaskPopUp() {
-  addTaskParentElem.classList.add('active');
-  const closeBtn = document.querySelector('#close');
-  closeBtn.addEventListener('click', closeNewtaskPopup);
+  toggleTaskForm();
+ /* const closeBtn = document.querySelector('#close');
+  closeBtn.addEventListener('click', closeNewtaskPopup);*/
 }
 
-function createTask() {
+/*export function createTask() {
   const title = document.getElementById('taskname');
+  console.log(title);
   const desc = document.getElementById('taskdesc');
- // const category = "unset";
+  // const category = "unset";
   const timeStart = document.getElementById('timestart');
   const timeEnd = document.getElementById('timeend');
-  
-  let timeStartEnd = `${timeStart.value} - ${timeEnd.value}`;
+  const timeStartEnd = `${timeStart.value} - ${timeEnd.value}`;
 
   model.createNewTask(title.value, desc.value, timestart.value, timeend.value, category.innerText, timeStartEnd);
   closeNewtaskPopup();
+  resetAddTaskForm();
 }
 
 function closeNewtaskPopup() {
-  addTaskParentElem.classList.remove('active');
- /*[title.value, desc.value, category, timeStart.value, timeEnd.value] = ["", "", "unset", "12:00", "13:00"];
-  	[cateDisplayer.innerHTML, tsDisplayer.innerHTML, teDisplayer.innerHTML] = [category, timeStart.value, timeEnd.value];*/
-}
+  toggleTaskForm();
+  resetAddTaskForm();
+  /*[title.value, desc.value, category, timeStart.value, timeEnd.value] = ["", "", "unset", "12:00", "13:00"];
+   	[cateDisplayer.innerHTML, tsDisplayer.innerHTML, teDisplayer.innerHTML] = [category, timeStart.value, timeEnd.value];
+}*/
 
-function openCategoryMenu() {
-  categoryMenu.classList.add('active');
-
-  categoryMenu.querySelectorAll("button").forEach(button => {
-    button.addEventListener("click", function() {
-      category.innerHTML = button.innerHTML;
-      closeCategory();
-    });
-  });
-}
-
-function closeCategory() {
-  categoryMenu.classList.remove('active');
-}
+/*function resetAddTaskForm() {
+  title.innerText = '';
+  description.innerText = ''
+  category.innerHTML = '';
+  timeStart.value = '';
+  timeEnd.value = ''
+}*/
