@@ -91,8 +91,6 @@ function navSectionToggle(e) {
 
 function addNewTaskPopUp() {
   toggleTaskForm();
- /* const closeBtn = document.querySelector('#close');
-  closeBtn.addEventListener('click', closeNewtaskPopup);*/
 }
 
 /*export function createTask() {

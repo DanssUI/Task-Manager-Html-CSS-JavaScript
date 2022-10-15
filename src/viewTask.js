@@ -2,8 +2,7 @@ const parentElement = document.querySelector('.task-view');
 
 export function generateTaskView() {
   let html = `
-    <button id="close" onclick="closetaskView()">&times;</button>
-
+    <button id="closeBtn">&times;</button>
     <div class="task-form-view">
       <img src="Img/unset.png" />
       <h1>Task Name</h1
@@ -30,6 +29,13 @@ export function generateTaskView() {
     </div>`
 
   parentElement.insertAdjacentHTML('beforeend', html);
+  document.querySelector('#closeBtn').addEventListener('click', closeTask);
+}
+
+function closeTask() {
+ // console.log(parentElement.innerHTML);
+   //parentElement.style.display = 'none'
+  parentElement.classList.remove('active');
 }
 
 /*function deleteTask(val) {

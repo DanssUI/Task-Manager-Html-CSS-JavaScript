@@ -121,6 +121,7 @@ export function createMonthDays() {
     if (i === currDay) {
       homepage.dateContainer.scrollLeft = datesBtn.offsetLeft - homepage.dateContainer.offsetLeft;
       currDayActive(datesBtn);
+      loadTask();
     }
   }
 }
@@ -140,18 +141,24 @@ export function scrollToSection(val) {
   //window.location.href = "#stats";
 }
 
+/*function saveData() {
+  localStorage.setItem("tasks", JSON.stringify(taskArray));
+  localStorage.setItem("stats", JSON.stringify(statsData));
+  generateStats();
+}*/
+
 export function createNewTask(title, desc, timestart, timeend, category, timeStartEnd) {
-  
+
   let uniqueid = Math.random() * 100;
 
   statsData.active++;
   statsData.total++;
   statsData[category]++;
-  saveData()
+  // saveData()
 
-  let existTask = taskArray.find(task => task.date === currid);
+  if (taskArray.find(task => task.date === currid)) {
+    let existTask = taskArray.find(task => task.date === currid);
 
-  if (existTask) {
     let content = existTask.content;
 
     content.push(
@@ -165,9 +172,8 @@ export function createNewTask(title, desc, timestart, timeend, category, timeSta
       time: timeStartEnd,
       category
     });
-
     loadTask();
-    saveData();
+    //saveData();
   } else {
     taskArray.push({
       date: currid,
@@ -185,81 +191,77 @@ export function createNewTask(title, desc, timestart, timeend, category, timeSta
       ]
     });
     loadTask();
-    saveData();
+    //  saveData();
   }
 }
 
-function saveData() {
-  localStorage.setItem("tasks", JSON.stringify(taskArray));
-  localStorage.setItem("stats", JSON.stringify(statsData));
-  generateStats();
-}
-
 export function loadTask() {
+
   const updatedtaskCard = document.querySelectorAll(".task-card");
 
   updatedtaskCard.forEach(updatedtaskCard => updatedtaskCard.remove());
+
 
   document.querySelector(".task-container-completed").style.display = "none";
 
   document.querySelector(".empty-task").style.display = "block";
 
-  const existTask = taskArray.find(task => task.date === currid);
- 
-  if (existTask) {
+  if (taskArray.find(task => task.date === currid)) {
+
+    const existTask = taskArray.find(task => task.date === currid);
     let contentArray = existTask.content;
 
     for (var i = 0; i < contentArray.length; i++) {
-      let currcontent = contentArray[i];
 
-      const tab = document.createElement("div");
-      tab.classList = "task-card";
-      tab.onclick = function() {
-        opentaskView(
-          currcontent.title,
-          currcontent.desc,
-          currcontent.timestart,
-          currcontent.timeend,
-          currcontent.category,
-          currcontent.uid,
-          currcontent.isCompleted
-        )
-      };
+      let currContent = contentArray[i];
 
-      const tabContent = document.createElement("span");
-      tabContent.classList = "task-content";
+      createTaskCard(currContent);
 
-      const image = document.createElement("img");
-      image.src = "Img/" + currcontent.category + ".png";
 
-      const title = document.createElement("h2");
-      title.innerHTML = currcontent.title;
-
-      const des = document.createElement("p");
-      des.innerHTML = currcontent.desc;
-
-      const time = document.createElement("h3");
-      time.innerHTML = currcontent.time;
-
-      tab.appendChild(image);
-      tabContent.appendChild(title);
-      tabContent.appendChild(des);
-      tabContent.appendChild(time);
-      tab.appendChild(tabContent);
+      let tabs = document.querySelectorAll('.task-card');
+      tabs.forEach(tab => {
+        tab.addEventListener('click', () => {
+        opentaskView(currContent.title,
+          currContent.desc,
+          currContent.timestart,
+          currContent.timeend,
+          currContent.category,
+          currContent.uid,
+          currContent.isCompleted);
+      })
+      })
 
       document.querySelector(".empty-task").style.display = "none";
-
-      if (currcontent.isCompleted === false) {
-        document.querySelector(".task-container").appendChild(tab);
-
-      } else if (currcontent.isCompleted === true) {
-        tab.style = "background: linear-gradient(120deg, #D6FFA3, #97FF00)";
-        document.querySelector(".task-container-completed").style.display = "flex";
-        document.querySelector(".task-container-completed").appendChild(tab);
-      }
-
     }
   }
+}
+
+function createTaskCard(content) {
+  //  let tab;
+  let html = `
+    <div class="task-card">
+      <img src="Img/${content.category}.png" />
+      <div class="task-content">
+        <h2>${content.title}</h2>
+        <p>${content.desc} </p>
+        <span>${content.time}</span>
+      </div>
+    </div>
+  `
+
+  document.querySelector(".empty-task").style.display = "none";
+
+  if (content.isCompleted === false) document.querySelector(".task-container").insertAdjacentHTML('beforeend', html);
+  else {
+    document.querySelector(".task-container-completed").style.display = "flex";
+    document.querySelector(".task-container-completed").insertAdjacentHTML('beforeend', html);
+    // tab = document.querySelector('.task-card');
+    //tab.style = "background: linear-gradient(120deg, #D6FFA3, #97FF00)"
+  }
+
+  //  let tab = document.querySelector('.task-card');
+  //  console.log(tab);
+  return html
 }
 
 
@@ -293,10 +295,6 @@ function opentaskView(t, d, ts, te, c, u, ic) {
     cmplt.style.display = "none";
   }
 
-}
-
-function closetaskView() {
-  taskView.classList.remove('active')
 }
 
 export function loadData() {

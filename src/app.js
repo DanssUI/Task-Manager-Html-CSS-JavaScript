@@ -19,7 +19,7 @@ function init() {
 
 init();
 
-model.loadTask();
+//model.loadTask();
 model.initTime();
 model.createMonthDays();
 stats.generateStats();

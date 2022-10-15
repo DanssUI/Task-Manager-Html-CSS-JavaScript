@@ -12,7 +12,7 @@ let timeEndElem;
 
 export function generateAddTaskHTML() {
   let html = `
-    <button data-btn="close" id="close">&times</button>
+    <button id="closeCrossBtn">&times</button>
     <div class="task-form">
       <h3 id="taskHeader">Task Name</h3>
       <input type="text" id="taskname" value="" required />
@@ -25,16 +25,16 @@ export function generateAddTaskHTML() {
           <b>Category : </b> <span>Unset</span>
         </button>
         
-        <button data-btn="timestart"><b>Start</b><br />
+        <button><b>Start</b><br />
           <span></span><input type="time" id="timestart" value="12:00" />
         </button>
         
-        <button data-btn="timeend"><b>End</b><br />
+        <button><b>End</b><br />
           <span></span><input type="time" id="timeend" value="13:00" />
         </button>
       </div>
     </div>
-    <button data-btn="createTask" id="createTask"> Create New Task </button>`
+    <button id="createTask"> Create New Task </button>`
 
 
   addTaskParentElem.insertAdjacentHTML('beforeend', html);
@@ -50,7 +50,7 @@ export function generateAddTaskHTML() {
 }
 
 function init() {
-  const closeCrossBtn = document.querySelector('#close');
+  const closeCrossBtn = document.querySelector('#closeCrossBtn');
   const createTaskBtn = document.querySelector('#createTask');
 
   categoryBtn.addEventListener('click', openCategoryMenu);

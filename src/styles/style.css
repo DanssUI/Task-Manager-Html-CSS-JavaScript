@@ -424,6 +424,11 @@ body {
   padding: 0 30px 0 30px;
 }
 
+.task-card img {
+  width: 80px;
+  height: auto;
+}
+
 .task-content {
   width: 100%;
   height: 80%;
@@ -434,25 +439,23 @@ body {
   margin-left: 2em;
 }
 
-.task-card h2 {
+.task-content h2 {
   width: 100%;
   height: auto;
   overflow: hidden;
 }
 
-.task-card p {
+.task-content p {
   width: 100%;
   height: auto;
   overflow: hidden;
+  display: -webkit-box;
+  -webkit-line-clamp: 1;
+  -webkit-box-orient: vertical;
 }
 
-.task-card img {
-  width: 80px;
-  height: auto;
-}
-
-.task-card h3 {
-  font-weight: normal;
+.task-content span  {
+  font-size: 1.1rem;
   color: #757575;
 }
 
@@ -720,7 +723,8 @@ body {
   transform: translateY(0);
 }
 
-#close {
+#closeBtn,
+#closeCrossBtn {
   position: absolute;
   top: 3%;
   right: 5%;
