@@ -17,7 +17,7 @@ removed h4 after h2 from stats section <br>
 Placed the create task button on bottom <br>
 move structure to js <br>
 changed a class name from loweri-input to lower-input<br>
-
+changed the ids on close button(they had same ids) <br>
 <br>
 
 <h3>CSS</h3><br>
@@ -45,6 +45,8 @@ removed onclicks with addEventListeners.<br>
 removed the creating month days logic from timeinit function and created it's own function.<br>
 corrected a bad name(addtaskBtn)<br>
 fixed a bug year not changing on date buttons id<br>
+Created a separate function for generating new task <br>
+created different js files for Creating task, viewing task and view stats<br>
 <br>
 
 ##Currently Working on---<br>
