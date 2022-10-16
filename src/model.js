@@ -269,14 +269,15 @@ function opentaskView(t, d, ts, te, c, u, ic) {
   const taskView = document.querySelector(".task-view");
 
   taskView.classList.add('active');
-  let title = taskView.querySelector(".task-form-view h1");
-  let desc = taskView.querySelector(".task-form-view p");
+  
+  let title = taskView.querySelector(".task-form-view h2");
+  let desc = taskView.querySelector(".task_view_desc");
   let del = taskView.querySelector(".task-view #taskDelete");
   let cmplt = taskView.querySelector(".task-view #taskComplete");
 
-  let cateDisplay = document.querySelector(".lower-input-view button:nth-child(1) span");
-  let tsDisplay = document.querySelector(".lower-input-view button:nth-child(2) span");
-  let teDisplay = document.querySelector(".lower-input-view button:nth-child(3) span");
+  let cateDisplay = document.querySelector(".category_time_cont button:nth-child(1) span");
+  let tsDisplay = document.querySelector(".category_time_cont button:nth-child(2) span");
+  let teDisplay = document.querySelector(".category_time_cont button:nth-child(3) span");
   let imgDisplay = document.querySelector(".task-form-view img");
 
   imgDisplay.src = "Img/" + c + ".png";
@@ -288,7 +289,7 @@ function opentaskView(t, d, ts, te, c, u, ic) {
   cateDisplay.innerHTML = c;
   del.onclick = function() { deleteTask(u) };
 
-  if (ic == "false") {
+  if (ic === false) {
     cmplt.style.display = "block";
     cmplt.onclick = function() { completeTask(u) };
   } else {

@@ -2,14 +2,19 @@ const parentElement = document.querySelector('.task-view');
 
 export function generateTaskView() {
   let html = `
-    <button id="closeBtn">&times;</button>
+    <button id="closeViewBtn">&times;</button>
     <div class="task-form-view">
-      <img src="Img/unset.png" />
-      <h1>Task Name</h1
-      <p>Task Description</p>
-
-      <div class="lower-input-view">
-        <div class="lower-holder-view">
+      <h2>Task Name</h2>
+      <div class='img_cont'>
+        <img src="Img/unset.png" />
+      </div>
+      <div class="desc_container">
+        <p>Task Description</p>
+        <p class="task_view_desc"></p>
+      </div>
+      
+      <div class="lower-holder-view">
+        <div class="category_time_cont">
           <button>
             <b>Category : </b>
             <span></span>
@@ -22,14 +27,17 @@ export function generateTaskView() {
             <b>End</b><br>
             <span></span>
           </button>
+        </div>
+       
+        <div class="action_button_cont">
           <button id="taskComplete">Complete</button>
           <button id="taskDelete">Delete</button>
-        </div>
+        <div>
       </div>
     </div>`
 
   parentElement.insertAdjacentHTML('beforeend', html);
-  document.querySelector('#closeBtn').addEventListener('click', closeTask);
+  document.querySelector('#closeViewBtn').addEventListener('click', closeTask);
 }
 
 function closeTask() {

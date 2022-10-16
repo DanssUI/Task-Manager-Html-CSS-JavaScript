@@ -12,7 +12,7 @@ let timeEndElem;
 
 export function generateAddTaskHTML() {
   let html = `
-    <button id="closeCrossBtn">&times</button>
+    <button id="closeTaskBtn">&times</button>
     <div class="task-form">
       <h3 id="taskHeader">Task Name</h3>
       <input type="text" id="taskname" value="" required />
@@ -50,10 +50,8 @@ export function generateAddTaskHTML() {
 }
 
 function init() {
-  const closeCrossBtn = document.querySelector('#closeCrossBtn');
+  const closeCrossBtn = document.querySelector('#closeTaskBtn');
   const createTaskBtn = document.querySelector('#createTask');
-
-  generateCategoryMenu();
 
   createTaskBtn.addEventListener('click', createTask);
 
@@ -73,6 +71,9 @@ function createTask() {
 function closeNewtaskPopup() {
   toggleTaskForm();
   resetAddTaskForm();
+
+  //readd the classlist on home button
+  document.querySelector('[data-nav-btn="home"]').classList.add('active');
 }
 
 function resetAddTaskForm() {
@@ -91,7 +92,7 @@ function getInputValue() {
   timeEndInput.addEventListener('input', () => timeEndElem.innerHTML = timeEndInput.value)
 }
 
-function generateCategoryMenu() {
+export function generateCategoryMenu() {
   let html = `
     <div class="category_Menu">
       <button>unset</button>
@@ -110,7 +111,7 @@ function openSelectCategory(e) {
   const btn = e.target.matches('[data-btn="category"]');
 
   if (!btn && e.target.closest('.category_Menu') != null) {
-    if(e.target.matches('button')) category.innerHTML = e.target.innerText;
+    if (e.target.matches('button')) category.innerHTML = e.target.innerText;
   }
 
   if (btn) categoryMenu.classList.add('active');
@@ -123,5 +124,6 @@ function closeCategoryMenu() {
 
 export function toggleTaskForm() {
   addTaskParentElem.classList.toggle('active');
+  
   getInputValue();
 }

@@ -1,6 +1,6 @@
 import * as model from './model.js';
 import { icons } from './helper.js';
-import { toggleTaskForm, category } from './createTask.js';
+import { toggleTaskForm, category, generateCategoryMenu } from './createTask.js';
 
 const parentContainer = document.querySelector('.schedule-section');
 
@@ -91,6 +91,7 @@ function navSectionToggle(e) {
 
 function addNewTaskPopUp() {
   toggleTaskForm();
+  generateCategoryMenu();
 }
 
 /*export function createTask() {

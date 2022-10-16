@@ -36,7 +36,8 @@ added transition on task-view.<br>
 removed flex box from lower-input div<br>
 added transition on category menu pop up<br>
 and some other things too <br>
-
+removed the extra container(lower-input-view) from task view, changed flex to grid and decreased the height of container<br>
+removed extra class declaration<br>
 <br>
 
 <h3>JS</h3><br>
