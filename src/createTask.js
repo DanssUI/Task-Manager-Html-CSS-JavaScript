@@ -53,25 +53,13 @@ function init() {
   const closeCrossBtn = document.querySelector('#closeCrossBtn');
   const createTaskBtn = document.querySelector('#createTask');
 
-  categoryBtn.addEventListener('click', openCategoryMenu);
+  generateCategoryMenu();
 
   createTaskBtn.addEventListener('click', createTask);
 
   closeCrossBtn.addEventListener('click', closeNewtaskPopup);
-}
 
-function openCategoryMenu() {
-  generateCategoryMenu();
-  categoryMenu.classList.add('active');
-
-  categoryMenu.querySelectorAll("button").forEach(button => button.addEventListener("click", function() {
-    category.innerHTML = button.innerHTML;
-    closeCategoryMenu();
-  }));
-}
-
-function closeCategoryMenu() {
-  categoryMenu.classList.remove('active');
+  document.addEventListener('click', openSelectCategory);
 }
 
 function createTask() {
@@ -98,9 +86,9 @@ function resetAddTaskForm() {
 }
 
 function getInputValue() {
-  timeStartInput.addEventListener('input',() => timeStartElem.innerHTML = timeStartInput.value);
-  
-  timeEndInput.addEventListener('input',() => timeEndElem.innerHTML = timeEndInput.value)
+  timeStartInput.addEventListener('input', () => timeStartElem.innerHTML = timeStartInput.value);
+
+  timeEndInput.addEventListener('input', () => timeEndElem.innerHTML = timeEndInput.value)
 }
 
 function generateCategoryMenu() {
@@ -116,6 +104,21 @@ function generateCategoryMenu() {
 
   document.body.insertAdjacentHTML('beforeend', html);
   categoryMenu = document.querySelector(".category_Menu");
+}
+
+function openSelectCategory(e) {
+  const btn = e.target.matches('[data-btn="category"]');
+
+  if (!btn && e.target.closest('.category_Menu') != null) {
+    if(e.target.matches('button')) category.innerHTML = e.target.innerText;
+  }
+
+  if (btn) categoryMenu.classList.add('active');
+  else closeCategoryMenu();
+}
+
+function closeCategoryMenu() {
+  categoryMenu.classList.remove('active');
 }
 
 export function toggleTaskForm() {
