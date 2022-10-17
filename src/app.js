@@ -14,7 +14,7 @@ function generateMarkup() {
   model.initTime();
   model.createMonthDays();
   stats.generateStats();
-  model.addTabHandler(viewTask.opentaskView);
+  model.addHandlerTab(viewTask.opentaskView);
 }
 
 function init() {
@@ -23,8 +23,8 @@ function init() {
 
 init();
 
-//model.loadTask();
-//model.loadData();
+//model.renderTasks();
+//model.renderTasks();
 
 //reset Database
 //loadStorage.setItem("tasks", JSON.stringify(taskArray));

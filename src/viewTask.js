@@ -1,4 +1,4 @@
-import { statsData, taskArray, currid, loadTask } from './model.js'
+import { statsData, taskArray, currid, renderTasks } from './model.js'
 const parentElement = document.querySelector('.task-view');
 
 export function generateTaskView() {
@@ -57,11 +57,11 @@ export function opentaskView(title, desc, timeStart, timeEnd, category, uniqueid
   let deleteBtn = parentElement.querySelector(".action_button_cont #taskDelete");
   let completeBtn = parentElement.querySelector(".action_button_cont #taskComplete");
 
-  delElem.onclick = function() { deleteTask(uniqueid) };
+  //  delElem.onclick = function() { deleteTask(uniqueid) };
 
   if (isCompleted === false) {
     completeBtn.style.display = "block";
-    //  cmpltElem.onclick = function() { completeTask (uniqueid) };
+    completeBtn.onclick = function() { completeTask(uniqueid) };
   } else {
     completeBtn.style.display = "none";
   }
@@ -83,8 +83,9 @@ function completeTask(val) {
     let getTask = taskArray.find(tanggal => tanggal.date === currid);
     let getUidTask = getTask.content.find(id => id.uid === val);
     getUidTask.isCompleted = true;
+    console.log(getUidTask);
   }
 
-  loadTask();
+  renderTasks();
   closeTask();
 }

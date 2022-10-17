@@ -69,7 +69,7 @@ function createTask() {
   model.createNewTask(title.value, desc.value, timeStartInput.value, timeEndInput.value, category.innerText, timeStartEnd);
   closeNewtaskPopup();
   resetAddTaskForm();
-  model.addTabHandler(opentaskView);
+  model.addHandlerTab(opentaskView);
 }
 
 function closeNewtaskPopup() {

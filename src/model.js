@@ -103,9 +103,9 @@ export function initTime() {
 export function createMonthDays() {
   const allBtn = document.querySelectorAll(".date button");
   allBtn.forEach(btn => { btn.remove() });
-
-  for (var i = 1; i < getMonthTotalDays + 1; i++) {
-
+  
+  for (let i = 1; i < getMonthTotalDays + 1; i++) {
+    
     //get current month days
     const currMonthFullDate = new Date(now.getFullYear(), currMonth, i);
 
@@ -130,7 +130,7 @@ export function createMonthDays() {
       //reassign the currid 
       currid = datesBtn.id;
       currDayActive(datesBtn);
-      loadTask();
+      renderTasks();
     });
 
     datesBtn.classList = "dateBtn";
@@ -139,13 +139,13 @@ export function createMonthDays() {
     if (i === currDay) {
       homepage.dateContainer.scrollLeft = datesBtn.offsetLeft - homepage.dateContainer.offsetLeft;
       currDayActive(datesBtn);
-      loadTask()
+      renderTasks()
     }
   }
 }
 
 export function currDayActive(elem) {
-  const allBtn = document.querySelectorAll(".date button");
+  const allBtn = document.querySelectorAll(".date button")
 
   allBtn.forEach(btn => btn.classList = "dateBtn");
 
@@ -188,7 +188,7 @@ export function createNewTask(title, desc, timestart, timeend, category, timeSta
       time: timeStartEnd,
       category
     });
-    loadTask();
+    renderTasks();
 
   } else {
     taskArray.push({
@@ -206,11 +206,11 @@ export function createNewTask(title, desc, timestart, timeend, category, timeSta
         }
       ]
     });
-    loadTask();
+    renderTasks();
   }
 }
 
-export function loadTask() {
+export function renderTasks() {
   const emptyContainer = document.querySelector(".empty-task");
 
   //remove all the pre add tasks
@@ -258,7 +258,7 @@ function createTaskCard(content) {
   
 }
 
-export function addTabHandler(handler) {
+export function addHandlerTab(handler) {
   const tabsContainer = document.querySelector(".task-container");
 
   const todayDate = taskArray.find(task => task.date === currid);
@@ -267,10 +267,15 @@ export function addTabHandler(handler) {
   
   tabsContainer.addEventListener('click', e => {
     const id = e.target.closest('.task-card').dataset.id;
+    
     contentArr.forEach(content => {
-      if (Number(content.uid) === Number(id)) {
-        handler(content.title, content.desc, content.timestart, content.timeend, content.category, content.uid, content.isCompleted);
-      }
-    });
-  });
+      Number(content.uid) === Number(id) && handler(content.title, content.desc, content.timestart, content.timeend, content.category, content.uid, content.isCompleted)
+    })
+  })
 }
+
+function setLocalStorage() {
+ // localStorage
+}
+
+//Complete task function is not working properly yet

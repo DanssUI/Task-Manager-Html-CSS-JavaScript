@@ -156,6 +156,38 @@ body {
   font-size: 0.5em;
 }
 
+.navbar {
+  position: fixed;
+  bottom: 0;
+  right: 0;
+  left: 0;
+  height: 5rem;
+  display: flex;
+  justify-content: space-evenly;
+  align-items: center;
+  z-index: 10;
+  background: #fff;
+  border-radius: 2.5rem 2.5rem 0px 0px;
+  box-shadow: 0 1px 5px 0 rgba(0, 0, 0, 0.3);
+}
+
+.navbar button {
+  width: 3rem;
+  height: 3rem;
+  background: none;
+  border: none;
+}
+
+.navbar button svg {
+  width: 3rem;
+  height: 3rem;
+}
+
+.navbar button.active svg .activeBtn {
+  fill: url(#Gradient1);
+}
+
+/*TASK CARD*/
 .task-container-parent {
   width: 100%;
   height: 70%;
@@ -164,7 +196,7 @@ body {
   flex-shrink: 0;
   flex-direction: column;
   align-items: center;
-  padding-bottom: 10rem;
+  padding-bottom: 4rem;
   backdrop-filter: blur(10px);
   background: rgba(255, 255, 255, 0.6);
   box-shadow: 0 8px 15px 0 rgba(31, 38, 135, 0.37);
@@ -215,36 +247,69 @@ body {
   color: #4E4E4E;
 }
 
-.navbar {
-  position: fixed;
-  bottom: 0;
-  right: 0;
-  left: 0;
-  height: 5rem;
+.task-holder {
+  position: absolute;
+  width: 100%;
+  height: 75%;
+  background-color: blue;
   display: flex;
-  justify-content: space-evenly;
+  justify-content: start;
   align-items: center;
-  z-index: 10;
-  background: #fff;
-  border-radius: 2.5rem 2.5rem 0px 0px;
-  box-shadow: 0 1px 5px 0 rgba(0, 0, 0, 0.3);
+  flex-direction: column;
+  overflow-y: scroll;
+  padding-bottom: 10px;
 }
 
-.navbar button {
-  width: 3rem;
-  height: 3rem;
-  background: none;
-  border: none;
+.task-card {
+  width: 95%;
+  height: 12rem;
+  background-color: white;
+  display: flex;
+  align-items: center;
+  flex-direction: row;
+  margin-top: 1rem;
+  flex-shrink: 0;
+  border-radius: 10px;
+  padding-inline:2rem;
+  backdrop-filter: blur(10px);
+  box-shadow: 0 8px 15px 0 rgba(31, 38, 135, 0.37);
 }
 
-.navbar button svg {
-  width: 3rem;
-  height: 3rem;
+.task-card img {
+  width: 80px;
+  height: auto;
 }
 
-.navbar button.active svg .activeBtn {
-  fill: url(#Gradient1);
+.task-content {
+  width: 100%;
+  height: 80%;
+  display: flex;
+  align-items: start;
+  justify-content: center;
+  flex-direction: column;
+  margin-left: 2em;
 }
+
+.task-content h2 {
+  width: 100%;
+  height: auto;
+  overflow: hidden;
+}
+
+.task-content p {
+  width: 100%;
+  height: auto;
+  overflow: hidden;
+  display: -webkit-box;
+  -webkit-line-clamp: 1;
+  -webkit-box-orient: vertical;
+}
+
+.task-content span {
+  font-size: 1.1rem;
+  color: #757575;
+}
+
 
 /*STATS PAGE*/
 .stats-section {
@@ -395,69 +460,6 @@ body {
 
 .catbox-holder span:nth-of-type(6) {
   background-image: url('../../Img/entertainment.png');
-}
-
-.task-holder {
-  position: absolute;
-  width: 100%;
-  height: 75%;
-  background-color: blue;
-  display: flex;
-  justify-content: start;
-  align-items: center;
-  flex-direction: column;
-  overflow-y: scroll;
-  padding-bottom: 10px;
-}
-
-.task-card {
-  width: 95%;
-  height: 12rem;
-  background-color: white;
-  display: flex;
-  align-items: center;
-  flex-direction: row;
-  margin-top: 1rem;
-  flex-shrink: 0;
-  border-radius: 10px;
-  padding-inline:2rem;
-  backdrop-filter: blur(10px);
-  box-shadow: 0 8px 15px 0 rgba(31, 38, 135, 0.37);
-}
-
-.task-card img {
-  width: 80px;
-  height: auto;
-}
-
-.task-content {
-  width: 100%;
-  height: 80%;
-  display: flex;
-  align-items: start;
-  justify-content: center;
-  flex-direction: column;
-  margin-left: 2em;
-}
-
-.task-content h2 {
-  width: 100%;
-  height: auto;
-  overflow: hidden;
-}
-
-.task-content p {
-  width: 100%;
-  height: auto;
-  overflow: hidden;
-  display: -webkit-box;
-  -webkit-line-clamp: 1;
-  -webkit-box-orient: vertical;
-}
-
-.task-content span {
-  font-size: 1.1rem;
-  color: #757575;
 }
 
 /*ADD TASK*/
