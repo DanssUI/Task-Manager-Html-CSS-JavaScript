@@ -29,7 +29,6 @@ add transition on add-task container<br>
 fixed the create task button slightly overlapping the timers.<br>
 Change the architecture similiar to MVC <br>
 removed background images from nav and added svgs<br>
-<br>
 removed position absolute from lower-box .lb-head.<br>
 remove flex with grid and also height auto from some properties<br>
 added transition on task-view.<br>
@@ -39,6 +38,7 @@ and some other things too <br>
 removed the extra container(lower-input-view) from task view, changed flex to grid and decreased the height of container<br>
 removed extra class declaration<br>
 added blur and shadow on task card <br>
+hopefully(-_-) css variables are in correct position now<br>
 <br>
 
 <h3>JS</h3><br>
