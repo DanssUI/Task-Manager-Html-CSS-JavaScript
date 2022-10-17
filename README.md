@@ -38,6 +38,7 @@ added transition on category menu pop up<br>
 and some other things too <br>
 removed the extra container(lower-input-view) from task view, changed flex to grid and decreased the height of container<br>
 removed extra class declaration<br>
+added blur and shadow on task card <br>
 <br>
 
 <h3>JS</h3><br>

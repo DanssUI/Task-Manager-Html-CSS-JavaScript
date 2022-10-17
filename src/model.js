@@ -1,7 +1,7 @@
 import * as homepage from './homepage.js';
 import { generateStats } from './stats.js'
 import { monthsArr, weekDaysArr } from './helper.js';
-
+import { opentaskView } from './viewTask.js'
 
 export const now = new Date();
 
@@ -9,12 +9,13 @@ let currMonth = now.getMonth();
 let currYear = now.getFullYear();
 let getMonthTotalDays;
 let currDay;
+let tabs;
 
-export const nowid = `${currYear} ${(now.getMonth() + 1)} ${now.getDate()}`;
+export const nowid = `${currYear}${(now.getMonth() + 1)}${now.getDate()}`;
 
 export let currid = nowid;
 
-let taskArray = [{
+export let taskArray = [{
   date: currid,
   content: [
     {
@@ -43,6 +44,20 @@ export let statsData = {
   entertainment: 1
 };
 
+function messagePopUp(message, className) {
+  const messageCont = document.querySelector('.message');
+  const pElem = messageCont.querySelector('p');
+
+  messageCont.classList.add(`${className}`);
+  pElem.innerText = `${message}`
+
+  setTimeout(() => {
+    messageCont.classList.remove(`${className}`);
+    pElem.innerText = '';
+  }, 1500);
+}
+
+
 export function changeMonth(e) {
   const btn = e.target.closest('button');
   const btnDataset = btn?.dataset.btn;
@@ -62,8 +77,10 @@ export function changeMonth(e) {
       currYear--;
     }
   }
+
   initTime();
   createMonthDays();
+
   homepage.dateContainer.querySelector("button").click();
   homepage.dateContainer.scrollLeft = 0;
 }
@@ -74,8 +91,6 @@ export function initTime() {
 
   let month = monthsArr[currMonth];
   let day = weekDaysArr[now.getDay()];
-
-  // const nowid = `${now.getFullYear()} ${(now.getMonth() + 1)} ${now.getDate()}`;
 
   currDay = now.getDate();
 
@@ -97,6 +112,8 @@ export function createMonthDays() {
     //get current month week days
     const weekDays = weekDaysArr[currMonthFullDate.getDay()].slice(0, 3);
 
+    const id = `${currYear}${(currMonth + 1)}${i}`;
+
     //create dates button
     const datesBtn = document.createElement("button");
     datesBtn.innerHTML = i;
@@ -110,6 +127,7 @@ export function createMonthDays() {
     datesBtn.id = `${currYear}${(currMonth + 1)}${i}`;
 
     datesBtn.addEventListener('click', () => {
+      //reassign the currid 
       currid = datesBtn.id;
       currDayActive(datesBtn);
       loadTask();
@@ -121,7 +139,7 @@ export function createMonthDays() {
     if (i === currDay) {
       homepage.dateContainer.scrollLeft = datesBtn.offsetLeft - homepage.dateContainer.offsetLeft;
       currDayActive(datesBtn);
-      loadTask();
+      loadTask()
     }
   }
 }
@@ -130,6 +148,7 @@ export function currDayActive(elem) {
   const allBtn = document.querySelectorAll(".date button");
 
   allBtn.forEach(btn => btn.classList = "dateBtn");
+
   elem.classList.add("active");
 }
 
@@ -141,25 +160,22 @@ export function scrollToSection(val) {
   //window.location.href = "#stats";
 }
 
-/*function saveData() {
-  localStorage.setItem("tasks", JSON.stringify(taskArray));
-  localStorage.setItem("stats", JSON.stringify(statsData));
-  generateStats();
-}*/
 
 export function createNewTask(title, desc, timestart, timeend, category, timeStartEnd) {
 
-  let uniqueid = Math.random() * 100;
+  const uniqueid = new Date().getTime().toString();
 
-  statsData.active++;
-  statsData.total++;
-  statsData[category]++;
-  // saveData()
+  category = category.toLowerCase();
 
-  if (taskArray.find(task => task.date === currid)) {
-    let existTask = taskArray.find(task => task.date === currid);
+  statsData.active += 1;
+  statsData.total += 1;
+  statsData[category] += 1;
 
-    let content = existTask.content;
+  const existTask = taskArray.find(task => task.date === currid);
+
+  if (existTask) {
+
+    const content = existTask.content;
 
     content.push(
     {
@@ -173,7 +189,7 @@ export function createNewTask(title, desc, timestart, timeend, category, timeSta
       category
     });
     loadTask();
-    //saveData();
+
   } else {
     taskArray.push({
       date: currid,
@@ -191,127 +207,70 @@ export function createNewTask(title, desc, timestart, timeend, category, timeSta
       ]
     });
     loadTask();
-    //  saveData();
   }
 }
 
 export function loadTask() {
+  const emptyContainer = document.querySelector(".empty-task");
 
+  //remove all the pre add tasks
   const updatedtaskCard = document.querySelectorAll(".task-card");
-
   updatedtaskCard.forEach(updatedtaskCard => updatedtaskCard.remove());
 
+  const todayDate = taskArray.find(task => task.date === currid);
 
-  document.querySelector(".task-container-completed").style.display = "none";
+  if (todayDate) {
+    //hide the empty container
+    emptyContainer.style.display = 'none';
 
-  document.querySelector(".empty-task").style.display = "block";
-
-  if (taskArray.find(task => task.date === currid)) {
-
-    const existTask = taskArray.find(task => task.date === currid);
-    let contentArray = existTask.content;
-
-    for (var i = 0; i < contentArray.length; i++) {
-
-      let currContent = contentArray[i];
-
-      createTaskCard(currContent);
-
-
-      let tabs = document.querySelectorAll('.task-card');
-      tabs.forEach(tab => {
-        tab.addEventListener('click', () => {
-        opentaskView(currContent.title,
-          currContent.desc,
-          currContent.timestart,
-          currContent.timeend,
-          currContent.category,
-          currContent.uid,
-          currContent.isCompleted);
-      })
-      })
-
-      document.querySelector(".empty-task").style.display = "none";
-    }
-  }
+    const contentArr = todayDate.content;
+    contentArr.forEach(content => {
+          createTaskCard(content);
+    })
+  } else emptyContainer.style.display = "block";
+  generateStats();
 }
 
+//create task card
 function createTaskCard(content) {
-  //  let tab;
-  let html = `
-    <div class="task-card">
+  const tabsContainer = document.querySelector(".task-container");
+  const completedTaskCont = document.querySelector(".task-container-completed");
+
+  const html = `
+    <div data-id='${content.uid}' class="task-card">
       <img src="Img/${content.category}.png" />
       <div class="task-content">
         <h2>${content.title}</h2>
         <p>${content.desc} </p>
         <span>${content.time}</span>
       </div>
-    </div>
-  `
+    </div>`
 
-  document.querySelector(".empty-task").style.display = "none";
+  if (content.isCompleted === false) tabsContainer.insertAdjacentHTML('afterbegin', html);
 
-  if (content.isCompleted === false) document.querySelector(".task-container").insertAdjacentHTML('beforeend', html);
-  else {
-    document.querySelector(".task-container-completed").style.display = "flex";
-    document.querySelector(".task-container-completed").insertAdjacentHTML('beforeend', html);
-    // tab = document.querySelector('.task-card');
-    //tab.style = "background: linear-gradient(120deg, #D6FFA3, #97FF00)"
+  if (content.isCompleted === true) {
+    completedTaskCont.style.display = "flex";
+    completedTaskCont.insertAdjacentHTML('afterend', html);
+
+    const tab = document.querySelector('.task-card');
+    tab.style = "background: linear-gradient(120deg, #D6FFA3, #97FF00)";
   }
-
-  //  let tab = document.querySelector('.task-card');
-  //  console.log(tab);
-  return html
-}
-
-
-function opentaskView(t, d, ts, te, c, u, ic) {
-  const taskView = document.querySelector(".task-view");
-
-  taskView.classList.add('active');
   
-  let title = taskView.querySelector(".task-form-view h2");
-  let desc = taskView.querySelector(".task_view_desc");
-  let del = taskView.querySelector(".task-view #taskDelete");
-  let cmplt = taskView.querySelector(".task-view #taskComplete");
-
-  let cateDisplay = document.querySelector(".category_time_cont button:nth-child(1) span");
-  let tsDisplay = document.querySelector(".category_time_cont button:nth-child(2) span");
-  let teDisplay = document.querySelector(".category_time_cont button:nth-child(3) span");
-  let imgDisplay = document.querySelector(".task-form-view img");
-
-  imgDisplay.src = "Img/" + c + ".png";
-
-  title.innerHTML = t;
-  desc.innerHTML = d;
-  tsDisplay.innerHTML = ts;
-  teDisplay.innerHTML = te;
-  cateDisplay.innerHTML = c;
-  del.onclick = function() { deleteTask(u) };
-
-  if (ic === false) {
-    cmplt.style.display = "block";
-    cmplt.onclick = function() { completeTask(u) };
-  } else {
-    cmplt.style.display = "none";
-  }
-
 }
 
-export function loadData() {
-  //Task Data
-  if (JSON.parse(localStorage.getItem("tasks")) == null) {
-    localStorage.setItem("tasks", JSON.stringify(taskArray));
-    taskArray = JSON.parse(localStorage.getItem("tasks"));
-  } else {
-    taskArray = JSON.parse(localStorage.getItem("tasks"));
-  }
+export function addTabHandler(handler) {
+  const tabsContainer = document.querySelector(".task-container");
 
-  //Stats Data
-  if (JSON.parse(localStorage.getItem("stats")) == null) {
-    localStorage.setItem("stats", JSON.stringify(statsData));
-    statsData = JSON.parse(localStorage.getItem("stats"));
-  } else {
-    statsData = JSON.parse(localStorage.getItem("stats"));
-  }
+  const todayDate = taskArray.find(task => task.date === currid);
+
+  const contentArr = todayDate.content;
+  
+  tabsContainer.addEventListener('click', e => {
+    const id = e.target.closest('.task-card').dataset.id;
+    contentArr.forEach(content => {
+      if (Number(content.uid) === Number(id)) {
+        handler(content.title, content.desc, content.timestart, content.timeend, content.category, content.uid, content.isCompleted);
+      }
+    });
+  });
 }

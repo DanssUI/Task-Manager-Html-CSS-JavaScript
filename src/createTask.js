@@ -1,5 +1,8 @@
-import * as model from './model.js'
+import * as model from './model.js';
+import {opentaskView} from './viewTask.js';
+
 const addTaskParentElem = document.querySelector('.add-task');
+
 let categoryBtn;
 export let category;
 let categoryMenu;
@@ -11,7 +14,7 @@ let timeStartElem;
 let timeEndElem;
 
 export function generateAddTaskHTML() {
-  let html = `
+  const html = `
     <button id="closeTaskBtn">&times</button>
     <div class="task-form">
       <h3 id="taskHeader">Task Name</h3>
@@ -26,11 +29,11 @@ export function generateAddTaskHTML() {
         </button>
         
         <button><b>Start</b><br />
-          <span></span><input type="time" id="timestart" value="12:00" />
+          <span>12:00</span><input type="time" id="timestart" value="12:00" />
         </button>
         
         <button><b>End</b><br />
-          <span></span><input type="time" id="timeend" value="13:00" />
+          <span>13:00</span><input type="time" id="timeend" value="13:00" />
         </button>
       </div>
     </div>
@@ -66,34 +69,33 @@ function createTask() {
   model.createNewTask(title.value, desc.value, timeStartInput.value, timeEndInput.value, category.innerText, timeStartEnd);
   closeNewtaskPopup();
   resetAddTaskForm();
+  model.addTabHandler(opentaskView);
 }
 
 function closeNewtaskPopup() {
   toggleTaskForm();
   resetAddTaskForm();
-
-  //readd the classlist on home button
-  document.querySelector('[data-nav-btn="home"]').classList.add('active');
 }
 
 function resetAddTaskForm() {
   title.value = '';
   desc.value = ''
   category.innerHTML = 'Unset';
-  timeStartInput.value = '';
-  timeEndInput.value = ''
-  timeStartElem.innerText = '';
-  timeEndElem.innerText = ''
+  //default values for elements 
+  timeStartInput.value = '12:00';
+  timeEndInput.value = '13:00'
+  timeStartElem.innerText = '12:00';
+  timeEndElem.innerText = '13:00';
 }
 
 function getInputValue() {
   timeStartInput.addEventListener('input', () => timeStartElem.innerHTML = timeStartInput.value);
 
-  timeEndInput.addEventListener('input', () => timeEndElem.innerHTML = timeEndInput.value)
+  timeEndInput.addEventListener('input', () => timeEndElem.innerHTML = timeEndInput.value);
 }
 
 export function generateCategoryMenu() {
-  let html = `
+ const html = `
     <div class="category_Menu">
       <button>unset</button>
       <button>work</button>
@@ -114,16 +116,15 @@ function openSelectCategory(e) {
     if (e.target.matches('button')) category.innerHTML = e.target.innerText;
   }
 
-  if (btn) categoryMenu.classList.add('active');
+  if (btn) categoryMenu?.classList.add('active');
   else closeCategoryMenu();
 }
 
 function closeCategoryMenu() {
-  categoryMenu.classList.remove('active');
+  categoryMenu?.classList.remove('active');
 }
 
 export function toggleTaskForm() {
   addTaskParentElem.classList.toggle('active');
-  
   getInputValue();
 }

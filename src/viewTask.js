@@ -1,31 +1,41 @@
+import { statsData, taskArray, currid, loadTask } from './model.js'
 const parentElement = document.querySelector('.task-view');
 
 export function generateTaskView() {
   let html = `
     <button id="closeViewBtn">&times;</button>
     <div class="task-form-view">
-      <h2>Task Name</h2>
+
+    </div>`
+
+  parentElement.insertAdjacentHTML('beforeend', html);
+  document.querySelector('#closeViewBtn').addEventListener('click', closeTask);
+}
+
+export function opentaskView(title, desc, timeStart, timeEnd, category, uniqueid, isCompleted) {
+  const html = `
+    <h2>${title}</h2>
       <div class='img_cont'>
-        <img src="Img/unset.png" />
+        <img src="Img/${category}.png" />
       </div>
       <div class="desc_container">
         <p>Task Description</p>
-        <p class="task_view_desc"></p>
+        <p class="task_view_desc">${desc}</p>
       </div>
       
       <div class="lower-holder-view">
         <div class="category_time_cont">
           <button>
-            <b>Category : </b>
+            <b>Category : ${category}</b>
             <span></span>
           </button>
           <button>
             <b>Start</b> <br>
-            <span></span>
+            <span>${timeStart}</span>
           </button>
           <button>
             <b>End</b><br>
-            <span></span>
+            <span>${timeEnd}</span>
           </button>
         </div>
        
@@ -33,69 +43,48 @@ export function generateTaskView() {
           <button id="taskComplete">Complete</button>
           <button id="taskDelete">Delete</button>
         <div>
-      </div>
-    </div>`
+      </div>`;
 
-  parentElement.insertAdjacentHTML('beforeend', html);
-  document.querySelector('#closeViewBtn').addEventListener('click', closeTask);
+  const taskViewForm = document.querySelector('.task-form-view');
+
+  //clear the form
+  taskViewForm.innerHTML = '';
+
+  taskViewForm.insertAdjacentHTML('beforeend', html);
+
+  parentElement.classList.add('active');
+
+  let deleteBtn = parentElement.querySelector(".action_button_cont #taskDelete");
+  let completeBtn = parentElement.querySelector(".action_button_cont #taskComplete");
+
+  delElem.onclick = function() { deleteTask(uniqueid) };
+
+  if (isCompleted === false) {
+    completeBtn.style.display = "block";
+    //  cmpltElem.onclick = function() { completeTask (uniqueid) };
+  } else {
+    completeBtn.style.display = "none";
+  }
+
 }
 
 function closeTask() {
- // console.log(parentElement.innerHTML);
-   //parentElement.style.display = 'none'
   parentElement.classList.remove('active');
 }
 
-/*function deleteTask(val) {
-  if (taskArray.find(tanggal => tanggal.date === homepage.currid)) {
-    let getTask = taskArray.find(tanggal => tanggal.date === homepage.currid);
-    let taskContent = getTask.content;
+function completeTask(val) {
+  if (statsData.active > 0) {
+    statsData.complete++;
+    statsData.acitve--;
+    //  saveData();
+  }
+
+  if (taskArray.find(task => task.date === currid)) {
+    let getTask = taskArray.find(tanggal => tanggal.date === currid);
     let getUidTask = getTask.content.find(id => id.uid === val);
-
-    //Stats Update
-    if (taskContent.isCompleted == "false") {
-      if (statsData.aktif > 0) {
-        statsData.hapus++;
-        statsData.aktif--;
-        saveData();
-      }
-    } else {
-      if (statsData.komplit > 0) {
-        statsData.hapus++;
-        statsData.komplit--;
-        saveData();
-      }
-    }
-
-    let indPos = taskContent.indexOf(getUidTask);
-
-    if (taskContent.length > 1) {
-      taskContent.splice(indPos, 1);
-    } else {
-      taskArray.pop();
-    }
-
-    saveData();
-    loadTask();
-    closetaskView();
-  }
-}*/
-
-/*function completeTask(val) {
-  if (statsData.aktif > 0) {
-    statsData.komplit++;
-    statsData.aktif--;
-    saveData();
+    getUidTask.isCompleted = true;
   }
 
-  if (taskArray.find(tanggal => tanggal.date === homepage.currid)) {
-    let getTask = taskArray.find(tanggal => tanggal.date === homepage.currid);
-    let getUidTask = getTask.content.find(id => id.uid === val);
-    getUidTask.isCompleted = "true";
-  }
-
-  saveData();
   loadTask();
-  closetaskView();
-
-}*/
+  closeTask();
+}

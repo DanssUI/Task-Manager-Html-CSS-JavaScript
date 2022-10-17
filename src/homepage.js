@@ -31,7 +31,7 @@ export function generateHomepageHTML() {
     </div>
 
     <div class="task-container-parent">
-      <div  class="task-container">
+      <div class="task-container">
         <span class="empty-task">There is no task.!</span>
       </div>
       <div class="task-container-completed">
@@ -93,32 +93,3 @@ function addNewTaskPopUp() {
   toggleTaskForm();
   generateCategoryMenu();
 }
-
-/*export function createTask() {
-  const title = document.getElementById('taskname');
-  console.log(title);
-  const desc = document.getElementById('taskdesc');
-  // const category = "unset";
-  const timeStart = document.getElementById('timestart');
-  const timeEnd = document.getElementById('timeend');
-  const timeStartEnd = `${timeStart.value} - ${timeEnd.value}`;
-
-  model.createNewTask(title.value, desc.value, timestart.value, timeend.value, category.innerText, timeStartEnd);
-  closeNewtaskPopup();
-  resetAddTaskForm();
-}
-
-function closeNewtaskPopup() {
-  toggleTaskForm();
-  resetAddTaskForm();
-  /*[title.value, desc.value, category, timeStart.value, timeEnd.value] = ["", "", "unset", "12:00", "13:00"];
-   	[cateDisplayer.innerHTML, tsDisplayer.innerHTML, teDisplayer.innerHTML] = [category, timeStart.value, timeEnd.value];
-}*/
-
-/*function resetAddTaskForm() {
-  title.innerText = '';
-  description.innerText = ''
-  category.innerHTML = '';
-  timeStart.value = '';
-  timeEnd.value = ''
-}*/

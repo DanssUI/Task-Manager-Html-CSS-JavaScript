@@ -163,11 +163,11 @@ body {
   display: flex;
   flex-shrink: 0;
   flex-direction: column;
-  padding-bottom: 30px;
+  align-items: center;
+  padding-bottom: 10rem;
   backdrop-filter: blur(10px);
   background: rgba(255, 255, 255, 0.6);
   box-shadow: 0 8px 15px 0 rgba(31, 38, 135, 0.37);
-  border: 1px solid rgba(255, 255, 255, 0.18);
 }
 
 .task-container {
@@ -176,8 +176,8 @@ body {
   flex-shrink: 0;
   justify-content: start;
   align-items: center;
-  flex-direction: column-reverse;
-  margin-bottom: 80px;
+  flex-direction: column;
+  margin-bottom: 5rem;
 }
 
 .task-container-completed {
@@ -185,14 +185,13 @@ body {
   width: 100%;
   display: none;
   flex-shrink: 0;
-  flex-direction: column-reverse;
-  justify-items: start;
+  flex-direction: column;
+  justify-items: end;
   align-items: center;
-  margin-bottom: 6.2rem;
 }
 
 .completed-tag {
-  width: 6.2rem;
+  width: 8rem;
   height: 2.2rem;
   display: flex;
   justify-content: center;
@@ -413,15 +412,17 @@ body {
 
 .task-card {
   width: 95%;
-  height: 13rem;
+  height: 12rem;
   background-color: white;
   display: flex;
   align-items: center;
   flex-direction: row;
-  margin: 10px 0 0 0;
+  margin-top: 1rem;
   flex-shrink: 0;
   border-radius: 10px;
-  padding: 0 30px 0 30px;
+  padding-inline:2rem;
+  backdrop-filter: blur(10px);
+  box-shadow: 0 8px 15px 0 rgba(31, 38, 135, 0.37);
 }
 
 .task-card img {
@@ -763,7 +764,7 @@ body {
   width: 100%;
   height: 35%;
   padding-top: 10px;
-  border-radius: 30px 30px 0 0;
+  border-radius: 2rem 2rem 0 0;
   background: rgba(255, 255, 255, 0.6);
   box-shadow: 0 8px 15px 0 rgba(31, 38, 135, 0.37);
 }
@@ -780,7 +781,7 @@ body {
   height: 3.5rem;
   flex-shrink: 0;
   margin: 5px;
-  border-radius: 20px;
+  border-radius: 0.8rem;
   border: none;
   background-color: white;
   box-shadow: 1px 0 5px 0 rgba(200, 200, 200, 0.3);
@@ -816,4 +817,44 @@ body {
 #taskComplete {
   box-shadow: 0px 5px 10px 0 hsla(206, 100%, 50%, .5);
   background: linear-gradient(105deg, #7FD5FF, #008DFF);
+}
+
+.message {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  position: fixed;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  padding: 2rem;
+  border-radius: 5px;
+  opacity: 0;
+  pointer-events: none;
+  user-select: none;
+  width: 50%;
+  height: 2rem;
+  transition: 500ms ease-in-out;
+  box-shadow: 1px 0 5px 0 rgba(0, 0, 0, 0.1);
+}
+
+.message p {
+  margin: 0;
+  text-transform: capitalize;
+}
+
+.message.success {
+  background: hsla(138, 100%, 70%, 0.6);
+  opacity: 1;
+  pointer-events: auto;
+  user-select: auto;
+  transition: 500ms ease-in-out;
+}
+
+.message.error {
+  background: hsla(7, 93%, 74%, 1.0);
+  opacity: 1;
+  pointer-events: auto;
+  user-select: auto;
+  transition: 500ms ease-in-out;
 }

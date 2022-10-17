@@ -16,7 +16,7 @@ export function generateStatsHTML() {
 }
 
 export function generateStats() {
-  let html = `
+  const html = `
   <div class="box-holder">
     <div>
       <h1>${statsData.active}</h1>
@@ -48,6 +48,14 @@ export function generateStats() {
     </div>
   </div>`
 
+
+education: 0
+entertainment: 1
+social: 0
+sport: 0
+unset: 0
+work: 
+
   statsHolder.innerHTML = '';
-  statsHolder.insertAdjacentHTML('beforeend', html)
+  statsHolder.insertAdjacentHTML('beforeend', html);
 }
