@@ -145,7 +145,7 @@ export function createMonthDays() {
 }
 
 export function currDayActive(elem) {
-  const allBtn = document.querySelectorAll(".date button");
+  const allBtn = document.querySelectorAll(".date button")
 
   allBtn.forEach(btn => btn.classList = "dateBtn");
 
