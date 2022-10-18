@@ -53,6 +53,4 @@ created different js files for Creating task, viewing task and view stats<br>
 <br>
 
 ##Currently Working on---<br>
-Cleaning code<br>
-Changing architecture <br>
 Responsiveness<br>

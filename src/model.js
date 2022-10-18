@@ -1,7 +1,7 @@
 import * as homepage from './homepage.js';
 import { generateStats } from './stats.js'
 import { monthsArr, weekDaysArr } from './helper.js';
-import { addHandlerCompleteTask, closeTask } from './viewTask.js'
+import { openTaskView } from './viewTask.js'
 
 export const now = new Date();
 
@@ -9,7 +9,7 @@ let currMonth = now.getMonth();
 let currYear = now.getFullYear();
 let getMonthTotalDays;
 let currDay;
-let tabs;
+let tasks;
 
 export const nowid = `${currYear}${(now.getMonth() + 1)}${now.getDate()}`;
 
@@ -44,7 +44,7 @@ export let statsData = {
   entertainment: 1
 };
 
-function messagePopUp(message, className) {
+export function messagePopUp(message, className) {
   const messageCont = document.querySelector('.message');
   const pElem = messageCont.querySelector('p');
 
@@ -54,7 +54,7 @@ function messagePopUp(message, className) {
   setTimeout(() => {
     messageCont.classList.remove(`${className}`);
     pElem.innerText = '';
-  }, 1500);
+  }, 1000);
 }
 
 
@@ -131,6 +131,7 @@ export function createMonthDays() {
       currid = datesBtn.id;
       currDayActive(datesBtn);
       renderTasks();
+      addHandlerTasks(openTaskView);
     });
 
     datesBtn.classList = "dateBtn";
@@ -139,7 +140,7 @@ export function createMonthDays() {
     if (i === currDay) {
       homepage.dateContainer.scrollLeft = datesBtn.offsetLeft - homepage.dateContainer.offsetLeft;
       currDayActive(datesBtn);
-      renderTasks()
+      renderTasks();
     }
   }
 }
@@ -154,10 +155,8 @@ export function currDayActive(elem) {
 
 export function scrollToSection(val) {
   if (val === 'home') document.getElementById('schedule').scrollIntoView({ behavior: "smooth" });
-  //window.location.href = "#schedule";
 
   if (val === 'stats') document.getElementById('stats').scrollIntoView({ behavior: "smooth" });
-  //window.location.href = "#stats";
 }
 
 
@@ -201,7 +200,7 @@ export function createNewTask(title, desc, timestart, timeend, category, timeSta
           desc,
           timestart,
           timeend,
-          time: 'timeStartEnd',
+          time: timeStartEnd,
           category
         }
       ]
@@ -213,17 +212,25 @@ export function createNewTask(title, desc, timestart, timeend, category, timeSta
 export function renderTasks() {
   const emptyContainer = document.querySelector(".empty-task");
 
-  //remove all the pre add tasks
+  const completedTaskCont = document.querySelector(".task-container-completed");
+
+  //remove all the pre-added tasks
   const updatedtaskCard = document.querySelectorAll(".task-card");
   updatedtaskCard.forEach(updatedtaskCard => updatedtaskCard.remove());
 
   const todayDate = taskArray.find(task => task.date === currid);
+
+  //hide the complete task container if there's no task which is completed 
+  const isCompleted = todayDate?.content.some(task => task.isCompleted === true);
+
+  if (!isCompleted) completedTaskCont.style.display = 'none';
 
   if (todayDate) {
     //hide the empty container
     emptyContainer.style.display = 'none';
 
     const contentArr = todayDate.content;
+
     contentArr.forEach(content => {
       createTaskCard(content);
     })
@@ -235,7 +242,7 @@ export function renderTasks() {
 
 //create task card
 function createTaskCard(content) {
-  const tabsContainer = document.querySelector(".task-container");
+  const tasksContainer = document.querySelector(".task-container");
   const completedTaskCont = document.querySelector(".task-container-completed");
 
   const html = `
@@ -248,63 +255,44 @@ function createTaskCard(content) {
       </div>
     </div>`
 
-  if (!content.isCompleted) tabsContainer.insertAdjacentHTML('afterbegin', html);
+  if (!content.isCompleted) tasksContainer.insertAdjacentHTML('afterbegin', html);
   else {
     completedTaskCont.style.display = "flex";
     completedTaskCont.insertAdjacentHTML('afterend', html);
 
-    const tab = document.querySelector(`[data-id='${content.uid}']`);
-    tab.classList.add('complete');
+    //select the task user interacting with
+    const task = document.querySelector(`[data-id='${content.uid}']`);
+    task.classList.add('complete');
+    addHandlerTasks(openTaskView);
   }
-
 }
 
-export function addHandlerTab(handler) {
-  const tabsContainer = document.querySelector(".task-container-parent");
+export function addHandlerTasks(handler) {
+  const tasksContainerParent = document.querySelector(".task-container-parent");
+
+  if (!taskArray) return
 
   const todayDate = taskArray.find(task => task.date === currid);
+  const contentArr = todayDate?.content;
 
-  const contentArr = todayDate.content;
+  tasksContainerParent.addEventListener('click', e => {
 
-  tabsContainer.addEventListener('click', e => {
-
-    const id = e.target.closest('.task-card').dataset.id;
-
-    contentArr.forEach(content => {
-      if (Number(content.uid) === Number(id)) {
+    const id = e.target.closest('.task-card')?.dataset.id;
+    
+    contentArr?.forEach(content => {
+      if (content.uid === id) {
         handler(content.title, content.desc, content.timestart, content.timeend, content.category, content.uid, content.isCompleted);
-        addHandlerCompleteTask(completeTask);
       }
     })
   })
 }
 
-export function completeTask(e) {
-  const dataset = e.target.closest('.action_button_cont').dataset.taskId;
-
-  if (statsData.active > 0) {
-    statsData.complete++;
-    statsData.acitve--;
-    setLocalStorage('tasks', taskArray);
-    setLocalStorage('stats', statsData);
-  }
-
-  const currDate = taskArray.find(task => task.date === currid);
-
-  if (currDate) {
-    const getTask = taskArray.find(tanggal => tanggal.date === currid);
-    const getUidTask = getTask.content.find(id => {
-      return id.uid === dataset
-    });
-
-    getUidTask.isCompleted = true;
-  }
-
-  renderTasks();
-  closeTask();
-}
-
-
 export function setLocalStorage(key, value) {
   localStorage.setItem(`${key}`, JSON.stringify(value));
+}
+
+export function getData() {
+  taskArray = JSON.parse(localStorage.getItem('tasks')) ? JSON.parse(localStorage.getItem('tasks')) : taskArray;
+
+  statsData = JSON.parse(localStorage.getItem('stats')) ? JSON.parse(localStorage.getItem('stats')) : statsData;
 }

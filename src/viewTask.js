@@ -1,5 +1,7 @@
-import { statsData, taskArray, currid, /*renderTasks,*/ setLocalStorage } from './model.js'
+import { statsData, taskArray, currid, renderTasks, setLocalStorage } from './model.js'
 const parentElement = document.querySelector('.task-view');
+
+let actionBtnsCont;
 
 export function generateTaskView() {
   const html = `
@@ -12,7 +14,7 @@ export function generateTaskView() {
   document.querySelector('#closeViewBtn').addEventListener('click', closeTask);
 }
 
-export function opentaskView(title, desc, timeStart, timeEnd, category, uniqueid, isCompleted) {
+export function openTaskView(title, desc, timeStart, timeEnd, category, uniqueid, isCompleted) {
   const html = `
     <h2>${title}</h2>
       <div class='img_cont'>
@@ -49,60 +51,58 @@ export function opentaskView(title, desc, timeStart, timeEnd, category, uniqueid
 
   //clear the form
   taskViewForm.innerHTML = '';
-
   taskViewForm.insertAdjacentHTML('beforeend', html);
 
   parentElement.classList.add('active');
 
-  const deleteBtn = parentElement.querySelector(".action_button_cont #taskDelete");
-
   const completeBtn = parentElement.querySelector(".action_button_cont #taskComplete");
 
-  //  delElem.onclick = function() { deleteTask(uniqueid) };
+  if (isCompleted === false) completeBtn.style.display = "block";
+  else completeBtn.style.display = "none";
 
-  if (isCompleted === false) {
-    completeBtn.style.display = "block";
-    //   completeBtn.onclick = function() { completeTask(uniqueid) };
-  } else completeBtn.style.display = "none";
-
+  addHandlerCompleteTask(getBtnAction);
 }
 
-export function addHandlerCompleteTask(handler) {
-  const completeBtn = document.querySelector(".action_button_cont #taskComplete");
-  
-  completeBtn.addEventListener('click', handler)
+function addHandlerCompleteTask(handler) {
+  const actionBtnsCont = document.querySelector('.action_button_cont');
+  actionBtnsCont.addEventListener('click', handler);
 }
 
-/*function addHandlerCompleteTask(handler) {
-  const completeBtn = parentElement.querySelector(".action_button_cont #taskComplete");
-  completeBtn.addEventListener('click', handler)
-}
+function getBtnAction(e) {
+  const uniqueid = e.target.closest('.action_button_cont').dataset.taskId;
 
-function completeTask(e) {
-  const parent = e.closest('.action_button_cont');
-  console.log(parent);
-}*/
+  const btnType = e.target.id;
+
+  if (btnType === 'taskComplete') {
+    if (statsData.active > 0) {
+      statsData.complete++;
+      statsData.active--;
+      setLocalStorage('tasks', taskArray);
+      setLocalStorage('stats', statsData);
+    }
+    getTask(uniqueid, btnType);
+  }
+
+  if (btnType === 'taskDelete') {
+    statsData.active--;
+    statsData.deleted++;
+    getTask(uniqueid, btnType);
+  }
+}
 
 export function closeTask() {
   parentElement.classList.remove('active');
 }
 
-/*function completeTask(val) {
-  if (statsData.active > 0) {
-    statsData.complete++;
-    statsData.acitve--;
-    setLocalStorage('tasks', taskArray);
-    setLocalStorage('stats', statsData);
-  }
-
+function getTask(uniqueid, btnType) {
   const currDate = taskArray.find(task => task.date === currid);
-
   if (currDate) {
-    const getTask = taskArray.find(tanggal => tanggal.date === currid);
-    const getUidTask = getTask.content.find(id => id.uid === val);
-    getUidTask.isCompleted = true;
-  }
 
+    const getUidTask = currDate.content.find(id => id.uid === uniqueid);
+
+    if (btnType === 'taskComplete') getUidTask.isCompleted = true;
+    if (btnType === 'taskDelete') console.log('delete');
+  }
   renderTasks();
   closeTask();
-}*/
+}

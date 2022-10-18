@@ -5,6 +5,8 @@ import * as stats from './stats.js'
 import * as viewTask from './viewTask.js'
 import { generateAddTaskHTML } from './createTask.js'
 
+model.getData();
+
 function generateMarkup() {
   homepage.generateHomepageHTML();
   generateAddTaskHTML();
@@ -14,7 +16,8 @@ function generateMarkup() {
   model.initTime();
   model.createMonthDays();
   stats.generateStats();
-  model.addHandlerTab(viewTask.opentaskView);
+  //initialize the listener when the page loads
+// model.addHandlerTasks(viewTask.openTaskView);
 }
 
 function init() {
@@ -22,10 +25,3 @@ function init() {
 }
 
 init();
-
-//model.renderTasks();
-//model.renderTasks();
-
-//reset Database
-//loadStorage.setItem("tasks", JSON.stringify(taskArray));
-//localStorage.setItem("stats", JSON.stringify(statsData));

@@ -1,5 +1,5 @@
 import * as model from './model.js';
-import {opentaskView} from './viewTask.js';
+import { openTaskView } from './viewTask.js';
 
 const addTaskParentElem = document.querySelector('.add-task');
 
@@ -69,7 +69,9 @@ function createTask() {
   model.createNewTask(title.value, desc.value, timeStartInput.value, timeEndInput.value, category.innerText, timeStartEnd);
   closeNewtaskPopup();
   resetAddTaskForm();
-  model.addHandlerTab(opentaskView);
+  model.messagePopUp('Task Created', 'success');
+  // for the newly created tasks;
+  model.addHandlerTasks(openTaskView);
 }
 
 function closeNewtaskPopup() {
@@ -95,7 +97,7 @@ function getInputValue() {
 }
 
 export function generateCategoryMenu() {
- const html = `
+  const html = `
     <div class="category_Menu">
       <button>unset</button>
       <button>work</button>

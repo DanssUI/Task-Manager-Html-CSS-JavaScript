@@ -849,7 +849,7 @@ body {
 }
 
 .message.success {
-  background: hsla(138, 100%, 70%, 0.6);
+  background: hsla(138, 100%, 70%, 0.9);
   opacity: 1;
   pointer-events: auto;
   user-select: auto;
@@ -857,7 +857,7 @@ body {
 }
 
 .message.error {
-  background: hsla(7, 93%, 74%, 1.0);
+  background: hsla(7, 93%, 74%, 0.9);
   opacity: 1;
   pointer-events: auto;
   user-select: auto;
