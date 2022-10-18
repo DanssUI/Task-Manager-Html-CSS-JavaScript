@@ -1,8 +1,8 @@
-import { statsData, taskArray, currid, renderTasks } from './model.js'
+import { statsData, taskArray, currid, /*renderTasks,*/ setLocalStorage } from './model.js'
 const parentElement = document.querySelector('.task-view');
 
 export function generateTaskView() {
-  let html = `
+  const html = `
     <button id="closeViewBtn">&times;</button>
     <div class="task-form-view">
 
@@ -39,7 +39,7 @@ export function opentaskView(title, desc, timeStart, timeEnd, category, uniqueid
           </button>
         </div>
        
-        <div class="action_button_cont">
+        <div data-task-id="${uniqueid}" class="action_button_cont">
           <button id="taskComplete">Complete</button>
           <button id="taskDelete">Delete</button>
         <div>
@@ -54,38 +54,55 @@ export function opentaskView(title, desc, timeStart, timeEnd, category, uniqueid
 
   parentElement.classList.add('active');
 
-  let deleteBtn = parentElement.querySelector(".action_button_cont #taskDelete");
-  let completeBtn = parentElement.querySelector(".action_button_cont #taskComplete");
+  const deleteBtn = parentElement.querySelector(".action_button_cont #taskDelete");
+
+  const completeBtn = parentElement.querySelector(".action_button_cont #taskComplete");
 
   //  delElem.onclick = function() { deleteTask(uniqueid) };
 
   if (isCompleted === false) {
     completeBtn.style.display = "block";
-    completeBtn.onclick = function() { completeTask(uniqueid) };
-  } else {
-    completeBtn.style.display = "none";
-  }
+    //   completeBtn.onclick = function() { completeTask(uniqueid) };
+  } else completeBtn.style.display = "none";
 
 }
 
-function closeTask() {
+export function addHandlerCompleteTask(handler) {
+  const completeBtn = document.querySelector(".action_button_cont #taskComplete");
+  
+  completeBtn.addEventListener('click', handler)
+}
+
+/*function addHandlerCompleteTask(handler) {
+  const completeBtn = parentElement.querySelector(".action_button_cont #taskComplete");
+  completeBtn.addEventListener('click', handler)
+}
+
+function completeTask(e) {
+  const parent = e.closest('.action_button_cont');
+  console.log(parent);
+}*/
+
+export function closeTask() {
   parentElement.classList.remove('active');
 }
 
-function completeTask(val) {
+/*function completeTask(val) {
   if (statsData.active > 0) {
     statsData.complete++;
     statsData.acitve--;
-    //  saveData();
+    setLocalStorage('tasks', taskArray);
+    setLocalStorage('stats', statsData);
   }
 
-  if (taskArray.find(task => task.date === currid)) {
-    let getTask = taskArray.find(tanggal => tanggal.date === currid);
-    let getUidTask = getTask.content.find(id => id.uid === val);
+  const currDate = taskArray.find(task => task.date === currid);
+
+  if (currDate) {
+    const getTask = taskArray.find(tanggal => tanggal.date === currid);
+    const getUidTask = getTask.content.find(id => id.uid === val);
     getUidTask.isCompleted = true;
-    console.log(getUidTask);
   }
 
   renderTasks();
   closeTask();
-}
+}*/

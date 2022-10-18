@@ -39,6 +39,7 @@ removed the extra container(lower-input-view) from task view, changed flex to gr
 removed extra class declaration<br>
 added blur and shadow on task card <br>
 hopefully(-_-) css variables are in correct position now<br>
+added border on task cards <br>
 <br>
 
 <h3>JS</h3><br>

@@ -1,7 +1,7 @@
 import * as homepage from './homepage.js';
 import { generateStats } from './stats.js'
 import { monthsArr, weekDaysArr } from './helper.js';
-import { opentaskView } from './viewTask.js'
+import { addHandlerCompleteTask, closeTask } from './viewTask.js'
 
 export const now = new Date();
 
@@ -19,7 +19,7 @@ export let taskArray = [{
   date: currid,
   content: [
     {
-      uid: 0,
+      uid: "0",
       isCompleted: false,
       title: "Give me a star ✨",
       desc: "This is an example",
@@ -103,9 +103,9 @@ export function initTime() {
 export function createMonthDays() {
   const allBtn = document.querySelectorAll(".date button");
   allBtn.forEach(btn => { btn.remove() });
-  
+
   for (let i = 1; i < getMonthTotalDays + 1; i++) {
-    
+
     //get current month days
     const currMonthFullDate = new Date(now.getFullYear(), currMonth, i);
 
@@ -225,10 +225,12 @@ export function renderTasks() {
 
     const contentArr = todayDate.content;
     contentArr.forEach(content => {
-          createTaskCard(content);
+      createTaskCard(content);
     })
   } else emptyContainer.style.display = "block";
   generateStats();
+  setLocalStorage('tasks', taskArray);
+  setLocalStorage('stats', statsData);
 }
 
 //create task card
@@ -246,36 +248,63 @@ function createTaskCard(content) {
       </div>
     </div>`
 
-  if (content.isCompleted === false) tabsContainer.insertAdjacentHTML('afterbegin', html);
-
-  if (content.isCompleted === true) {
+  if (!content.isCompleted) tabsContainer.insertAdjacentHTML('afterbegin', html);
+  else {
     completedTaskCont.style.display = "flex";
     completedTaskCont.insertAdjacentHTML('afterend', html);
 
-    const tab = document.querySelector('.task-card');
-    tab.style = "background: linear-gradient(120deg, #D6FFA3, #97FF00)";
+    const tab = document.querySelector(`[data-id='${content.uid}']`);
+    tab.classList.add('complete');
   }
-  
+
 }
 
 export function addHandlerTab(handler) {
-  const tabsContainer = document.querySelector(".task-container");
+  const tabsContainer = document.querySelector(".task-container-parent");
 
   const todayDate = taskArray.find(task => task.date === currid);
 
   const contentArr = todayDate.content;
-  
+
   tabsContainer.addEventListener('click', e => {
+
     const id = e.target.closest('.task-card').dataset.id;
-    
+
     contentArr.forEach(content => {
-      Number(content.uid) === Number(id) && handler(content.title, content.desc, content.timestart, content.timeend, content.category, content.uid, content.isCompleted)
+      if (Number(content.uid) === Number(id)) {
+        handler(content.title, content.desc, content.timestart, content.timeend, content.category, content.uid, content.isCompleted);
+        addHandlerCompleteTask(completeTask);
+      }
     })
   })
 }
 
-function setLocalStorage() {
- // localStorage
+export function completeTask(e) {
+  const dataset = e.target.closest('.action_button_cont').dataset.taskId;
+
+  if (statsData.active > 0) {
+    statsData.complete++;
+    statsData.acitve--;
+    setLocalStorage('tasks', taskArray);
+    setLocalStorage('stats', statsData);
+  }
+
+  const currDate = taskArray.find(task => task.date === currid);
+
+  if (currDate) {
+    const getTask = taskArray.find(tanggal => tanggal.date === currid);
+    const getUidTask = getTask.content.find(id => {
+      return id.uid === dataset
+    });
+
+    getUidTask.isCompleted = true;
+  }
+
+  renderTasks();
+  closeTask();
 }
 
-//Complete task function is not working properly yet
+
+export function setLocalStorage(key, value) {
+  localStorage.setItem(`${key}`, JSON.stringify(value));
+}
