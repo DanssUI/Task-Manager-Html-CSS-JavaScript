@@ -737,7 +737,7 @@ body {
 }
 
 .task-form-view .desc_container {
-  padding-left: 1rem;
+  padding-inline: 1rem;
 }
 
 .task-form-view .desc_container p:first-child {

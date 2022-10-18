@@ -263,7 +263,7 @@ function createTaskCard(content) {
     //select the task user interacting with
     const task = document.querySelector(`[data-id='${content.uid}']`);
     task.classList.add('complete');
-    addHandlerTasks(openTaskView);
+ //   addHandlerTasks(openTaskView);
   }
 }
 

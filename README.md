@@ -52,7 +52,5 @@ Created a separate function for generating new task <br>
 created different js files for Creating task, viewing task and view stats<br>
 <br>
 
-i completed the project in morning but i forgot to commit and start adding experimental features then i revert the changes without looking at the last commit.<br>
-
 ##Currently Working on---<br>
 Responsiveness<br>

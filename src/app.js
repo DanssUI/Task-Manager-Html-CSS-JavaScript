@@ -17,7 +17,7 @@ function generateMarkup() {
   model.createMonthDays();
   stats.generateStats();
   //initialize the listener when the page loads
-// model.addHandlerTasks(viewTask.openTaskView);
+ model.addHandlerTasks(viewTask.openTaskView);
 }
 
 function init() {

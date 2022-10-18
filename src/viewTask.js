@@ -77,12 +77,11 @@ function getBtnAction(e) {
     if (statsData.active > 0) {
       statsData.complete++;
       statsData.active--;
-      setLocalStorage('tasks', taskArray);
-      setLocalStorage('stats', statsData);
+      //      setLocalStorage('tasks', taskArray);
+      // setLocalStorage('stats', statsData);
     }
     getTask(uniqueid, btnType);
   }
-
   if (btnType === 'taskDelete') {
     statsData.active--;
     statsData.deleted++;
@@ -101,8 +100,14 @@ function getTask(uniqueid, btnType) {
     const getUidTask = currDate.content.find(id => id.uid === uniqueid);
 
     if (btnType === 'taskComplete') getUidTask.isCompleted = true;
-    if (btnType === 'taskDelete') console.log('delete');
+    if (btnType === 'taskDelete') {
+      currDate.content.filter((task, i) => {
+        task.uid === getUidTask.uid && currDate.content.splice(i, 1)
+      });
+    }
   }
   renderTasks();
   closeTask();
+  setLocalStorage('tasks', taskArray);
+  setLocalStorage('stats', statsData);
 }
