@@ -77,16 +77,14 @@ function getBtnAction(e) {
     if (statsData.active > 0) {
       statsData.complete++;
       statsData.active--;
-      //      setLocalStorage('tasks', taskArray);
-      // setLocalStorage('stats', statsData);
     }
     getTask(uniqueid, btnType);
   }
   if (btnType === 'taskDelete') {
-    statsData.active--;
     statsData.deleted++;
     getTask(uniqueid, btnType);
   }
+  statsData.total--
 }
 
 export function closeTask() {
@@ -95,15 +93,24 @@ export function closeTask() {
 
 function getTask(uniqueid, btnType) {
   const currDate = taskArray.find(task => task.date === currid);
+
   if (currDate) {
 
     const getUidTask = currDate.content.find(id => id.uid === uniqueid);
 
-    if (btnType === 'taskComplete') getUidTask.isCompleted = true;
-    if (btnType === 'taskDelete') {
-      currDate.content.filter((task, i) => {
-        task.uid === getUidTask.uid && currDate.content.splice(i, 1)
-      });
+    switch (btnType) {
+      case 'taskComplete':
+        getUidTask.isCompleted = true;
+        break;
+      case 'taskDelete':
+        getUidTask.isCompleted ? statsData.complete-- : statsData.active--;
+
+        currDate.content.filter((task, i) => {
+          task.uid === getUidTask.uid && currDate.content.splice(i, 1);
+        })
+        break;
+      default:
+        return
     }
   }
   renderTasks();
