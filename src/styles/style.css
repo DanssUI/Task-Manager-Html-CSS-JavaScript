@@ -196,7 +196,7 @@ body {
   flex-shrink: 0;
   flex-direction: column;
   align-items: center;
-  padding-bottom: 4rem;
+  padding-bottom: 10rem;
   backdrop-filter: blur(10px);
   background: rgba(255, 255, 255, 0.6);
   box-shadow: 0 8px 15px 0 rgba(31, 38, 135, 0.37);
@@ -218,7 +218,7 @@ body {
   display: none;
   flex-shrink: 0;
   flex-direction: column;
-  justify-items: end;
+  justify-items: space-between;
   align-items: center;
 }
 
@@ -230,14 +230,11 @@ body {
   align-items: center;
   background-color: #BEFFAD;
   color: #288300;
-  position: absolute;
-  z-index: 2;
-  top: -36px;
-  left: 10px;
   border-radius: 10px;
   font-size: 0.7em;
   font-weight: bold;
   padding-inline: 1rem;
+  border: 1px solid rgba(89, 249, 47, 1);
 }
 
 .empty-task {
@@ -273,6 +270,12 @@ body {
   padding-inline:2rem;
   backdrop-filter: blur(10px);
   box-shadow: 0 8px 15px 0 rgba(31, 38, 135, 0.37);
+  border: 1px solid rgba(155, 21, 255, 0.8);
+}
+
+.task-card.complete {
+  background: linear-gradient(120deg, #D6FFA3 50%, #97FF00);
+  border: 1px solid rgba(89, 249, 47, 1);
 }
 
 .task-card img {
@@ -734,7 +737,7 @@ body {
 }
 
 .task-form-view .desc_container {
-  padding-left: 1rem;
+  padding-inline: 1rem;
 }
 
 .task-form-view .desc_container p:first-child {
@@ -846,7 +849,7 @@ body {
 }
 
 .message.success {
-  background: hsla(138, 100%, 70%, 0.6);
+  background: hsla(138, 100%, 70%, 0.9);
   opacity: 1;
   pointer-events: auto;
   user-select: auto;
@@ -854,7 +857,7 @@ body {
 }
 
 .message.error {
-  background: hsla(7, 93%, 74%, 1.0);
+  background: hsla(7, 93%, 74%, 0.9);
   opacity: 1;
   pointer-events: auto;
   user-select: auto;
