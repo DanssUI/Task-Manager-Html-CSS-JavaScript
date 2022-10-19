@@ -44,7 +44,7 @@ export let statsData = {
   entertainment: 1
 };
 
-export function messagePopUp(message, className) {
+export function messagePopUp(message, className,time=1000) {
   const messageCont = document.querySelector('.message');
   const pElem = messageCont.querySelector('p');
 
@@ -53,8 +53,9 @@ export function messagePopUp(message, className) {
 
   setTimeout(() => {
     messageCont.classList.remove(`${className}`);
-    pElem.innerText = '';
-  }, 1000);
+  }, time);
+  
+  setTimeout(() => pElem.innerText = '', time * 2)
 }
 
 
@@ -245,7 +246,6 @@ function createTaskCard(content) {
   const completedTaskCont = document.querySelector(".task-container-completed");
   
   //check if title is empty or timestart > timeend or timestart === timeend
-  if(content.title === '' ) console.log('empty');
 
   const html = `
     <div data-id='${content.uid}' class="task-card">

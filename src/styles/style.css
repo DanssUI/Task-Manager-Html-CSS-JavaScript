@@ -838,7 +838,7 @@ body {
   pointer-events: none;
   user-select: none;
   width: 50%;
-  height: 2rem;
+  
   text-align: center;
   transition: 500ms ease-in-out;
   box-shadow: 1px 0 5px 0 rgba(0, 0, 0, 0.1);
