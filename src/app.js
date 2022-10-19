@@ -5,6 +5,7 @@ import * as stats from './stats.js'
 import * as viewTask from './viewTask.js'
 import { generateAddTaskHTML } from './createTask.js'
 
+//load the data from localStorage as soon as page loads
 model.getData();
 
 function generateMarkup() {
@@ -17,7 +18,7 @@ function generateMarkup() {
   model.createMonthDays();
   stats.generateStats();
   //initialize the listener when the page loads
- model.addHandlerTasks(viewTask.openTaskView);
+  model.addHandlerTasks(viewTask.openTaskView);
 }
 
 function init() {
