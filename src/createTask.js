@@ -66,6 +66,15 @@ function init() {
 function createTask() {
   const timeStartEnd = `${timeStartInput.value} — ${timeEndInput.value}`;
 
+  if (title.value === '' || timeStartInput.value >= timeEndInput.value) {
+    model.messagePopUp(`Important!
+    1. Title Cannot Empty.
+    2. Task start time cannot be greater or equal to task end time.
+   3.Task end time cannot be lower than task start time.`, 'danger', 2000);
+    closeNewtaskPopup();
+    return
+  }
+
   model.createNewTask(title.value, desc.value, timeStartInput.value, timeEndInput.value, category.innerText, timeStartEnd);
   closeNewtaskPopup();
   resetAddTaskForm();

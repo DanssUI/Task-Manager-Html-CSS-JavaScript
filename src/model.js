@@ -44,7 +44,7 @@ export let statsData = {
   entertainment: 1
 };
 
-export function messagePopUp(message, className) {
+export function messagePopUp(message, className,time=1000) {
   const messageCont = document.querySelector('.message');
   const pElem = messageCont.querySelector('p');
 
@@ -53,8 +53,9 @@ export function messagePopUp(message, className) {
 
   setTimeout(() => {
     messageCont.classList.remove(`${className}`);
-    pElem.innerText = '';
-  }, 1000);
+  }, time);
+  
+  setTimeout(() => pElem.innerText = '', time * 2)
 }
 
 
@@ -220,20 +221,19 @@ export function renderTasks() {
 
   const todayDate = taskArray.find(task => task.date === currid);
 
-  //hide the complete task container if there's no task which is completed 
+  //hide the complete task container if there's no task which is completed
   const isCompleted = todayDate?.content.some(task => task.isCompleted === true);
 
   if (!isCompleted) completedTaskCont.style.display = 'none';
 
-  if (todayDate) {
+  if (todayDate && todayDate?.content.length !== 0) {
+
     //hide the empty container
     emptyContainer.style.display = 'none';
 
     const contentArr = todayDate.content;
 
-    contentArr.forEach(content => {
-      createTaskCard(content);
-    })
+    contentArr.forEach(content => createTaskCard(content))
   } else emptyContainer.style.display = "block";
   generateStats();
   setLocalStorage('tasks', taskArray);
@@ -244,6 +244,8 @@ export function renderTasks() {
 function createTaskCard(content) {
   const tasksContainer = document.querySelector(".task-container");
   const completedTaskCont = document.querySelector(".task-container-completed");
+  
+  //check if title is empty or timestart > timeend or timestart === timeend
 
   const html = `
     <div data-id='${content.uid}' class="task-card">
@@ -263,7 +265,7 @@ function createTaskCard(content) {
     //select the task user interacting with
     const task = document.querySelector(`[data-id='${content.uid}']`);
     task.classList.add('complete');
- //   addHandlerTasks(openTaskView);
+    //   addHandlerTasks(openTaskView);
   }
 }
 
@@ -278,7 +280,7 @@ export function addHandlerTasks(handler) {
   tasksContainerParent.addEventListener('click', e => {
 
     const id = e.target.closest('.task-card')?.dataset.id;
-    
+
     contentArr?.forEach(content => {
       if (content.uid === id) {
         handler(content.title, content.desc, content.timestart, content.timeend, content.category, content.uid, content.isCompleted);
