@@ -80,7 +80,7 @@ export function changeMonth(e) {
   }
 
   initTime();
-  createMonthDays();
+//  createMonthDays();
 
   homepage.dateContainer.querySelector("button").click();
   homepage.dateContainer.scrollLeft = 0;
@@ -99,6 +99,7 @@ export function initTime() {
 
   dashboardMonth.innerHTML = month;
   dashboardYear.innerHTML = currYear;
+  createMonthDays();
 }
 
 export function createMonthDays() {
@@ -112,10 +113,11 @@ export function createMonthDays() {
 
     //get current month week days
     const weekDays = weekDaysArr[currMonthFullDate.getDay()].slice(0, 3);
-
+    
+    //date btns id
     const id = `${currYear}${(currMonth + 1)}${i}`;
 
-    //create dates button
+    //create date buttons
     const datesBtn = document.createElement("button");
     datesBtn.innerHTML = i;
 
@@ -125,7 +127,7 @@ export function createMonthDays() {
     weekDaysElem.innerHTML = weekDays;
     datesBtn.insertAdjacentElement('beforeend', weekDaysElem);
 
-    datesBtn.id = `${currYear}${(currMonth + 1)}${i}`;
+    datesBtn.id = id;
 
     datesBtn.addEventListener('click', () => {
       //reassign the currid 
