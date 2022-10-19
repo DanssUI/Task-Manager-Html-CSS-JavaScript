@@ -839,6 +839,7 @@ body {
   user-select: none;
   width: 50%;
   height: 2rem;
+  text-align: center;
   transition: 500ms ease-in-out;
   box-shadow: 1px 0 5px 0 rgba(0, 0, 0, 0.1);
 }
@@ -856,7 +857,7 @@ body {
   transition: 500ms ease-in-out;
 }
 
-.message.error {
+.message.danger {
   background: hsla(7, 93%, 74%, 0.9);
   opacity: 1;
   pointer-events: auto;

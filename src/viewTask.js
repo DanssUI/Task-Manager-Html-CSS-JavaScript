@@ -1,4 +1,4 @@
-import { statsData, taskArray, currid, renderTasks, setLocalStorage } from './model.js'
+import { statsData, taskArray, currid, renderTasks, setLocalStorage, messagePopUp } from './model.js'
 const parentElement = document.querySelector('.task-view');
 
 let actionBtnsCont;
@@ -7,7 +7,6 @@ export function generateTaskView() {
   const html = `
     <button id="closeViewBtn">&times;</button>
     <div class="task-form-view">
-
     </div>`
 
   parentElement.insertAdjacentHTML('beforeend', html);
@@ -48,7 +47,6 @@ export function openTaskView(title, desc, timeStart, timeEnd, category, uniqueid
       </div>`;
 
   const taskViewForm = document.querySelector('.task-form-view');
-
   //clear the form
   taskViewForm.innerHTML = '';
   taskViewForm.insertAdjacentHTML('beforeend', html);
@@ -72,26 +70,14 @@ function getBtnAction(e) {
   const uniqueid = e.target.closest('.action_button_cont').dataset.taskId;
 
   const btnType = e.target.id;
-
-  if (btnType === 'taskComplete') {
-    if (statsData.active > 0) {
-      statsData.complete++;
-      statsData.active--;
-    }
-    getTask(uniqueid, btnType);
-  }
-  if (btnType === 'taskDelete') {
-    statsData.deleted++;
-    getTask(uniqueid, btnType);
-  }
-  statsData.total--
+  CompleteDeleteTask(uniqueid, btnType);
 }
 
 export function closeTask() {
   parentElement.classList.remove('active');
 }
 
-function getTask(uniqueid, btnType) {
+function CompleteDeleteTask(uniqueid, btnType) {
   const currDate = taskArray.find(task => task.date === currid);
 
   if (currDate) {
@@ -101,13 +87,18 @@ function getTask(uniqueid, btnType) {
     switch (btnType) {
       case 'taskComplete':
         getUidTask.isCompleted = true;
+        statsData.complete++;
+        statsData.active--;
+        messagePopUp('Task marked as completed', 'success');
         break;
       case 'taskDelete':
         getUidTask.isCompleted ? statsData.complete-- : statsData.active--;
-
+        statsData.deleted++;
+        messagePopUp('Task deleted', 'danger');
         currDate.content.filter((task, i) => {
           task.uid === getUidTask.uid && currDate.content.splice(i, 1);
-        })
+        });
+        statsData.total--
         break;
       default:
         return
