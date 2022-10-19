@@ -220,32 +220,33 @@ export function renderTasks() {
 
   const todayDate = taskArray.find(task => task.date === currid);
 
-  //hide the complete task container if there's no task which is completed 
-  const isCompleted = todayDate?.content.some(task => task.isCompleted === true);
+  //hide the complete task container if there's no task which is completed
+    const isCompleted = todayDate?.content.some(task => task.isCompleted === true);
 
-  if (!isCompleted) completedTaskCont.style.display = 'none';
+    if (!isCompleted) completedTaskCont.style.display = 'none';
 
-  if (todayDate) {
-    //hide the empty container
-    emptyContainer.style.display = 'none';
+    if (todayDate && todayDate?.content.length !== 0) {
+      
+      //hide the empty container
+      emptyContainer.style.display = 'none';
+      
+      const contentArr = todayDate.content;
 
-    const contentArr = todayDate.content;
+      contentArr.forEach(content => {
+        createTaskCard(content);
+      })
+    } else emptyContainer.style.display = "block";
+    generateStats();
+    setLocalStorage('tasks', taskArray);
+    setLocalStorage('stats', statsData);
+  }
 
-    contentArr.forEach(content => {
-      createTaskCard(content);
-    })
-  } else emptyContainer.style.display = "block";
-  generateStats();
-  setLocalStorage('tasks', taskArray);
-  setLocalStorage('stats', statsData);
-}
+  //create task card
+  function createTaskCard(content) {
+    const tasksContainer = document.querySelector(".task-container");
+    const completedTaskCont = document.querySelector(".task-container-completed");
 
-//create task card
-function createTaskCard(content) {
-  const tasksContainer = document.querySelector(".task-container");
-  const completedTaskCont = document.querySelector(".task-container-completed");
-
-  const html = `
+    const html = `
     <div data-id='${content.uid}' class="task-card">
       <img src="Img/${content.category}.png" />
       <div class="task-content">
@@ -255,44 +256,44 @@ function createTaskCard(content) {
       </div>
     </div>`
 
-  if (!content.isCompleted) tasksContainer.insertAdjacentHTML('afterbegin', html);
-  else {
-    completedTaskCont.style.display = "flex";
-    completedTaskCont.insertAdjacentHTML('afterend', html);
+    if (!content.isCompleted) tasksContainer.insertAdjacentHTML('afterbegin', html);
+    else {
+      completedTaskCont.style.display = "flex";
+      completedTaskCont.insertAdjacentHTML('afterend', html);
 
-    //select the task user interacting with
-    const task = document.querySelector(`[data-id='${content.uid}']`);
-    task.classList.add('complete');
- //   addHandlerTasks(openTaskView);
+      //select the task user interacting with
+      const task = document.querySelector(`[data-id='${content.uid}']`);
+      task.classList.add('complete');
+      //   addHandlerTasks(openTaskView);
+    }
   }
-}
 
-export function addHandlerTasks(handler) {
-  const tasksContainerParent = document.querySelector(".task-container-parent");
+  export function addHandlerTasks(handler) {
+    const tasksContainerParent = document.querySelector(".task-container-parent");
 
-  if (!taskArray) return
+    if (!taskArray) return
 
-  const todayDate = taskArray.find(task => task.date === currid);
-  const contentArr = todayDate?.content;
+    const todayDate = taskArray.find(task => task.date === currid);
+    const contentArr = todayDate?.content;
 
-  tasksContainerParent.addEventListener('click', e => {
+    tasksContainerParent.addEventListener('click', e => {
 
-    const id = e.target.closest('.task-card')?.dataset.id;
-    
-    contentArr?.forEach(content => {
-      if (content.uid === id) {
-        handler(content.title, content.desc, content.timestart, content.timeend, content.category, content.uid, content.isCompleted);
-      }
+      const id = e.target.closest('.task-card')?.dataset.id;
+
+      contentArr?.forEach(content => {
+        if (content.uid === id) {
+          handler(content.title, content.desc, content.timestart, content.timeend, content.category, content.uid, content.isCompleted);
+        }
+      })
     })
-  })
-}
+  }
 
-export function setLocalStorage(key, value) {
-  localStorage.setItem(`${key}`, JSON.stringify(value));
-}
+  export function setLocalStorage(key, value) {
+    localStorage.setItem(`${key}`, JSON.stringify(value));
+  }
 
-export function getData() {
-  taskArray = JSON.parse(localStorage.getItem('tasks')) ? JSON.parse(localStorage.getItem('tasks')) : taskArray;
+  export function getData() {
+    taskArray = JSON.parse(localStorage.getItem('tasks')) ? JSON.parse(localStorage.getItem('tasks')) : taskArray;
 
-  statsData = JSON.parse(localStorage.getItem('stats')) ? JSON.parse(localStorage.getItem('stats')) : statsData;
-}
+    statsData = JSON.parse(localStorage.getItem('stats')) ? JSON.parse(localStorage.getItem('stats')) : statsData;
+  }
