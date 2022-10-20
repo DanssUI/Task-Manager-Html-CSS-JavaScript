@@ -1,6 +1,18 @@
 @import url('https://fonts.googleapis.com/css2?family=Poppins:wght@400&display=swap');
 @import url('https://fonts.googleapis.com/css2?family=Inter:wght@500&display=swap');
 
+:root {
+  --body-bg: url('../../Img/bg.png');
+}
+
+.dark-blue {
+  --body-bg: linear-gradient(120deg, rgba(2, 0, 50, 1) 0%, rgba(0, 212, 255, 1) 100%);
+}
+
+.radical-blue {
+  --body-bg: radial-gradient(circle, rgba(238, 174, 202, 1) 50%, rgba(148, 187, 233, 1) 100%);
+}
+
 * {
   box-sizing: border-box;
   padding: 0;
@@ -15,7 +27,7 @@
 body {
   width: 100vw;
   height: 100vh;
-  background-image: url('../../Img/bg.png');
+  background-image: var(--body-bg);
   background-size: cover;
   background-repeat: no-repeat;
 }
@@ -35,17 +47,18 @@ body {
   display: flex;
   flex-wrap: nowarp;
   overflow-x: hidden;
+
 }
 
 .schedule-section {
   position: relative;
   width: 100%;
   height: 100%;
+  scroll-snap-type: x mandatory;
   flex: 0 0 auto;
   display: flex;
   justify-content: center;
   align-items: center;
-  scroll-snap-align: start;
   flex-direction: column;
   overflow: hidden;
 }
@@ -56,23 +69,21 @@ body {
   align-items: center;
   flex-direction: column;
   margin-top: 0px;
-  height: 300px;
 }
 
 .topdate-holder {
   width: 100%;
-  height: 70px;
   display: flex;
   justify-content: space-between;
-  padding: 0px 30px;
+  padding: 0px 2rem;
   align-items: center;
   flex-direction: row;
-  margin: 3rem 0px 18px 0px;
+  margin: 3rem 0px 1.2rem 0px;
 }
 
 .topdate-holder h2 {
   font-size: 2.3em;
-  margin-top: 15px;
+  margin-top:1rem;
   color: #9B15FF;
 }
 
@@ -111,7 +122,6 @@ body {
   display: flex;
   justify-content: start;
   align-items: center;
-  background-color: black;
   overflow-x: scroll;
   padding-left: 20px;
   padding-right: 10px;
@@ -267,7 +277,7 @@ body {
   margin-top: 1rem;
   flex-shrink: 0;
   border-radius: 10px;
-  padding-inline:2rem;
+  padding-inline: 2rem;
   backdrop-filter: blur(10px);
   box-shadow: 0 8px 15px 0 rgba(31, 38, 135, 0.37);
   border: 1px solid rgba(155, 21, 255, 0.8);
@@ -479,7 +489,7 @@ body {
   padding-top: 1.2rem;
   border-radius: 30px 30px 0px 0px;
   background: linear-gradient(105deg, #FFFFFF, #F3E5FF, #E2F2FF);
-  box-shadow: 0 0 6px 0 rgba(31, 38, 135, 0.1);
+  box-shadow: 0 -10px 20px 0 rgba(31, 38, 135, 0.1);
   border: 1px solid rgba(255, 255, 255, 0.18);
   opacity: 0;
   pointer-events: none;
@@ -694,14 +704,16 @@ body {
   top: 15%;
   left: 0;
   right: 0;
-  bottom:0;
+  bottom: 0;
   z-index: 10;
+  border-radius: 2rem 2rem 0 0;
   transform: translateY(100%);
   opacity: 0;
   pointer-events: none;
   user-select: none;
   transition: 500ms ease-in-out;
   background: linear-gradient(105deg, #FFFFFF, #F3E5FF, #E2F2FF);
+  box-shadow: 0 -10px 20px 0 rgba(31, 38, 135, 0.1);
 }
 
 .task-view.active {
@@ -758,7 +770,7 @@ body {
 }
 
 #closeViewBtn {
-  top: -1%;
+  top: 0%;
   right: 3%;
 }
 
@@ -792,7 +804,7 @@ body {
   box-shadow: 1px 0 5px 0 rgba(200, 200, 200, 0.3);
 }
 
-.category_time_cont button:first-child > span {
+.category_time_cont button:first-child>span {
   text-transform: capitalize;
 }
 
@@ -838,7 +850,7 @@ body {
   pointer-events: none;
   user-select: none;
   width: 50%;
-  
+
   text-align: center;
   transition: 500ms ease-in-out;
   box-shadow: 1px 0 5px 0 rgba(0, 0, 0, 0.1);

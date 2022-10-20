@@ -55,7 +55,7 @@ export function messagePopUp(message, className,time=1000) {
     messageCont.classList.remove(`${className}`);
   }, time);
   
-  setTimeout(() => pElem.innerText = '', time * 2)
+  setTimeout(() => pElem.innerText = '', time * 1.3)
 }
 
 
@@ -80,7 +80,6 @@ export function changeMonth(e) {
   }
 
   initTime();
-//  createMonthDays();
 
   homepage.dateContainer.querySelector("button").click();
   homepage.dateContainer.scrollLeft = 0;
