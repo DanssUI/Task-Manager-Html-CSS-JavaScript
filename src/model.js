@@ -86,9 +86,8 @@ export function changeMonth(e) {
 }
 
 export function initTime() {
-  const dashboardMonth = document.querySelector(".topdate-holder h2");
-  const dashboardYear = document.querySelector(".topdate-holder h4");
-
+  const dashboardMonth = document.querySelector(".month_year h1");
+  const dashboardYear = document.querySelector(".month_year span");
   let month = monthsArr[currMonth];
   let day = weekDaysArr[now.getDay()];
 

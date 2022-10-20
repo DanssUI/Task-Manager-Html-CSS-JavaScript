@@ -16,7 +16,11 @@ export function generateHomepageHTML() {
   let html = `
     <div class="date-holder">
       <div class="topdate-holder">
-        <h4>2022<h2>July</h2></h4>
+      <div class="month_year">
+      <h1>July</h1>
+      <span>2022</span>
+      </div>
+       <!---- <h1>July<span>2022</span></h1>--->
         <div class="btns-container">
           <button data-btn="prev">
             <i class="fas fa-chevron-left"></i>

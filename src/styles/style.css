@@ -3,10 +3,30 @@
 
 :root {
   --body-bg: url('../../Img/bg.png');
+  --topdateH1: #42445A;
+  --topdateSpan: #000;
+  --change-month-btns: #9B15FF;
+  --dateBtn: #fff;
+  --dateBtn-bg-primary: #E2BCFF;
+  --dateBtn-bg-secondary: #9B15FF;
+  --dateBtn-shadow: hsla(274, 100%, 54%, 0.5);
+  --dateBtn-font: #000;
+  --dateBtn-font-active: #fff;
+  --navbar-bg: #fff;
 }
 
 .dark-blue {
   --body-bg: linear-gradient(120deg, rgba(2, 0, 50, 1) 0%, rgba(0, 212, 255, 1) 100%);
+  --topdateH1: #BEDFF0;
+  --topdateSpan: #DBF3F7;
+  --change-month-btns: #C3DEE7;
+  --dateBtn: #DBF3F7;
+  --dateBtn-bg-primary: rgba(2, 0, 50, 1);
+  --dateBtn-bg-secondary: rgba(0, 212, 255, 1);
+  --dateBtn-shadow: rgba(0, 212, 255, 0.3);
+  --dateBtn-font: #286EB2;
+  --dateBtn-font-active: #fff;
+  --navbar-bg: #0F569B;
 }
 
 .radical-blue {
@@ -54,13 +74,13 @@ body {
   position: relative;
   width: 100%;
   height: 100%;
-  scroll-snap-type: x mandatory;
   flex: 0 0 auto;
   display: flex;
   justify-content: center;
   align-items: center;
   flex-direction: column;
   overflow: hidden;
+  scroll-snap-align: start;
 }
 
 .date-holder {
@@ -68,30 +88,34 @@ body {
   justify-content: center;
   align-items: center;
   flex-direction: column;
-  margin-top: 0px;
 }
 
 .topdate-holder {
   width: 100%;
   display: flex;
   justify-content: space-between;
-  padding: 0px 2rem;
+  padding-inline: 0.5rem;
   align-items: center;
-  flex-direction: row;
-  margin: 3rem 0px 1.2rem 0px;
+  margin-block: 1.2rem;
 }
 
-.topdate-holder h2 {
+.month_year {
+  display: flex;
+  flex-direction: column-reverse;
+  align-items: start;
+}
+
+.month_year h1 {
   font-size: 2.3em;
-  margin-top:1rem;
-  color: #9B15FF;
+  margin: 0;
+  padding: 0;
+  color: var(--topdateH1);
 }
 
-.topdate-holder h4 {
-  position: absolute;
-  margin-bottom: 35px;
-  margin-left: 3px;
-  font-size: 1.1em;
+.month_year span {
+  font-size: 1em;
+  color: var(--topdateSpan);
+  font-weight: bold;
 }
 
 .topdate-holder div button {
@@ -100,7 +124,7 @@ body {
   outline: none;
   cursor: pointer;
   font-size: 1.5em;
-  color: #9B15FF;
+  color: var(--change-month-btns);
   width: 2em;
   height: 2em;
   border-radius: 100%;
@@ -109,60 +133,60 @@ body {
   transition: all 700ms;
 }
 
+/*have to add using js*/
+.topdate-holder button.active {
+  border: 1px solid var(--change-month-btns);
+}
+
 .topdate-holder button:focus,
 .topdate-holder button:hover {
   transform: scale(1.2) rotate(360deg);
-  border: 1px solid #9B15FF;
 }
 
 .date {
   width: 100vw;
-  height: 7.5rem;
-  padding-top: 10px;
   display: flex;
   justify-content: start;
   align-items: center;
   overflow-x: scroll;
-  padding-left: 20px;
-  padding-right: 10px;
+  padding: 0.5rem;
   scroll-snap-type: x mandatory;
   scroll-behavior: smooth;
   -webkit-overflow-scrolling: touch;
-  border-radius: 30px 30px 0px 0px;
-  background: rgba(255, 255, 255, 0.6);
-  box-shadow: 0 0px 1px 0 rgba(31, 38, 135, 0.37);
+  border-radius: 1.5rem 1.5rem 0 0;
   backdrop-filter: blur(10px);
   -webkit-backdrop-filter: blur(20px);
+  background: rgba(255, 255, 255, 0.6);
+  box-shadow: 0 0px 1px 0 rgba(31, 38, 135, 0.37);
 }
 
 .dateBtn {
   width: 3.7rem;
   height: 5.6rem;
-  background-color: white;
   display: flex;
   justify-content: center;
   align-items: center;
   flex-shrink: 0;
   flex-direction: column;
+  background-color: var(--dateBtn);
   margin: 5px;
   border-radius: 10px;
   border: none;
   scroll-snap-align: center;
   font-size: 1.6em;
   font-weight: bold;
-  transition: 300ms ease-in-out;
+  color: var(--dateBtn-font);
+  transition: 300ms ease-out;
 }
 
 .dateBtn.active {
-  background: linear-gradient(120deg, #E2BCFF, #9B15FF);
-  color: white;
-  box-shadow: 2px 4px 5px 0 hsla(274, 100%, 54%, 0.5);
-  font-size: 1.8em;
+  font-size: 1.7em;
+  background: linear-gradient(120deg, var(--dateBtn-bg-primary), var(--dateBtn-bg-secondary));
+  color: var(--dateBtn-font-active);
+  box-shadow: 2px 4px 5px 0 var(--dateBtn-shadow);
 }
 
-
-.dateBtn span,
-.dateBtn.active span {
+.dateBtn span {
   font-size: 0.5em;
 }
 
@@ -176,9 +200,8 @@ body {
   justify-content: space-evenly;
   align-items: center;
   z-index: 10;
-  background: #fff;
+  background: var(--navbar-bg);
   border-radius: 2.5rem 2.5rem 0px 0px;
-  box-shadow: 0 1px 5px 0 rgba(0, 0, 0, 0.3);
 }
 
 .navbar button {
