@@ -44,11 +44,11 @@ export let statsData = {
   entertainment: 1
 };
 
-function changeTheme() {
-  
-}
+export let theme = {
+  mode: 'default',
+};
 
-export function messagePopUp(message, className,time=1000) {
+export function messagePopUp(message, className, time = 1000) {
   const messageCont = document.querySelector('.message');
   const pElem = messageCont.querySelector('p');
 
@@ -58,7 +58,7 @@ export function messagePopUp(message, className,time=1000) {
   setTimeout(() => {
     messageCont.classList.remove(`${className}`);
   }, time);
-  
+
   setTimeout(() => pElem.innerText = '', time * 1.3)
 }
 
@@ -66,12 +66,12 @@ export function messagePopUp(message, className,time=1000) {
 export function changeMonth(e) {
   const btn = e.target.closest('button');
   const btnDataset = btn?.dataset.btn;
-  
+
   const isActive = btnDataset === 'prev' ? 'next' : 'prev';
-  
+
   //remove active class
   document.querySelector(`[data-btn=${isActive}]`).classList.remove('active');
-  
+
   if (btnDataset === 'next') {
     btn.classList.add('active');
     if (currMonth < 11) currMonth++;
@@ -122,7 +122,7 @@ export function createMonthDays() {
 
     //get current month week days
     const weekDays = weekDaysArr[currMonthFullDate.getDay()].slice(0, 3);
-    
+
     //date btns id
     const id = `${currYear}${(currMonth + 1)}${i}`;
 
@@ -255,7 +255,7 @@ export function renderTasks() {
 function createTaskCard(content) {
   const tasksContainer = document.querySelector(".task-container");
   const completedTaskCont = document.querySelector(".task-container-completed");
-  
+
   //check if title is empty or timestart > timeend or timestart === timeend
 
   const html = `
@@ -276,7 +276,6 @@ function createTaskCard(content) {
     //select the task user interacting with
     const task = document.querySelector(`[data-id='${content.uid}']`);
     task.classList.add('complete');
-    //   addHandlerTasks(openTaskView);
   }
 }
 
@@ -305,7 +304,12 @@ export function setLocalStorage(key, value) {
 }
 
 export function getData() {
-  taskArray = JSON.parse(localStorage.getItem('tasks')) ? JSON.parse(localStorage.getItem('tasks')) : taskArray;
-
-  statsData = JSON.parse(localStorage.getItem('stats')) ? JSON.parse(localStorage.getItem('stats')) : statsData;
+  const tasks = JSON.parse(localStorage.getItem('tasks'));
+  const stats = JSON.parse(localStorage.getItem('stats'));
+  
+  const themeMode = JSON.parse(localStorage.getItem('theme'));
+  
+  taskArray = tasks ? tasks : taskArray;
+  statsData = stats ? stats : statsData;
+  theme = themeMode ? themeMode : {};
 }

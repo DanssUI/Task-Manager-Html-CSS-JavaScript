@@ -1,7 +1,7 @@
 import * as model from './model.js';
 import { icons } from './helper.js';
 import { toggleTaskForm, category, generateCategoryMenu } from './createTask.js';
-
+const body = document.body;
 const parentContainer = document.querySelector('.schedule-section');
 const settingsMenu = document.querySelector('.settings_menu');
 
@@ -66,7 +66,7 @@ export function init() {
   changeMonthCont.addEventListener('click', model.changeMonth);
   nav.addEventListener('click', navSectionToggle);
   document.addEventListener('click', toggleSettings);
-  settingsMenu.addEventListener('click', toggleTheme);
+settingsMenu.addEventListener('click', toggleTheme);
 }
 
 function navSectionToggle(e) {
@@ -102,34 +102,49 @@ function addNewTaskPopUp() {
 
 function toggleSettings(e) {
   const isSettingsBtn = e.target.parentElement.classList.contains('icon');
-  
-  if(!isSettingsBtn && e.target.closest('.settings_menu') != null) return
-  
-  if(isSettingsBtn) settingsMenu.classList.toggle('active');
+
+  if (!isSettingsBtn && e.target.closest('.settings_menu') != null) return
+
+  if (isSettingsBtn) settingsMenu.classList.toggle('active');
   else settingsMenu.classList.remove('active');
 }
 
-function toggleTheme(e) {
-  const body = document.body;
-   const dataset = e.target.dataset.theme.toLowerCase();
-   body.classList = '';
-   switch (dataset) {
-     case 'default':
-       body.classList = '';
-       break;
-     case 'system default':
-       // code
-       break;
-     case 'dark':
-       // code
-       break;
-     case 'blue gradient':
-       body.classList.add('gradient-blue')
-       break;
-     case 'radical red':
-       body.classList.add('radical-red');
-       break;
-     default:
-     return 
-   }
+export function toggleTheme(e) {
+  const dataset = e.target.dataset?.theme.toLowerCase();
+  
+  model.theme.mode = dataset;
+  //set classList to empty
+  body.className = '';
+  
+  switch (model.theme.mode) {
+    case 'default':
+      body.classList = '';
+      break;
+    case 'system-default':
+      systemDefaultTheme();
+      break;
+    case 'dark':
+      body.classList.add('dark')
+      break;
+    case 'gradient-blue':
+      body.classList.add('gradient-blue')
+      break;
+    case 'radical-red':
+      body.classList.add('radical-red');
+      break;
+    default:
+      return
+  }
+  model.setLocalStorage('theme', model.theme);
+}
+
+function systemDefaultTheme() {
+  const hours = new Date().getHours();
+  const isDayTime = hours >= 18 || hours === 6
+  if (isDayTime) body.classList.add('dark');
+  else body.classList.remove('dark');
+}
+
+export function setTheme() {
+  body.classList.add(`${model.theme.mode}`);
 }

@@ -19,6 +19,7 @@ function generateMarkup() {
   stats.generateStats();
   //initialize the listener when the page loads
   model.addHandlerTasks(viewTask.openTaskView);
+  homepage.setTheme();
 }
 
 function init() {
