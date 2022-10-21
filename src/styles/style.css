@@ -146,6 +146,74 @@
 
 .radical-red {
   --body-bg: radial-gradient(circle, rgba(238, 174, 202, 1) 50%, rgba(148, 187, 233, 1) 100%);
+  --settings-svg: #BEDFF0;
+  --topdateH1: #BEDFF0;
+  --topdateSpan: #DBF3F7;
+  --change-month-btns: #C3DEE7;
+  --dateBtn: #D4ECFF;
+  --dateBtn-bg-primary: rgba(2, 0, 50, 1);
+  --dateBtn-bg-secondary: rgba(0, 212, 255, 1);
+  --dateBtn-shadow: hsla(215, 81%, 23%, 0.8);
+  --dateBtn-font: #286EB2;
+  --dateBtn-font-active: #fff;
+  --navbar-bg: #DBF3F7;
+  --stop_1: #0F5D9C;
+  --stop_2: #4190CF;
+  --stop_3: #0F5D9C;
+  --add-stop_1: #0F5D9C;
+  --add-stop_2: #0F5D9C;
+  --add-stop_3: #2596F0;
+  --task-container: rgba(255, 255, 255, 0.4);
+  --empty-task: #286EB2;
+  --task-card-bg: #D4ECFF;
+  --task-card-border: #1B6AD9;
+  --task-card-h2: #286EB2;
+  --task-card-p: #63A1DC;
+  --task-card-span: #6EADEB;
+  --task-card-shadow: hsla(215, 81%, 23%, 0.8);
+  --task-card-complete: linear-gradient(120deg, rgba(2, 0, 50, 1) 0%, rgba(0, 212, 255, 1) 100%);
+  --completed-font: #D4ECFF;
+  --completed-bg: linear-gradient(120deg, rgba(2, 0, 50, 1) 0%, rgba(0, 212, 255, 1) 100%);
+  --complete-font-h2: #D4ECFF;
+  --complete-font-p: #D4ECFF;
+  --complete-font-span: #CEE9F3;
+  --completed-border: #DBF3F7;
+
+  /*stats Data*/
+  --stats-heading-h2: #BEDFF0;
+  --stats-heading-span: #286EB2;
+  --stats-boxes: hsla(215, 81%, 23%, 0.8);
+  --stats-div-1: #2AB80A;
+  --stats-div-2: #286EB2;
+  --stats-div-3: #8913D0;
+  --stats-div-4: #CB1515;
+  --category-stats-heading: #D4ECFF;
+  --category-stats: rgba(255, 255, 255, 0.3);
+  --category-stats-border: #DBF3F7;
+  --category-boxes-bg: #D4ECFF;
+  --category-boxes-font: #286EB2;
+
+  /*ADD TASK*/
+  --add-task-bg: linear-gradient(120deg, rgba(2, 0, 50, 1) 0%, rgba(0, 212, 255, 1) 100%);
+  --add-task-shadow: hsla(215, 81%, 23%, 0.8);
+  --close-btn-shadow: hsla(215, 81%, 23%, 0.8);
+  --add-task-header: #00AEFF;
+  --task-desc-border: #00AEFF;
+  --title_desc_font: #BEDFF0;
+  --buttons-bg: #D4ECFF;
+  --button-font-primary: #286EB2;
+  --button-font-seconday: #00AEFF;
+  --category-menu: linear-gradient(120deg, rgba(2, 0, 50, 1) 0%, rgba(0, 212, 255, 1) 100%);
+  --category-menu-shadow: hsla(215, 81%, 23%, 0.8);
+  --category-menu-shadow: hsla(215, 81%, 23%, 0.8);
+  --category-btn-bg: rgba(255, 255, 255, 0.3);
+  --category-btn-font: #D4ECFF;
+  --add-btn-font: #BEDFF0;
+  --add-btn-bg: linear-gradient(120deg, rgba(2, 0, 50, 1) 0%, rgba(0, 212, 255, 1) 100%);
+  --add-btn-shadow: hsla(215, 81%, 23%, 0.8);
+
+  /*Task View*/
+  --view-desc-p: #BEDFF0;
 }
 
 * {
@@ -187,27 +255,28 @@ body {
 
 .settings .settings_menu {
   position: absolute;
-  top:0;
-  bottom:0;
-  padding: 1rem;
+  top: 0;
+  bottom: 0;
+  padding-block: 1rem;
   background: var(--task-card-bg);
   color: var(--task-card-h2);
-  box-shadow: 1px 1px 5px 0 var(--task-card-shadow);
   border-radius: 0.2rem;
-  display: grid;
-  place-items: center;
-  width: 13rem;
-  height: 15rem;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  width: 10rem;
+  height: 13rem;
   opacity: 0;
-  pointer-events:none;
-  user-select:none;
+  pointer-events: none;
+  user-select: none;
   transition: 300ms ease-in-out;
+  box-shadow: 1px 1px 5px 0 var(--task-card-shadow);
 }
 
 .settings_menu.active {
   top: 100%;
   opacity: 1;
-  pointer-events:auto;
+  pointer-events: auto;
 }
 
 .settings .settings_menu>p {
@@ -237,15 +306,16 @@ body {
 
 .menu_section_1 {
   margin-top: 0.5rem;
+  list-style: none;
 }
 
-.menu_section_1 > p {
+.menu_section_1>li {
   padding-block: 0.2rem;
   transition: 100ms ease-in-out;
 }
 
-.menu_section_1 > p:hover,
-.menu_section_1 > p:focus {
+.menu_section_1>li:hover,
+.menu_section_1>li:focus {
   font-weight: bold;
 }
 
