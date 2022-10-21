@@ -44,6 +44,10 @@ export let statsData = {
   entertainment: 1
 };
 
+function changeTheme() {
+  
+}
+
 export function messagePopUp(message, className,time=1000) {
   const messageCont = document.querySelector('.message');
   const pElem = messageCont.querySelector('p');
@@ -62,8 +66,14 @@ export function messagePopUp(message, className,time=1000) {
 export function changeMonth(e) {
   const btn = e.target.closest('button');
   const btnDataset = btn?.dataset.btn;
-
+  
+  const isActive = btnDataset === 'prev' ? 'next' : 'prev';
+  
+  //remove active class
+  document.querySelector(`[data-btn=${isActive}]`).classList.remove('active');
+  
   if (btnDataset === 'next') {
+    btn.classList.add('active');
     if (currMonth < 11) currMonth++;
     else {
       currMonth = 0;
@@ -72,6 +82,7 @@ export function changeMonth(e) {
   }
 
   if (btnDataset === 'prev') {
+    btn.classList.add('active');
     if (currMonth > 0) currMonth--;
     else {
       currMonth = 11;
@@ -147,9 +158,9 @@ export function createMonthDays() {
 }
 
 export function currDayActive(elem) {
-  const allBtn = document.querySelectorAll(".date button")
+  const dateBtns = document.querySelectorAll(".date button");
 
-  allBtn.forEach(btn => btn.classList = "dateBtn");
+  dateBtns.forEach(btn => btn.classList = "dateBtn");
 
   elem.classList.add("active");
 }

@@ -3,8 +3,9 @@
 
 :root {
   --body-bg: url('../../Img/bg.png');
-  --topdateH1: #42445A;
-  --topdateSpan: #000;
+  --settings-svg: #fff;
+  --topdateH1: #000;
+  --topdateSpan: #42445A;
   --change-month-btns: #9B15FF;
   --dateBtn: #fff;
   --dateBtn-bg-primary: #E2BCFF;
@@ -46,11 +47,34 @@
   --category-stats-heading: #9B15FF;
   --category-stats: linear-gradient(105deg, #FFFFFF, #F3E5FF, #E2F2FF);
   --category-stats-border: rgba(255, 255, 255, 0.18);
-  --category-boxes-bg: rgba(255, 255, 255, 0.4) --category-boxes-font: #000;
+  --category-boxes-bg: rgba(255, 255, 255, 0.4);
+  --category-boxes-font: #000;
+
+  /*ADD TASK*/
+  --add-task-bg: linear-gradient(105deg, #FFFFFF, #F3E5FF, #E2F2FF);
+  --add-task-shadow: rgba(31, 38, 135, 0.1);
+  --close-btn-shadow: rgba(0, 0, 0, 0.2);
+  --add-task-header: #9B15FF;
+  --task-desc-border: #575757;
+  --title_desc_font: #000;
+  --buttons-bg: #fff;
+  --button-font-primary: #000;
+  --button-font-seconday: #777;
+  --category-menu: linear-gradient(105deg, #FFFFFF, #F3E5FF, #E2F2FF);
+  --category-menu-shadow: rgba(0, 0, 0, 0.1);
+  --category-btn-bg: rgba(255, 255, 255, 0.4);
+  --category-btn-font: #000;
+  --add-btn-bg: linear-gradient(155deg, #7FD5FF, #008DFF);
+  --add-btn-font: #fff;
+  --add-btn-shadow: #0090FF;
+
+  /*View */
+  --view-desc-p: red;
 }
 
 .dark-blue {
   --body-bg: linear-gradient(120deg, rgba(2, 0, 50, 1) 0%, rgba(0, 212, 255, 1) 100%);
+  --settings-svg: #BEDFF0;
   --topdateH1: #BEDFF0;
   --topdateSpan: #DBF3F7;
   --change-month-btns: #C3DEE7;
@@ -92,13 +116,35 @@
   --stats-div-3: #8913D0;
   --stats-div-4: #CB1515;
   --category-stats-heading: #D4ECFF;
-  --category-stats: rgba(255, 255, 255,0.3);
+  --category-stats: rgba(255, 255, 255, 0.3);
   --category-stats-border: #DBF3F7;
   --category-boxes-bg: #D4ECFF;
   --category-boxes-font: #286EB2;
+
+  /*ADD TASK*/
+  --add-task-bg: linear-gradient(120deg, rgba(2, 0, 50, 1) 0%, rgba(0, 212, 255, 1) 100%);
+  --add-task-shadow: hsla(215, 81%, 23%, 0.8);
+  --close-btn-shadow: hsla(215, 81%, 23%, 0.8);
+  --add-task-header: #00AEFF;
+  --task-desc-border: #00AEFF;
+  --title_desc_font: #BEDFF0;
+  --buttons-bg: #D4ECFF;
+  --button-font-primary: #286EB2;
+  --button-font-seconday: #00AEFF;
+  --category-menu: linear-gradient(120deg, rgba(2, 0, 50, 1) 0%, rgba(0, 212, 255, 1) 100%);
+  --category-menu-shadow: hsla(215, 81%, 23%, 0.8);
+  --category-menu-shadow: hsla(215, 81%, 23%, 0.8);
+  --category-btn-bg: rgba(255, 255, 255, 0.3);
+  --category-btn-font: #D4ECFF;
+  --add-btn-font: #BEDFF0;
+  --add-btn-bg: linear-gradient(120deg, rgba(2, 0, 50, 1) 0%, rgba(0, 212, 255, 1) 100%);
+  --add-btn-shadow: hsla(215, 81%, 23%, 0.8);
+
+  /*Task View*/
+  --view-desc-p: #BEDFF0;
 }
 
-.radical-blue {
+.radical-red {
   --body-bg: radial-gradient(circle, rgba(238, 174, 202, 1) 50%, rgba(148, 187, 233, 1) 100%);
 }
 
@@ -119,6 +165,25 @@ body {
   background-image: var(--body-bg);
   background-size: cover;
   background-repeat: no-repeat;
+  position: relative;
+}
+
+.settings {
+  position: absolute;
+  top: 1%;
+  right: 3%;
+}
+
+.settings .icon svg {
+  width: 30px;
+}
+
+.settings .icon svg .st0 {
+  stroke: var(--settings-svg);
+}
+
+.settings .settings_menu {
+  display:none;
 }
 
 .container {
@@ -136,7 +201,6 @@ body {
   display: flex;
   flex-wrap: nowarp;
   overflow-x: hidden;
-
 }
 
 .schedule-section {
@@ -154,7 +218,7 @@ body {
 
 .date-holder {
   display: flex;
-  justify-content: center;
+  justify-content: start;
   align-items: center;
   flex-direction: column;
 }
@@ -162,7 +226,7 @@ body {
 .topdate-holder {
   width: 100%;
   display: flex;
-  justify-content: space-between;
+  justify-content: start;
   padding-inline: 0.5rem;
   align-items: center;
   margin-block: 1.2rem;
@@ -172,6 +236,8 @@ body {
   display: flex;
   flex-direction: column-reverse;
   align-items: start;
+  width: 8rem;
+  margin-right: 5rem;
 }
 
 .month_year h1 {
@@ -623,14 +689,13 @@ body {
   z-index: 20;
   padding-top: 1.2rem;
   border-radius: 30px 30px 0px 0px;
-  background: linear-gradient(105deg, #FFFFFF, #F3E5FF, #E2F2FF);
-  box-shadow: 0 -10px 20px 0 rgba(31, 38, 135, 0.1);
-  border: 1px solid rgba(255, 255, 255, 0.18);
-  opacity: 0;
   pointer-events: none;
   user-select: none;
   transform: translateY(100%);
   transition: transform 500ms ease-in-out, opacity 500ms ease-in-out;
+  background: var(--add-task-bg);
+  box-shadow: 0 -10px 20px 0 var(--add-task-shadow);
+  opacity: 0;
 }
 
 .add-task .task-form {
@@ -651,7 +716,7 @@ body {
   z-index: 10;
   font-size: 2.5em;
   color: white;
-  text-shadow: 1px 1px 2px rgba(0, 0, 0, 0.2);
+  text-shadow: 1px 1px 2px var(--close-btn-shadow);
 }
 
 .add-task.active {
@@ -661,32 +726,10 @@ body {
   opacity: 1;
 }
 
-.add-task h2 {
-  position: absolute;
-  top: 30px;
-  z-index: 10;
-}
-
-#createTask {
-  position: fixed;
-  bottom: 1rem;
-  width: 90%;
-  height: 2.5rem;
-  background: linear-gradient(155deg, #7FD5FF, #008DFF);
-  color: white;
-  border: none;
-  border-radius: 10px;
-  z-index: 10;
-  font-size: 1em;
-  font-weight: bold;
-  box-shadow: 0px 5px 10px 0 #0090FF;
-}
-
 #taskHeader {
   font-size: 1.5em;
-  color: #00AEFF;
+  color: var(--add-task-header);
   margin-left: 8%;
-  color: #9B15FF;
 }
 
 #taskname,
@@ -697,15 +740,12 @@ body {
   width: 80%;
   padding: 1rem 0.5rem;
   border: none;
-  border-bottom: 0.7px solid #575757;
+  border-bottom: 0.7px solid var(--task-desc-border);
   background: none;
   margin-bottom: 2rem;
   margin-left: 2rem;
   outline: none;
-}
-
-#taskdesc {
-  color: #3F3F3F;
+  color: var(--title_desc_font);
 }
 
 .lower-input {
@@ -745,11 +785,17 @@ body {
   margin: 5px;
   border-radius: 20px;
   border: none;
-  background-color: white;
+  background-color: var(--buttons-bg);
+}
+
+.lower-input button b,
+.lower-holder-view button b {
+  color: var(--button-font-primary);
 }
 
 .lower-input button span {
   text-transform: capitalize;
+  color: var(--button-font-seconday);
 }
 
 .lower-input button input,
@@ -804,8 +850,8 @@ body {
   border-radius: 30px;
   z-index: 30;
   width: 100%;
-  background: linear-gradient(105deg, #FFFFFF, #F3E5FF, #E2F2FF);
-  box-shadow: 1px 1px 5px 0px rgba(0, 0, 0, 0.1);
+  background: var(--category-menu);
+  box-shadow: 1px 1px 5px 0px var(--category-menu-shadow);
   opacity: 0;
   pointer-events: none;
   user-select: none;
@@ -828,10 +874,27 @@ body {
   flex-shrink: 0;
   font-size: clamp(0.8rem, 3vw, 1rem);
   border-radius: 15px;
-  background: rgba(255, 255, 255, 0.4);
-  box-shadow: 0 0 16px rgba(0, 0, 0, 0.1);
+  background: var(--category-btn-bg);
+  color: var(--category-btn-font);
+  box-shadow: 0 0 16px var(--category-menu-shadow);
   text-transform: capitalize;
 }
+
+#createTask {
+  position: fixed;
+  bottom: 1rem;
+  width: 90%;
+  height: 2.5rem;
+  background: var(--add-btn-bg);
+  color: var(--add-btn-font);
+  border: none;
+  border-radius: 10px;
+  z-index: 10;
+  font-size: 1em;
+  font-weight: bold;
+  box-shadow: 0px 5px 10px 0 var(--add-btn-shadow);
+}
+
 
 /*Task View*/
 .task-view {
@@ -847,8 +910,8 @@ body {
   pointer-events: none;
   user-select: none;
   transition: 500ms ease-in-out;
-  background: linear-gradient(105deg, #FFFFFF, #F3E5FF, #E2F2FF);
-  box-shadow: 0 -10px 20px 0 rgba(31, 38, 135, 0.1);
+  background: var(--add-task-bg);
+  box-shadow: 0 -10px 20px 0 var(--add-task-shadow);
 }
 
 .task-view.active {
@@ -871,6 +934,7 @@ body {
   font-size: 2em;
   padding: 0;
   margin: 1rem;
+  color: var(--title_desc_font);
 }
 
 .task-form-view>.img_cont {
@@ -889,18 +953,18 @@ body {
 
 .task-form-view .desc_container p:first-child {
   font-size: 1.5rem;
-  color: #000;
+  color: var(--title_desc_font);
   margin: 0;
 }
 
 .task-form-view .desc_container p:nth-child(2) {
   font-size: 1.2em;
   margin-top: 0.5em;
-  color: #3F3F3F;
+  color: var(--button-font-seconday);
 }
 
 .task-form-view .desc_container p:nth-child(2)::first-letter {
-  color: red;
+  color: var(--view-desc-p);
   text-transform: capitalize;
 }
 
@@ -935,8 +999,8 @@ body {
   margin: 5px;
   border-radius: 0.8rem;
   border: none;
-  background-color: white;
-  box-shadow: 1px 0 5px 0 rgba(200, 200, 200, 0.3);
+  background-color: var(--buttons-bg);
+  box-shadow: 1px 0 5px 0 hsla;
 }
 
 .category_time_cont button:first-child>span {
