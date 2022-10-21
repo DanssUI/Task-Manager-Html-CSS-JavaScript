@@ -3,6 +3,7 @@ import { icons } from './helper.js';
 import { toggleTaskForm, category, generateCategoryMenu } from './createTask.js';
 
 const parentContainer = document.querySelector('.schedule-section');
+const settingsMenu = document.querySelector('.settings_menu');
 
 let taskContainer;
 let changeMonthCont;
@@ -16,7 +17,10 @@ export function generateHomepageHTML() {
   let html = `
     <div class="date-holder">
       <div class="topdate-holder">
-        <h4>2022<h2>July</h2></h4>
+        <div class="month_year">
+          <h1>July</h1>
+          <span>2022</span>
+        </div>
         <div class="btns-container">
           <button data-btn="prev">
             <i class="fas fa-chevron-left"></i>
@@ -61,6 +65,8 @@ export function generateHomepageHTML() {
 export function init() {
   changeMonthCont.addEventListener('click', model.changeMonth);
   nav.addEventListener('click', navSectionToggle);
+  document.addEventListener('click', toggleSettings);
+  settingsMenu.addEventListener('click', toggleTheme);
 }
 
 function navSectionToggle(e) {
@@ -92,4 +98,38 @@ function navSectionToggle(e) {
 function addNewTaskPopUp() {
   toggleTaskForm();
   generateCategoryMenu();
+}
+
+function toggleSettings(e) {
+  const isSettingsBtn = e.target.parentElement.classList.contains('icon');
+  
+  if(!isSettingsBtn && e.target.closest('.settings_menu') != null) return
+  
+  if(isSettingsBtn) settingsMenu.classList.toggle('active');
+  else settingsMenu.classList.remove('active');
+}
+
+function toggleTheme(e) {
+  const body = document.body;
+   const dataset = e.target.dataset.theme.toLowerCase();
+   body.classList = '';
+   switch (dataset) {
+     case 'default':
+       body.classList = '';
+       break;
+     case 'system default':
+       // code
+       break;
+     case 'dark':
+       // code
+       break;
+     case 'blue gradient':
+       body.classList.add('gradient-blue')
+       break;
+     case 'radical red':
+       body.classList.add('radical-red');
+       break;
+     default:
+     return 
+   }
 }

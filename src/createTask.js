@@ -64,21 +64,28 @@ function init() {
 }
 
 function createTask() {
+  const dateBtns = document.querySelectorAll(".date button");
   const timeStartEnd = `${timeStartInput.value} — ${timeEndInput.value}`;
 
   if (title.value === '' || timeStartInput.value >= timeEndInput.value) {
     model.messagePopUp(`Important!
     1. Title Cannot Empty.
+    
     2. Task start time cannot be greater or equal to task end time.
-   3.Task end time cannot be lower than task start time.`, 'danger', 2000);
+    
+    3.Task end time cannot be lower than task start time.`, 'danger', 2000);
+    //reset and close the form
     closeNewtaskPopup();
     return
   }
 
   model.createNewTask(title.value, desc.value, timeStartInput.value, timeEndInput.value, category.innerText, timeStartEnd);
-  closeNewtaskPopup();
-  resetAddTaskForm();
+
   model.messagePopUp('Task Created', 'success');
+
+  //reset and close the form
+  closeNewtaskPopup();
+
   // for the newly created tasks;
   model.addHandlerTasks(openTaskView);
 }
