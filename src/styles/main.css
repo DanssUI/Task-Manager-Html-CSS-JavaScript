@@ -956,6 +956,10 @@ body {
   box-shadow: 0 8px 15px 0 rgba(var(--shadow-primary), 0.1);
 }
 
+.lower-holder-view button > span {
+  color: var(--font-color-primary);
+}
+
 .category_time_cont {
   display: grid;
   grid-template-columns: 1fr 1fr;
