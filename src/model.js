@@ -67,11 +67,6 @@ export function changeMonth(e) {
   const btn = e.target.closest('button');
   const btnDataset = btn?.dataset.btn;
 
-  const isActive = btnDataset === 'prev' ? 'next' : 'prev';
-
-  //remove active class
-  document.querySelector(`[data-btn=${isActive}]`).classList.remove('active');
-
   if (btnDataset === 'next') {
     btn.classList.add('active');
     if (currMonth < 11) currMonth++;
@@ -89,7 +84,7 @@ export function changeMonth(e) {
       currYear--;
     }
   }
-
+  
   initTime();
 
   homepage.dateContainer.querySelector("button").click();
@@ -308,7 +303,7 @@ export function getData() {
   const stats = JSON.parse(localStorage.getItem('stats'));
   
   const themeMode = JSON.parse(localStorage.getItem('theme'));
-  
+ 
   taskArray = tasks ? tasks : taskArray;
   statsData = stats ? stats : statsData;
   theme = themeMode ? themeMode : {};

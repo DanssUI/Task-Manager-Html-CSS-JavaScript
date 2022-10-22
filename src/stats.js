@@ -4,8 +4,8 @@ let statsHolder;
 
 export function generateStatsHTML() {
   let html = `
-    <h2 class="headertop">All
-      <span class="headerbottom">Statistics</span>
+    <h2 class="headertop">Statistics
+      <span class="headerbottom">All</span>
     </h2>
     <div class="stats-holder">
     </div>`

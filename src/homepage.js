@@ -66,7 +66,7 @@ export function init() {
   changeMonthCont.addEventListener('click', model.changeMonth);
   nav.addEventListener('click', navSectionToggle);
   document.addEventListener('click', toggleSettings);
-settingsMenu.addEventListener('click', toggleTheme);
+  settingsMenu.addEventListener('click', toggleTheme);
 }
 
 function navSectionToggle(e) {
@@ -110,13 +110,13 @@ function toggleSettings(e) {
 }
 
 export function toggleTheme(e) {
-  const dataset = e.target.dataset?.theme.toLowerCase();
+  const dataset = e.target.dataset.theme;
   
-  model.theme.mode = dataset;
+  if(!dataset) return 
   //set classList to empty
   body.className = '';
-  
-  switch (model.theme.mode) {
+
+  switch (dataset.toLowerCase()) {
     case 'default':
       body.classList = '';
       break;
@@ -129,12 +129,13 @@ export function toggleTheme(e) {
     case 'gradient-blue':
       body.classList.add('gradient-blue')
       break;
-    case 'radical-red':
-      body.classList.add('radical-red');
+    case 'gradient-cyan':
+      body.classList.add('gradient-cyan');
       break;
     default:
       return
   }
+  model.theme.mode = dataset;
   model.setLocalStorage('theme', model.theme);
 }
 
@@ -146,5 +147,6 @@ function systemDefaultTheme() {
 }
 
 export function setTheme() {
+  if (model.theme.mode === 'system-default') systemDefaultTheme();
   body.classList.add(`${model.theme.mode}`);
 }
