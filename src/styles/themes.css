@@ -1,0 +1,149 @@
+.dark {
+  --body-bg: linear-gradient(120deg, rgba(0, 0, 0, 1) 0%, rgba(0, 0, 0, 1) 100%);;
+  --theme-font: #fff;
+  --settings-svg: #fff;
+  --font-color-primary: rgba(255, 255, 255, 1);
+  --font-color-secondary: #DADADA;
+  --font-color-tertiary: #DCDCDC;
+  --bg-primary: #303030;
+  --bg-secondary: #CFCFCF;
+  --bg-linear_radial: rgba(0, 0, 0, 1);
+  --shadow-primary:255, 255, 255;
+  --date-btn-active-bg: #000;
+  --dateBtn-shadow: 255, 255, 255;
+  --date-btn-active-font: #fff;
+  --change-month-btns: #777;
+  --stop_1: #fff;
+  --stop_2: #999;
+  --stop_3: #999;
+  --add-stop_1: #fff;
+  --add-stop_2: #000;
+  --add-stop_3: #000;
+  --transparency: rgba(230, 230, 230, .8);
+  --task-card-border: #fff;
+  --task-card-complete: #000;
+  --completed-font: #fff;
+  --completed-bg: #000;
+  --complete-font-h2: #fff;
+  --complete-font-p: #fff;
+  --complete-font-span: #C9C9C9;
+  --completed-border: #DBF3F7;
+
+  /*stats Data*/
+  --stats-heading-span: #777;
+  --stats-div-1: #2AB80A;
+  --stats-div-2: #286EB2;
+  --stats-div-3: #8913D0;
+  --stats-div-4: #CB1515;
+  --category-stats-border: #777;
+
+  /*ADD TASK*/
+  --task-desc-border: #fff;
+  --add-btn-font: #fff;
+  --add-btn-bg: #777;
+  --add-btn-shadow: rgba(255, 255, 255, 1);
+
+  /*Task View*/
+  --view-desc-p: #BEDFF0;
+}
+
+.gradient-blue {
+  --body-bg: linear-gradient(120deg, rgba(2, 0, 50, 1) 0%, rgba(0, 212, 255, 1) 100%);
+  --theme-font: #D4ECFF;
+  --settings-svg: #BEDFF0;
+  --font-color-primary: #286EB2;
+  --font-color-secondary: #619FD3;
+  --font-color-tertiary: #286EB2;
+  --bg-primary: #D4ECFF;
+  --bg-secondary: #F9FFFF;
+  --bg-linear_radial: linear-gradient(120deg, rgba(2, 0, 50, 1) 0%, rgba(0, 212, 255, 1) 100%);
+  --shadow-primary: 14, 63, 126;
+  --date-btn-active-bg: linear-gradient(120deg, rgba(2, 0, 50, 1), rgba(0, 212, 255, 1));
+  --dateBtn-shadow: 11, 51, 106;
+  --date-btn-active-font: #fff;
+  --change-month-btns: #C3DEE7;
+  --stop_1: #0F5D9C;
+  --stop_2: #4190CF;
+  --stop_3: #0F5D9C;
+  --add-stop_1: #0F5D9C;
+  --add-stop_2: #0F5D9C;
+  --add-stop_3: #2596F0;
+  --transparency: rgba(255, 255, 255, 0.4);
+  --task-card-border: #1B6AD9;
+  --task-card-complete: linear-gradient(120deg, rgba(2, 0, 50, 1) 0%, rgba(0, 212, 255, 1) 100%);
+  --completed-font: #D4ECFF;
+  --completed-bg: linear-gradient(120deg, rgba(2, 0, 50, 1) 0%, rgba(0, 212, 255, 1) 100%);
+  --complete-font-h2: #D4ECFF;
+  --complete-font-p: #D4ECFF;
+  --complete-font-span: #CEE9F3;
+  --completed-border: #DBF3F7;
+
+  /*stats Data*/
+  --stats-heading-span: #D4ECFF;
+  --stats-div-1: #2AB80A;
+  --stats-div-2: #286EB2;
+  --stats-div-3: #8913D0;
+  --stats-div-4: #CB1515;
+  --category-stats-border: #DBF3F7;
+
+  /*ADD TASK*/
+  --task-desc-border: #00AEFF;
+  --add-btn-font: #BEDFF0;
+  --add-btn-bg: linear-gradient(120deg, rgba(2, 0, 50, 1) 0%, rgba(0, 212, 255, 1) 100%);
+  --add-btn-shadow: hsla(215, 81%, 23%, 0.8);
+
+  /*Task View*/
+  --view-desc-p: #BEDFF0;
+}
+
+.gradient-cyan {
+  --body-bg: linear-gradient(0deg, rgba(34, 193, 195, 1) 0%, rgba(255, 255, 255, 1) 100%);
+  --theme-font: #0A9EA0;
+  --settings-svg: rgba(34, 193, 195, 1);
+  --font-color-primary: #3DB0B1;
+  --font-color-secondary: #42C1C3;
+  --font-color-tertiary: #0B7375;
+  --bg-primary: #EBFFFF;
+  --bg-secondary: #0A9EA0;
+  --bg-linear_radial: linear-gradient(0deg, rgba(34, 193, 195, 1) 0%, rgba(255, 255, 255, 1) 100%);
+  --shadow-primary: 10, 113, 115;
+  --dateBtn-bg: #F9FFFF;
+  --date-btn-active-bg: radial-gradient(circle, rgba(34, 193, 195, 1) 0%, rgba(255, 255, 255, 1) 100%);
+  --dateBtn-shadow: 10, 116, 117;
+  --date-btn-active-font: #EDFFFF;
+  --change-month-btns: #0A9EA0;
+  --dateBtn: #F9FFFF;
+  --date-btn-active-bg: radial-gradient(circle, rgba(34, 193, 195, 1) 0%, rgba(255, 255, 255, 1) 100%);
+  --stop_1: #F9FFFF;
+  --stop_2: #0A9EA0;
+  --stop_3: #0A9EA0;
+  --add-stop_1: #F9FFFF;
+  --add-stop_2: #087B7B;
+  --add-stop_3: #087B7B;
+  --transparency: rgba(255, 255, 255, 0.4);
+  --task-card-border: #3FA8A8;
+  --task-card-complete: linear-gradient(0deg, rgba(34, 193, 195, 1) 0%, rgba(255, 255, 255, 1) 100%);
+  --completed-font: #00AFB1;
+  --completed-bg: linear-gradient(0deg, rgba(34, 193, 195, 1) 0%, rgba(255, 255, 255, 1) 100%);
+  --complete-font-h2: #00AFB1;
+  --complete-font-p: #0B7375;
+  --complete-font-span: #0B7375;
+  --completed-border: #0B7375;
+
+  /*stats Data*/
+  --stats-heading-span: #42C1C3;
+  --stats-div-1: #2AB80A;
+  --stats-div-2: #286EB2;
+  --stats-div-3: #8913D0;
+  --stats-div-4: #CB1515;
+  --category-stats-border: #2BF0F4;
+
+  /*ADD TASK*/
+  --task-desc-border: #0A9EA0;
+  --add-btn-font: #0A9EA0;
+  --add-btn-bg: linear-gradient(45deg, rgba(34, 193, 195, 1) 0%, rgba(255, 255, 255, 1) 100%);
+  --add-btn-shadow: rgba(22, 129, 129, 1);
+
+  /*Task View*/
+  --view-desc-p: #0D5B5B;
+}
