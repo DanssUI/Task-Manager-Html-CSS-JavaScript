@@ -48,14 +48,6 @@ export function generateStats() {
     </div>
   </div>`
 
-
-education: 0
-entertainment: 1
-social: 0
-sport: 0
-unset: 0
-work: 
-
   statsHolder.innerHTML = '';
   statsHolder.insertAdjacentHTML('beforeend', html);
 }

@@ -2,6 +2,7 @@
 @import url('https://fonts.googleapis.com/css2?family=Inter:wght@500&display=swap');
 @import url('./themes.css');
 
+
 :root {
   --body-bg: url('../../Img/bg.png');
   --theme-font: #9B15FF;
@@ -11,7 +12,7 @@
   --font-color-tertiary: #999;
   --bg-primary: #fff;
   --bg-secondary: #F9FFFF;
-  --bg-linear_radial: linear-gradient(105deg,#FFFFFF, #F3E5FF, #E2F2FF);
+  --bg-linear_radial: linear-gradient(105deg, #FFFFFF, #F3E5FF, #E2F2FF);
   --shadow-primary: 0, 0, 0;
   --change-month-btns: #9B15FF;
   --date-btn-active-bg: linear-gradient(120deg, #E2BCFF, #9B15FF);
@@ -163,7 +164,7 @@ body {
   justify-content: center;
 }
 
-/*HONE PAGE*/
+/*HOME PAGE*/
 .page-wrapper {
   height: 100%;
   width: 100%;
@@ -407,20 +408,6 @@ body {
   text-shadow: 1px 1px 1px rgba(255, 255, 255, 0.5);
 }
 
-.task-holder {
-  position: absolute;
-  width: 100%;
-  height: 75%;
-  background-color: blue;
-  display: flex;
-  justify-content: start;
-  align-items: center;
-  flex-direction: column;
-  overflow-y: scroll;
-  padding-bottom: 0.2rem;
-
-}
-
 .task-card {
   width: 95%;
   height: 12rem;
@@ -438,8 +425,7 @@ body {
 }
 
 .task-card img {
-  width: 80px;
-  height: auto;
+  width: 5rem;
 }
 
 .task-content {
@@ -956,7 +942,7 @@ body {
   box-shadow: 0 8px 15px 0 rgba(var(--shadow-primary), 0.1);
 }
 
-.lower-holder-view button > span {
+.lower-holder-view button>span {
   color: var(--font-color-primary);
 }
 
@@ -1049,4 +1035,182 @@ body {
   pointer-events: auto;
   user-select: auto;
   transition: 500ms ease-in-out;
+}
+
+@media screen and (max-width:320px) {
+  /*HOME PAGE*/
+  .month_year {
+    width: 6rem;
+  }
+
+  .month_year h1 {
+    font-size: 1em;
+  }
+
+  .month_year span {
+    font-size: 0.7em;
+  }
+
+  .topdate-holder div button {
+    font-size: 1em;
+  }
+
+  .dateBtn {
+    width: 3rem;
+    height: 4rem;
+    font-size: 1em;
+  }
+
+  .dateBtn.active {
+    font-size: 1.2em;
+  }
+
+  .dateBtn span {
+    font-size: 0.5em;
+  }
+
+  .navbar {
+    height: 3.5rem;
+  }
+
+  .navbar button svg {
+    width: 2rem;
+    height: 2rem;
+  }
+
+  /*TASK CARD*/
+  .task-card {
+    height: 9rem;
+  }
+
+  .task-card img {
+    width: 4rem;
+  }
+
+  .task-content span {
+    font-size: 1rem;
+  }
+
+  /*STATS DATA*/
+  .headertop {
+    font-size: 1.5em;
+  }
+
+  .headertop>span {
+    font-size: 0.5em;
+  }
+  
+  .box-holder{
+    display:flex;
+    align-items: center;
+    justify-content: center;
+    width: 100%;
+    height: 50%;
+    padding-inline: 0.5rem;
+  }
+
+  .box-holder div {
+    width: 4rem;
+    height: 4rem;
+  }
+
+  .box-holder div h1 {
+    font-size: 1rem;
+  }
+
+  .box-holder div p {
+    font-size: 0.4rem;
+  }
+
+  .lower-box {
+    height: 45%;
+    margin-top: .5rem;
+  }
+
+  .lower-box .lb-head {
+    font-size:1rem;
+  }
+  
+  .catbox-holder span {
+    width: 4rem;
+    border-radius: 0.9rem;
+    padding-right: 10px;
+  }
+
+  /*ADD TASK*/
+  .add-task {
+    min-height: 100%
+  }
+
+  #closeTaskBtn,
+  #closeViewBtn {
+    font-size: 2em;
+  }
+
+  #taskHeader {
+    font-size: 1em;
+  }
+
+  .lower-input button,
+  .lower-holder-view button {
+    width: 8rem;
+    background-size: 20px !important;
+    flex-shrink: 1;
+  }
+
+  lower-input button:nth-of-type(1),
+  .lower-holder-view button:nth-of-type(1) {
+    width: 12rem;
+  }
+
+  .category_Menu button {
+    flex-shrink: 1;
+  }
+
+  /*Task View*/
+  .task-view {
+    top: 0;
+  }
+
+  .task-form-view h2 {
+    font-size: 1.3em;
+  }
+
+  .task-form-view>.img_cont>img {
+    width: 2rem;
+  }
+
+  .task-form-view .desc_container p:first-child {
+    font-size: 1rem;
+  }
+
+  .task-form-view .desc_container p:nth-child(2) {
+    font-size: 0.8em;
+  }
+
+  .category_time_cont button {
+    height: 3rem;
+    font-size: 0.7em;
+  }
+
+  .action_button_cont {
+    width: 100%;
+    padding: 0;
+  }
+
+  .action_button_cont button {
+    width: 100%;
+  }
+
+  #taskDelete {
+    background: red;
+  }
+
+  #taskComplete {
+    background: #068FFD;
+  }
+
+  .message p {
+    font-size: 0.5rem;
+  }
 }
