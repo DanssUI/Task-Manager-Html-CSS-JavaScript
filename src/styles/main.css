@@ -1,6 +1,7 @@
+@import url('./themes.css');
+@import url('./media.css') screen and (min-width: 1024px);
 @import url('https://fonts.googleapis.com/css2?family=Poppins:wght@400&display=swap');
 @import url('https://fonts.googleapis.com/css2?family=Inter:wght@500&display=swap');
-@import url('./themes.css');
 
 
 :root {
@@ -197,28 +198,28 @@ body {
   width: 100%;
   display: flex;
   justify-content: start;
-  padding-inline: 0.5rem;
   align-items: center;
-  margin-block: 1.2rem;
+  margin-bottom: 1.2rem;
+  padding-inline: 0.5rem;
 }
 
 .month_year {
   display: flex;
   flex-direction: column-reverse;
+  justify-content: start;
   align-items: start;
-  width: 8rem;
-  margin-right: 5rem;
+  width: 15rem;
 }
 
 .month_year h1 {
-  font-size: 2.3em;
+  font-size: clamp(2rem, 3vw, 2.2rem);
   margin: 0;
   padding: 0;
   color: var(--font-color-primary);
 }
 
 .month_year span {
-  font-size: 1em;
+  font-size: clamp(1rem, 3vw, 1.2rem );
   color: var(--font-color-secondary);
   font-weight: bold;
 }
@@ -228,7 +229,7 @@ body {
   border: none;
   outline: none;
   cursor: pointer;
-  font-size: 1.5em;
+  font-size: clamp(1.5rem, 3vw, 2rem);
   color: var(--change-month-btns);
   width: 2em;
   height: 2em;
@@ -279,14 +280,14 @@ body {
   border-radius: 10px;
   border: none;
   scroll-snap-align: center;
-  font-size: 1.6em;
+  font-size: clamp(1.6rem, 3vw, 2rem);
   font-weight: bold;
   color: var(--font-color-primary);
   transition: 300ms ease-out;
 }
 
 .dateBtn.active {
-  font-size: 1.7em;
+  font-size: clamp(1.7rem, 3vw+25px, 2.1rem);
   background: var(--date-btn-active-bg);
   color: var(--date-btn-active-font);
   box-shadow: 2px 4px 5px 0 rgba(var(--dateBtn-shadow), 0.5);
@@ -394,7 +395,7 @@ body {
   background: var(--completed-bg);
   color: var(--completed-font);
   border-radius: 10px;
-  font-size: 0.7em;
+  font-size: clamp(0.7rem, 3vw, 1rem);
   font-weight: bold;
   padding-inline: 1rem;
   border: 1px solid var(--completed-border);
@@ -495,14 +496,14 @@ body {
   margin: 0;
   top: 2rem;
   left: 2rem;
-  font-size: 2.3em;
+  font-size: clamp(2.3rem, 3vw, 2.5rem);
   display: flex;
   flex-direction: column-reverse;
   color: var(--font-color-primary);
 }
 
 .headertop>span {
-  font-size: 0.5em;
+  font-size: clamp(0.5rem, 3vw, 0.8rem);
   color: var(--stats-heading-span);
 }
 
@@ -1037,7 +1038,8 @@ body {
   transition: 500ms ease-in-out;
 }
 
-@media screen and (max-width:320px) {
+@media screen and (max-width: 320px) {
+
   /*HOME PAGE*/
   .month_year {
     width: 6rem;
@@ -1099,9 +1101,9 @@ body {
   .headertop>span {
     font-size: 0.5em;
   }
-  
-  .box-holder{
-    display:flex;
+
+  .box-holder {
+    display: flex;
     align-items: center;
     justify-content: center;
     width: 100%;
@@ -1128,9 +1130,9 @@ body {
   }
 
   .lower-box .lb-head {
-    font-size:1rem;
+    font-size: 1rem;
   }
-  
+
   .catbox-holder span {
     width: 4rem;
     border-radius: 0.9rem;

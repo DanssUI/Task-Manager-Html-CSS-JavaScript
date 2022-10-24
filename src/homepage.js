@@ -1,6 +1,7 @@
 import * as model from './model.js';
 import { icons } from './helper.js';
 import { toggleTaskForm, category, generateCategoryMenu } from './createTask.js';
+
 const body = document.body;
 const parentContainer = document.querySelector('.schedule-section');
 const settingsMenu = document.querySelector('.settings_menu');
@@ -33,7 +34,7 @@ export function generateHomepageHTML() {
         
       <div class="date"></div>
     </div>
-
+    
     <div class="task-container-parent">
       <div class="task-container">
         <span class="empty-task">There is no task.!</span>
@@ -111,14 +112,14 @@ function toggleSettings(e) {
 
 export function toggleTheme(e) {
   const dataset = e.target.dataset.theme;
-  
-  if(!dataset) return 
+
+  if (!dataset) return
   //set classList to empty
   body.className = '';
 
   switch (dataset.toLowerCase()) {
     case 'default':
-      body.classList = '';
+      body.classList = null;
       break;
     case 'system-default':
       systemDefaultTheme();

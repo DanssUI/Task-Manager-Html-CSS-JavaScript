@@ -4,7 +4,7 @@ export const weekDaysArr = ["Sunday", "Monday", "Tuesday", "Wednesday", "Thursda
 export let icons = {
   home: `<svg viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
   <defs>
-    <linearGradient id="Gradient1" x1="0" x2="0 y1="0" y2="1">
+    <linearGradient id="Gradient1" x1="0" x2="0" y1="0" y2="1">
       <stop offset="0%" class="stop_1" />
       <stop offset="50%" class="stop_2" stop-opacity="1" />
       <stop offset="100%" class="stop_3" />
@@ -14,7 +14,7 @@ export let icons = {
 </svg>`,
   add: `<svg enable-background="new 0 0 32 32" version="1.1" viewBox="0 0 32 32" xml:space="preserve" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink">
     <defs>
-      <linearGradient id="Gradient2" x1="0" x2="0 y1="0" y2="1">
+      <linearGradient id="Gradient2" x1="0" x2="0" y1="0" y2="1">
         <stop offset="0%" class="add_stop_1" opacity="1"/>
         <stop offset="50%" class="add_stop_2" stop-opacity="1" />
         <stop offset="100%" class="add_stop_3" />

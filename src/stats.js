@@ -1,8 +1,8 @@
 import { statsData } from './model.js'
-const parentElement = document.querySelector('#stats');
+let parentElement = document.querySelector('#stats');
 let statsHolder;
 
-export function generateStatsHTML() {
+export function renderStatsHTML() {
   let html = `
     <h2 class="headertop">Statistics
       <span class="headerbottom">All</span>
@@ -13,6 +13,16 @@ export function generateStatsHTML() {
   parentElement.insertAdjacentHTML('beforeend', html);
   statsHolder = document.querySelector('.stats-holder');
   generateStats();
+}
+
+export function isDesktopView() {
+  const width = window.matchMedia('(min-width: 1024px)');
+
+  if (width.matches) {
+    const dateMonthSection = document.querySelector('.date-holder');
+
+    dateMonthSection.insertAdjacentElement('beforeend', statsHolder);
+  }
 }
 
 export function generateStats() {

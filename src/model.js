@@ -3,6 +3,8 @@ import { generateStats } from './stats.js'
 import { monthsArr, weekDaysArr } from './helper.js';
 import { openTaskView } from './viewTask.js'
 
+const width = window.matchMedia('(min-width: 1024px)');
+
 export const now = new Date();
 
 let currMonth = now.getMonth();
@@ -84,11 +86,13 @@ export function changeMonth(e) {
       currYear--;
     }
   }
-  
+
   initTime();
 
   homepage.dateContainer.querySelector("button").click();
   homepage.dateContainer.scrollLeft = 0;
+
+  if (width.matches) homepage.dateContainer.scrollTop = 0;
 }
 
 export function initTime() {
@@ -148,7 +152,9 @@ export function createMonthDays() {
       homepage.dateContainer.scrollLeft = datesBtn.offsetLeft - homepage.dateContainer.offsetLeft;
       currDayActive(datesBtn);
       renderTasks();
-      
+
+      //Scroll to active btn on desktop view
+      if (width.matches) homepage.dateContainer.scrollTop = datesBtn.offsetTop - homepage.dateContainer.offsetTop;
     }
   }
 }
@@ -302,9 +308,9 @@ export function setLocalStorage(key, value) {
 export function getData() {
   const tasks = JSON.parse(localStorage.getItem('tasks'));
   const stats = JSON.parse(localStorage.getItem('stats'));
-  
+
   const themeMode = JSON.parse(localStorage.getItem('theme'));
- 
+
   taskArray = tasks ? tasks : taskArray;
   statsData = stats ? stats : statsData;
   theme = themeMode ? themeMode : {};
