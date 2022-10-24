@@ -39,8 +39,10 @@ export function generateHomepageHTML() {
       <div class="task-container">
         <span class="empty-task">There is no task.!</span>
       </div>
-      <div class="task-container-completed">
+     <div id="complete">
         <span class="completed-tag">Completed Tasks</span>
+        <div class="task-container-completed">
+        </div>
       </div>
     </div>
 

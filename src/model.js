@@ -226,7 +226,7 @@ export function createNewTask(title, desc, timestart, timeend, category, timeSta
 export function renderTasks() {
   const emptyContainer = document.querySelector(".empty-task");
 
-  const completedTaskCont = document.querySelector(".task-container-completed");
+  const completedTaskContParent = document.querySelector("#complete");
 
   //remove all the pre-added tasks
   const updatedtaskCard = document.querySelectorAll(".task-card");
@@ -237,7 +237,7 @@ export function renderTasks() {
   //hide the complete task container if there's no task which is completed
   const isCompleted = todayDate?.content.some(task => task.isCompleted === true);
 
-  if (!isCompleted) completedTaskCont.style.display = 'none';
+  if (!isCompleted) completedTaskContParent.style.display = 'none';
 
   if (todayDate && todayDate?.content.length !== 0) {
 
@@ -273,7 +273,8 @@ function createTaskCard(content) {
   if (!content.isCompleted) tasksContainer.insertAdjacentHTML('afterbegin', html);
   else {
     completedTaskCont.style.display = "flex";
-    completedTaskCont.insertAdjacentHTML('afterend', html);
+    if (width.matches) completedTaskCont.style.display = "grid";
+    completedTaskCont.insertAdjacentHTML('afterbegin', html);
 
     //select the task user interacting with
     const task = document.querySelector(`[data-id='${content.uid}']`);

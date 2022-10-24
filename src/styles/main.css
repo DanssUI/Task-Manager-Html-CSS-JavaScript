@@ -219,7 +219,7 @@ body {
 }
 
 .month_year span {
-  font-size: clamp(1rem, 3vw, 1.2rem );
+  font-size: clamp(1rem, 3vw, 1.2rem);
   color: var(--font-color-secondary);
   font-weight: bold;
 }
@@ -376,6 +376,7 @@ body {
   margin-bottom: 5rem;
 }
 
+
 .task-container-completed {
   position: relative;
   width: 100%;
@@ -386,8 +387,16 @@ body {
   align-items: center;
 }
 
+#complete {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  width: 100%;
+}
+
 .completed-tag {
-  width: 8rem;
+  width: 10rem;
   height: 2.2rem;
   display: flex;
   justify-content: center;
