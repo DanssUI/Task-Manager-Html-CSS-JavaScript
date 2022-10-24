@@ -26,6 +26,18 @@
   width: 70% !important;
 }
 
+.dateBtn {
+  font-size: 1.5rem !important;
+}
+
+.dateBtn.active {
+  font-size: 1.6rem !important;
+}
+
+.dateBtn span {
+  font-size: 0.6rem !important;
+}
+
 .date {
   width: 50vw !important;
   grid-column: 1/2;
@@ -39,9 +51,47 @@
   overflow-y: scroll !important;
   scroll-snap-type: y mandatory !important;
   box-shadow: none !important;
-  border-radius: 1.5rem !important;
+  border-radius: 0 !important;
+  background: none !important;
 }
 
+/*NAVBAR*/
+.navbar {
+  position: fixed;
+  bottom: 5% !important;
+  width: 5rem;
+  left: 90% !important;
+  height: 5rem;
+  display: flex;
+  justify-content: space-evenly;
+  align-items: center;
+  z-index: 10;
+  background: var(--bg-primary);
+  border-top-left-radius: 100% !important;
+  border-top-right-radius: 100% !important;
+  border-bottom-right-radius: 100% !important;
+  border-bottom-left-radius: 100% !important;
+}
+
+.navbar button {
+  width: 3rem;
+  height: 3rem;
+  background: none;
+  border: none;
+}
+
+.navbar button:first-child {
+  display: none;
+}
+
+.navbar button:last-child {
+  display: none;
+}
+
+.navbar button svg {
+  width: 3rem;
+  height: 3rem;
+}
 
 /*Stats Data*/
 .stats-holder {
@@ -55,7 +105,7 @@
 
 .box-holder {
   justify-content: start !important;
-  align-content:center !important;
+  align-content: center !important;
   gap: 1rem;
 }
 
@@ -82,4 +132,28 @@
 
 .lower-box .lb-head {
   display: none;
+}
+
+/*TASK CARD*/
+.task-container {
+  display: grid !important;
+  grid-template-columns: 1fr 1fr 1fr;
+  justify-content: center !important;
+  align-content: center !important;
+  column-gap: 0.8rem;
+  padding-inline: 0.5rem;
+}
+
+.empty-task {
+  text-align: center;
+  width: 100%;
+  grid-column: 1 / 4 !important;
+}
+
+.task-container-completed {
+  grid-template-columns: 1fr 1fr 1fr;
+  justify-content: center !important;
+  align-content: center !important;
+  column-gap: 0.8rem;
+  padding-inline: 0.5rem;
 }
