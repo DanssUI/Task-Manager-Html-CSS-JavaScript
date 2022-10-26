@@ -21,7 +21,7 @@ export function isDesktopView() {
   if (width.matches) {
     const dateMonthSection = document.querySelector('.date-holder');
 
-    dateMonthSection.insertAdjacentElement('beforeend', statsHolder);
+    dateMonthSection.insertAdjacentElement('beforeend', parentElement);
   }
 }
 

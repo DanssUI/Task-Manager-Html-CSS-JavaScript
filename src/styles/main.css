@@ -1,8 +1,6 @@
 @import url('./themes.css');
-@import url('./media.css') screen and (min-width: 1024px);
 @import url('https://fonts.googleapis.com/css2?family=Poppins:wght@400&display=swap');
 @import url('https://fonts.googleapis.com/css2?family=Inter:wght@500&display=swap');
-
 
 :root {
   --body-bg: url('../../Img/bg.png');
@@ -493,6 +491,7 @@ body {
   height: 100%;
   flex: 0 0 auto;
   display: flex;
+  flex-direction: column;
   justify-content: center;
   align-items: center;
   scroll-snap-align: start;
@@ -500,11 +499,9 @@ body {
 }
 
 .headertop {
-  position: absolute;
-  padding: 0;
+  align-self: start;
+  padding: 1rem 0 0 1rem;
   margin: 0;
-  top: 2rem;
-  left: 2rem;
   font-size: clamp(2.3rem, 3vw, 2.5rem);
   display: flex;
   flex-direction: column-reverse;
@@ -1165,7 +1162,7 @@ body {
   .lower-input button,
   .lower-holder-view button {
     width: 8rem;
-    background-size: 20px !important;
+    background-size: 20px;
     flex-shrink: 1;
   }
 
@@ -1223,5 +1220,179 @@ body {
 
   .message p {
     font-size: 0.5rem;
+  }
+}
+
+
+@media screen and (min-width: 1024px) {
+  .date-holder {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    grid-template-rows: 5rem 1fr;
+    column-gap: 0.5rem;
+    justify-content: start;
+    height: 25rem;
+  }
+
+  .topdate-holder {
+    grid-column: 1/2;
+    grid-row: 1/2;
+    margin: 0;
+    align-self: start;
+  }
+
+  .stats-section {
+    grid-column: 2/3;
+    grid-row: 1/3;
+  }
+  
+  .box-holder {
+    justify-self: start;
+    height: 100%;
+  }
+
+  .schedule-section {
+    justify-content: stretch;
+    align-items: center;
+    flex-direction: column;
+    overflow: hidden;
+    scroll-snap-align: start;
+    grid-column: 2/3;
+    grid-row: 2/3;
+  }
+
+  .month_year {
+    width: 73%;
+  }
+
+  .dateBtn {
+    font-size: 1.5rem;
+  }
+
+  .dateBtn.active {
+    font-size: 1.6rem;
+  }
+
+  .dateBtn span {
+    font-size: 0.6rem;
+  }
+
+  .date {
+    width: 50vw;
+    grid-column: 1/2;
+    grid-row: 2/12;
+    display: grid;
+    grid-template-columns: repeat(7, 1fr);
+    justify-content: stretch;
+    align-items: stretch;
+    height: 20rem;
+    overflow-y: scroll;
+    scroll-snap-type: y mandatory;
+    box-shadow: none;
+    border-radius: 0;
+    background: none;
+  }
+
+  /*NAVBAR*/
+  .navbar {
+    position: fixed;
+    bottom: 5%;
+    width: 5rem;
+    left: 90%;
+    height: 5rem;
+    display: flex;
+    justify-content: space-evenly;
+    align-items: center;
+    z-index: 10;
+    background: var(--bg-primary);
+    border-top-left-radius: 100%;
+    border-top-right-radius: 100%;
+    border-bottom-right-radius: 100%;
+    border-bottom-left-radius: 100%;
+  }
+
+  .navbar button {
+    width: 3rem;
+    height: 3rem;
+    background: none;
+    border: none;
+  }
+
+  .navbar button:first-child {
+    display: none;
+  }
+
+  .navbar button:last-child {
+    display: none;
+  }
+
+  .navbar button svg {
+    width: 3rem;
+    height: 3rem;
+  }
+
+  /*Stats Data*/
+  .stats-holder {
+    width: auto;
+    height: 100%;
+    justify-content: end;
+    align-items: center;
+    grid-column: 2 / 3;
+    grid-row: 1 / 4;
+  }
+
+  .box-holder {
+    justify-content: start;
+    align-content: center;
+    gap: 1rem;
+  }
+
+  .box-holder div {
+    display: flex;
+    width: 12rem;
+    height: 4rem;
+    flex-direction: row;
+    border-radius: 5rem;
+    gap: 0 1rem;
+  }
+
+  .box-holder div h1 {
+    font-size: 1.5rem;
+  }
+
+  .lower-box {
+    margin: 0;
+    border-radius: 0;
+    background: none;
+    justify-content: end;
+    border: none;
+  }
+
+  .lower-box .lb-head {
+    display: none;
+  }
+
+  /*TASK CARD*/
+  .task-container {
+    display: grid;
+    grid-template-columns: 1fr 1fr 1fr;
+    justify-content: center;
+    align-content: center;
+    column-gap: 0.8rem;
+    padding-inline: 0.5rem;
+  }
+
+  .empty-task {
+    text-align: center;
+    width: 100%;
+    grid-column: 1 / 4;
+  }
+
+  .task-container-completed {
+    grid-template-columns: 1fr 1fr 1fr;
+    justify-content: center;
+    align-content: center;
+    column-gap: 0.8rem;
+    padding-inline: 0.5rem;
   }
 }
