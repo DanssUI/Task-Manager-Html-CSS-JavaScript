@@ -47,6 +47,7 @@ export function openTaskView(title, desc, timeStart, timeEnd, category, uniqueid
       </div>`;
 
   const taskViewForm = document.querySelector('.task-form-view');
+  
   //clear the form
   taskViewForm.innerHTML = '';
   taskViewForm.insertAdjacentHTML('beforeend', html);
