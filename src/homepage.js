@@ -13,7 +13,6 @@ let addTaskPopup;
 let nav;
 export let categoryMenu;
 
-
 export function generateHomepageHTML() {
   let html = `
     <div class="date-holder">

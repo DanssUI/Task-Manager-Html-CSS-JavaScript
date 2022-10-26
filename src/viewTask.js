@@ -27,8 +27,8 @@ export function openTaskView(title, desc, timeStart, timeEnd, category, uniqueid
       <div class="lower-holder-view">
         <div class="category_time_cont">
           <button>
-            <b>Category : ${category}</b>
-            <span></span>
+            <b>Category :</b>
+            <span>${category}</span>
           </button>
           <button>
             <b>Start</b> <br>
@@ -47,9 +47,10 @@ export function openTaskView(title, desc, timeStart, timeEnd, category, uniqueid
       </div>`;
 
   const taskViewForm = document.querySelector('.task-form-view');
-  
+
   //clear the form
   taskViewForm.innerHTML = '';
+
   taskViewForm.insertAdjacentHTML('beforeend', html);
 
   parentElement.classList.add('active');

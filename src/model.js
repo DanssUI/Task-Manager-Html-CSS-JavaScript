@@ -225,18 +225,18 @@ export function createNewTask(title, desc, timestart, timeend, category, timeSta
 
 export function renderTasks() {
   const emptyContainer = document.querySelector(".empty-task");
-  
+
   const completedTaskContParent = document.querySelector("#complete");
 
   //remove all the pre-added tasks
   const updatedtaskCard = document.querySelectorAll(".task-card");
   updatedtaskCard.forEach(updatedtaskCard => updatedtaskCard.remove());
-  
+
   const todayDate = taskArray.find(task => task.date === currid);
 
   //hide the complete task container if there's no task which is completed
   const isCompleted = todayDate?.content.some(task => task.isCompleted === true);
-  
+
   if (isCompleted) completedTaskContParent.style.display = 'flex';
   else completedTaskContParent.style.display = 'none';
 
@@ -292,7 +292,7 @@ export function addHandlerTasks(handler) {
   const contentArr = todayDate?.content;
 
   tasksContainerParent.addEventListener('click', e => {
-
+    
     const id = e.target.closest('.task-card')?.dataset.id;
 
     contentArr?.forEach(content => {
