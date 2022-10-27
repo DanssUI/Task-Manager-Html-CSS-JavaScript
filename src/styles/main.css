@@ -999,7 +999,7 @@ body {
 }
 
 #taskComplete {
-  box-shadow: 0px 5px 10px 0 hsla(206, 100%, 50%, .5);
+  box-shadow: 0px 5px 10px 0 hsla(206, 100%, 50%, .5) ;
   background: linear-gradient(105deg, #7FD5FF, #008DFF);
 }
 
@@ -1490,23 +1490,12 @@ body {
   }
 
   /*Stats Data*/
-  .stats-holder {
-    width: auto;
-    height: 100%;
-    justify-content: end;
-    align-items: center;
-    grid-column: 2 / 3;
-    grid-row: 1 / 4;
-  }
-
   .box-holder {
     height: 100%;
     gap: 1rem;
-    border: 2px solid red;
   }
 
   .box-holder div {
-    display: flex;
     width: 13rem;
     height: 13rem;
     flex-direction: column;
@@ -1523,17 +1512,6 @@ body {
   }
 
   .lower-box {
-    margin: 0;
-    border-radius: 1rem;
-    height: 35%;
-    margin-top: 1.5rem;
-    display: flex;
-    flex-direction: column;
-    justify-content: start;
-    align-items: start;
-    border-radius: 30px 30px 0 0;
-    background: var(--bg-linear_radial);
-    border: 1px solid var(--category-stats-border);
     padding: 0 2rem 0.5rem;
   }
 
@@ -1543,59 +1521,208 @@ body {
 
   /*TASK CARD*/
   .task-container {
-    display: grid;
-    grid-template-columns: 1fr 1fr;
+    display: flex;
+    flex-direction: row;
+    flex-wrap: wrap;
+  }
+  
+  .task-card {
+    width: 40%;
+    flex-grow: 1;
   }
 
   .task-container-completed {
-    grid-template-columns: 1fr 1fr;
+    display: flex !important;
+    flex-direction: row;
+    flex-wrap: wrap;
   }
 
   /*ADD TASK*/
-  .add-task {
-    left: 50%;
-    right: 0;
-    flex-direction: column;
-    transform: translateX(100%);
+
+  .lower-holder-view {
+    height: 30%;
   }
 
-  .add-task.active {
-    transform: translateX(0);
-  }
+}
 
-  #taskname,
-  #taskdesc {
-    margin: 2rem;
+@media screen and (min-width: 2560px) {
+ .dateBtn {
+    font-size: 3rem;
   }
-
-  .lower-input {
+  
+  .dateBtn span {
+    font-size: 1.8rem;
+  }
+  
+  .dateBtn.active {
+    font-size: 3.1rem;
+  }
+  
+  .dateBtn.active span {
+    font-size: 1.9rem;
+  }
+  
+  /*Stats Data*/
+  .stats-section .headertop span {
+    font-size: 2rem;
+  }
+  
+  .box-holder {
     height: 100%;
-    padding-bottom: 1rem;
-  }
-
-  .category_Menu {
-    left: 50%;
-    width: auto;
     gap: 1rem;
+    display: flex;
+    flex-direction: row;
   }
 
-  .category_Menu button {
-    width: 8rem;
+  .box-holder div {
+    width: 13rem;
+    height: 13rem;
+    flex-direction: column;
+    border-radius: 1rem;
+    gap: 1rem 0.5rem;
   }
 
-  /*Task View*/
-  .task-view {
-    top: 30%;
-    right: 50%;
-    transform: translateX(-100%);
+  .box-holder div h1 {
+    font-size: 2.5rem;
+  }
+  
+  .box-holder div p {
+    font-size: 1.5rem;
   }
 
-  .task-view.active {
-    transform: translateX(0);
+  .lower-box {
+    width: 100%;
+    padding: 0 2rem 3rem ;
   }
+
+  .lower-box .lb-head {
+    font-size: 2rem;
+  }
+  
+  .catbox-holder span {
+    width: 10rem;
+    height: 5rem;
+    font-size: 2rem;
+    background-size:40px;
+  }
+
+  /*TASK CARD*/
+  .task-container {
+    display: flex;
+    flex-direction: row;
+    flex-wrap: wrap;
+  }
+  
+  .task-card {
+    width: 40%;
+    flex-grow: 1;
+  }
+  
+  .empty-task {
+    font-size: 3rem;
+  }
+
+  .task-container-completed {
+    display: flex !important;
+    flex-direction: row;
+    flex-wrap: wrap;
+  }
+  
+  .completed-tag {
+    font-size: 2rem;
+    height: 5rem;
+  }
+  
+  .task-content h2 {
+    font-size: 3rem;
+  }
+  
+  .task-content p {
+    font-size: 2.5rem;
+  }
+  
+  .task-card {
+    height: 20rem;
+  }
+  
+  .task-content span {
+    font-size: 2rem;
+  }
+
+/*VIEW TASK*/
 
   .lower-holder-view {
     height: 40%;
   }
+  
+    .task-form-view h2 {
+    font-size: 3rem;
+  }
+  
+  .task-form-view .desc_container p:first-child {
+    font-size: 3.5rem;
+  }
+  
+  .task-form-view .desc_container p:nth-child(2) {
+    font-size: 3rem;
+  }
+  
+ 
+  
+  #taskDelete,
+  #taskComplete {
+    height: 5rem;
+    font-size: 3rem;
+  }
+  
+  #taskDelete {
+  background: #FF2B00;
+}
 
+#taskComplete {
+  background: #008DFF;
+}
+
+  
+  /*ADD TASK*/
+  #closeTaskBtn,
+  #closeViewBtn {
+    font-size: 6rem;
+  }
+  
+.task-form #taskHeader {
+    font-size: 3rem;
+  }
+  
+  #taskname,#taskdesc {
+    font-size: 2.5rem;
+    margin-top: 5rem;
+    margin-left: 5rem;
+    padding-bottom: 2rem;
+    border-bottom-width: 3px;
+  }
+  
+  .lower-input button,
+  .lower-holder-view button {
+    font-size: 2rem;
+    width: 20rem;
+    height: 8rem;
+    background-size: 50px !important;
+  }
+  
+ .lower-input button:nth-of-type(1),
+.lower-holder-view button:nth-of-type(1) {
+  width: 30rem;
+}
+
+.category_Menu button {
+  font-size: 2.5rem;
+  width: 23rem;
+  height: 7rem;
+}
+
+#createTask{
+  font-size: 2.5rem;
+  height: 5rem;
+}
 }
