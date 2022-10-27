@@ -52,5 +52,6 @@ Created a separate function for generating new task <br>
 created different js files for Creating task, viewing task and view stats<br>
 <br>
 
-##Currently Working on---<br>
-Responsiveness<br>
+##Feature to look forward---<br>
+Edit option <br>
+Notification <br>
