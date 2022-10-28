@@ -2,55 +2,6 @@
 @import url('https://fonts.googleapis.com/css2?family=Poppins:wght@400&display=swap');
 @import url('https://fonts.googleapis.com/css2?family=Inter:wght@500&display=swap');
 
-:root {
-  --body-bg: url('../../Img/bg.png');
-  --theme-font: #9B15FF;
-  --settings-svg: #000;
-  --font-color-primary: #000;
-  --font-color-secondary: #777;
-  --font-color-tertiary: #999;
-  --bg-primary: #fff;
-  --bg-secondary: #F9FFFF;
-  --bg-linear_radial: linear-gradient(105deg, #FFFFFF, #F3E5FF, #E2F2FF);
-  --shadow-primary: 0, 0, 0;
-  --change-month-btns: #9B15FF;
-  --date-btn-active-bg: linear-gradient(120deg, #E2BCFF, #9B15FF);
-  --dateBtn-shadow: 153, 20, 255;
-  --date-btn-active-font: #fff;
-  --stop_1: #E2BCFF;
-  --stop_2: #9B15FF;
-  --stop_3: #9B15FF;
-  --add-stop_1: #86C0FE;
-  --add-stop_2: #0274ED;
-  --add-stop_3: #0274ED;
-  --transparency: rgba(255, 255, 255, 0.6);
-  --task-card-border: rgba(155, 21, 255, 0.8);
-  --task-card-complete: linear-gradient(120deg, #D6FFA3 50%, #97FF00);
-  --completed-font: #288300;
-  --completed-bg: linear-gradient(120deg, #D6FFA3 50%, #97FF00);
-  --completed-border: rgba(89, 249, 47, 1);
-  --complete-font-h2: var(--font-color-primary);
-  --complete-font-p: var(--font-color-secondary);
-  --complete-font-span: var(--font-color-tertiary);
-
-  /*stats page*/
-  --stats-heading-span: var(--theme-font);
-  --stats-div-1: #A000FF;
-  --stats-div-2: #84CD00;
-  --stats-div-3: #FFBB61;
-  --stats-div-4: #FF298F;
-  --category-stats-border: rgba(255, 255, 255, 0.18);
-
-  /*ADD TASK*/
-  --task-desc-border: #575757;
-  --add-btn-bg: linear-gradient(155deg, #7FD5FF, #008DFF);
-  --add-btn-font: #fff;
-  --add-btn-shadow: #0090FF;
-
-  /*View */
-  --view-desc-p: #9F2DF4;
-}
-
 * {
   box-sizing: border-box;
   padding: 0;
