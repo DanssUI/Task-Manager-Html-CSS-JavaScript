@@ -143,7 +143,7 @@ export function toggleTheme(e) {
 
 function systemDefaultTheme() {
   const hours = new Date().getHours();
-  const isDayTime = hours >= 18 || hours === 6
+  const isDayTime = hours >= 18 || hours <= 6
   if (isDayTime) body.classList.add('dark');
   else body.classList.remove('dark');
 }
