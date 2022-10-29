@@ -402,6 +402,7 @@ body {
   height: auto;
   overflow: hidden;
   color: var(--font-color-primary);
+  word-break: break-all;
 }
 
 .task-content p {
@@ -412,6 +413,7 @@ body {
   display: -webkit-box;
   -webkit-line-clamp: 1;
   -webkit-box-orient: vertical;
+  word-break: break-all;
 }
 
 .task-content span {
@@ -850,6 +852,7 @@ body {
   padding: 0;
   margin: 1rem;
   color: var(--font-color-primary);
+  word-break: break-all;
 }
 
 .task-form-view>.img_cont {
@@ -876,6 +879,7 @@ body {
   font-size: 1.2em;
   margin-top: 0.5em;
   color: var(--font-color-secondary);
+  word-break: break-all;
 }
 
 .task-form-view .desc_container p:nth-child(2)::first-letter {
